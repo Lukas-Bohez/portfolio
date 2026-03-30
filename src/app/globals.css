@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+:root {
+  --color-primary: #1e3a8a; /* blue-900 */
+  --color-primary-2: #60a5fa; /* blue-400 */
+  --color-secondary: #f59e0b; /* amber-500 */
+  --color-muted: #6b7280; /* slate-500 */
+  --color-bg: #ffffff;
+  --color-surface: #f8fafc;
+  --color-text: #0f172a;
+  --color-border: #e2e8f0;
+}
+
+[data-theme='dark'] {
+  --color-primary: #93c5fd; /* blue-300 */
+  --color-primary-2: #bfdbfe; /* blue-200 */
+  --color-secondary: #facc15; /* amber-400 */
+  --color-muted: #94a3b8; /* slate-400 */
+  --color-bg: #020617;
+  --color-surface: #0b1223;
+  --color-text: #e2e8f0;
+  --color-border: #334155;
+}
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Shared palette utility classes */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-muted { color: var(--color-muted); }
+.text-default { color: var(--color-text); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-primary-2 { background-color: var(--color-primary-2); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-surface { background-color: var(--color-surface); }
+.bg-body { background-color: var(--color-bg); }
+
+.border-surface { border-color: var(--color-border); }
+.border-accent { border-color: var(--color-primary); }
+
+.btn-primary { background-color: var(--color-primary); color: #ffffff; }
+.btn-primary:hover { background-color: #1d4ed8; }
+.btn-secondary { background-color: var(--color-secondary); color: #0f172a; }
+.btn-secondary:hover { background-color: #f59e0b; }
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-surface {
+  background-color: var(--color-surface);
+}
+.text-primary {
+  color: var(--color-primary);
+}
+.text-muted {
+  color: var(--color-muted);
+}
+.border-surface {
+  border-color: var(--color-border);
+}
