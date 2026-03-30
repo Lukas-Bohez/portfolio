@@ -26,6 +26,14 @@ export default function Home() {
   }, []);
   return (
     <main>
+      <Navbar
+        onThemeToggle={() => {}}
+        isDark={false}
+        onScrollTo={(id) => {
+          const elem = document.getElementById(id);
+          if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }}
+      />
       <Hero isDark={false} onScrollToProjects={() => {
         const elem = document.getElementById('projects');
         if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
