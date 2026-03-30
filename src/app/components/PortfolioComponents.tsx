@@ -21,10 +21,9 @@ type SectionProps = {
   title: string;
   subtitle?: string;
   children: ReactNode;
-  isDark?: boolean;
 };
 
-function Section({ id, title, subtitle, children, isDark = false }: SectionProps) {
+function Section({ id, title, subtitle, children }: SectionProps) {
   return (
     <motion.section
       id={id}
@@ -36,8 +35,8 @@ function Section({ id, title, subtitle, children, isDark = false }: SectionProps
       variants={sectionVariants}
     >
       <div className="mb-4">
-        <h2 className="text-2xl font-bold">{title}</h2>
-        {subtitle && <p className="mt-2 text-default">{subtitle}</p>}
+        <h2 className="text-2xl font-bold text-primary">{title}</h2>
+        {subtitle && <p className="mt-2 text-muted">{subtitle}</p>}
       </div>
       {children}
     </motion.section>
@@ -88,6 +87,7 @@ export function Navbar({
 export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () => void; isDark: boolean }) {
   return (
     <motion.section
+      data-hero=""
       className="mb-10 rounded-3xl border border-surface bg-surface p-8 shadow-xl backdrop-blur text-default"
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
@@ -132,7 +132,8 @@ export function Stats() {
       {metrics.map((metric) => (
         <article
           key={metric.label}
-          className="rounded-2xl border border-surface bg-surface p-4 text-center shadow-sm backdrop-blur"
+          className="rounded-2xl border border-surface bg-surface p-4 text-center shadow-sm backdrop-blur mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          data-reveal=""
         >
           <p className="text-2xl font-bold text-primary">{metric.value}</p>
           {/* label removed for cleaner stat cards */}
@@ -182,7 +183,8 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
           {skills.map((skill) => (
             <span
               key={skill}
-              className="rounded-lg border border-black dark:border-white px-3 py-1 text-xs font-semibold text-default"
+              className="rounded-lg border border-black dark:border-white px-3 py-1 text-xs font-semibold text-default mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+              data-reveal=""
             >
               {skill}
             </span>
@@ -196,9 +198,15 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
 export function FeaturedProjects({ isDark }: { isDark: boolean }) {
   const projects = [
     {
-      name: 'ConvertTheSpireFlutter',
+      name: 'AI The Spire',
       description:
-        '2024 playlist-to-archive media toolkit for seamless local + self-hosted workflows.',
+        'Personal portfolio and self-hosted lab. Next.js, TailwindCSS, Python, Dart/Flutter, media engineering, and open-source tools. See README for full details.',
+      url: 'https://github.com/Lukas-Bohez/aithespire',
+    },
+    {
+      name: 'Convert the Spire Reborn',
+      description:
+        'Native Flutter app for playlist downloading, media conversion, and local playback. Multi-site support, casting, and fast native performance. See repo for binaries and docs.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
     },
     {
@@ -206,12 +214,6 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
       description:
         '2024 encrypted P2P storage + messaging with local-first vault persistence and no cloud dependency.',
       url: 'https://github.com/Lukas-Bohez/vault-the-spire',
-    },
-    {
-      name: 'Astonia3-fan-server',
-      description:
-        '2023 community revival server with co-op network and live sync for classic game lore.',
-      url: 'https://github.com/Lukas-Bohez/Astonia3-fan-server',
     },
   ];
 
@@ -221,11 +223,12 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
         {projects.map((project) => (
           <motion.article
             key={project.name}
-            className="rounded-2xl border border-surface bg-surface p-5 shadow-sm"
+            className="rounded-2xl border border-surface bg-surface p-5 shadow-sm mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
+            data-reveal=""
           >
             <h3 className="text-lg font-semibold">{project.name}</h3>
             <p className="mt-2 text-sm text-default">{project.description}</p>
@@ -233,7 +236,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
               href={project.url}
               target="_blank"
               rel="noreferrer noopener"
-              className="mt-4 inline-flex items-center text-sm font-semibold text-blue-700 hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-100"
+              className="mt-4 inline-flex items-center text-sm font-semibold text-primary hover:text-secondary"
             >
               Explore ↗
             </a>
@@ -245,19 +248,6 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
 }
 
 export function ContactSection({ isDark }: { isDark: boolean }) {
-  const links = [
-    {
-      name: 'Email',
-      href: 'mailto:lukasbohez@gmail.com',
-      description: 'Reach out for contract and full-time opportunities.',
-    },
-    {
-      name: 'GitHub',
-      href: 'https://github.com/Lukas-Bohez',
-      description: 'Open source work and active contributions.',
-    },
-  ];
-
   return (
     <Section
       id="contact"
@@ -265,18 +255,36 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
       subtitle="I’m actively interviewing and available for mid-senior roles"
     >
       <div className="grid gap-3 sm:grid-cols-3">
-        {links.map((link) => (
-          <a
-            key={link.name}
-            href={link.href}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="rounded-2xl border border-surface bg-surface p-4 text-sm text-default shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-          >
-            <h3 className="font-semibold">{link.name}</h3>
-            <p className="mt-1 text-xs text-muted">{link.description}</p>
-          </a>
-        ))}
+        <a
+          href="mailto:lukasbohez@gmail.com"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="rounded-2xl border border-surface bg-surface p-4 text-sm text-default shadow-sm transition hover:-translate-y-1 hover:shadow-md mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          data-reveal=""
+        >
+          <span className="font-semibold">Email</span>
+          <span className="mt-1 text-xs text-muted block">Reach out for contract and full-time opportunities.</span>
+        </a>
+        <a
+          href="https://github.com/Lukas-Bohez"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="rounded-2xl border border-surface bg-surface p-4 text-sm text-default shadow-sm transition hover:-translate-y-1 hover:shadow-md mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          data-reveal=""
+        >
+          <span className="font-semibold">GitHub</span>
+          <span className="mt-1 text-xs text-muted block">Open source work and active contributions.</span>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-2xl border border-surface bg-surface p-4 text-sm text-default shadow-sm transition hover:-translate-y-1 hover:shadow-md mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          data-reveal=""
+        >
+          <span className="font-semibold">LinkedIn</span>
+          <span className="mt-1 text-xs text-muted block">Mid-senior roles,<br />open to opportunities.</span>
+        </a>
       </div>
     </Section>
   );

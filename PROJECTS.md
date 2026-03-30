@@ -1,11 +1,20 @@
 # Projects and Architecture
 
-## ConvertTheSpire / ConvertTheSpireFlutter
 
-- Cross-platform Flutter app (Linux, Windows, macOS, Android)
-- Uses `youtube_explode_dart` to fetch video metadata and stream data directly in Dart
-- Designed as a native alternative to command-line `yt-dlp` with a GUI for playlist bulk downloads
-- Supports MP3/MP4 conversion workflows and optional community support mode (idle CPU donation)
+## AI The Spire
+
+- Personal portfolio and self-hosted lab of Lukas Bohez
+- Built with Next.js App Router, TailwindCSS, and TypeScript
+- Features: project showcase, about, contact, and open-source documentation
+- Central hub for all self-hosted and open-source projects
+
+## Convert the Spire Reborn
+
+- Cross-platform native Flutter app (Linux, Windows, macOS, Android)
+- Uses `youtube_explode_dart` and `yt-dlp` for video/audio download and conversion
+- Bulk playlist downloads, multi-site support, casting, and local media management
+- Fast, lightweight, and privacy-focused (no tracking, no ads)
+
 
 ## QuizTheSpire
 
