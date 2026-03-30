@@ -13,10 +13,7 @@ import {
 } from './components/PortfolioComponents';
 
 export default function Home() {
-
   useCardReveal();
-
-  // Show button to jump to top or loop to top if at bottom
   const [showToTop, setShowToTop] = useState(false);
   useEffect(() => {
     const onScroll = () => {
@@ -27,23 +24,16 @@ export default function Home() {
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
   return (
     <main>
-      {/* Hero — rendered ONCE, never repeated, no data-reveal */}
       <Hero isDark={false} onScrollToProjects={() => {
         const elem = document.getElementById('projects');
         if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }} />
-
-      {/* Single copy of the sections */}
       <Stats />
       <AboutAndSkills isDark={false} />
       <FeaturedProjects isDark={false} />
       <ContactSection isDark={false} />
-
-      {/* Single "to top" button with loop logic */}
-        // ...button removed as requested...
     </main>
   );
 }

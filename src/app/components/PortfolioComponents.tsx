@@ -1,15 +1,12 @@
 'use client';
 
+
 import { motion } from 'framer-motion';
+import { ThemeToggle } from './ThemeToggle';
 
 import type { ReactNode } from 'react';
 
-type SectionProps = {
-  id?: string;
-  title: string;
-  subtitle?: string;
-  children: ReactNode;
-};
+
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 24, scale: 0.98 },
@@ -72,13 +69,7 @@ export function Navbar({
             {item.label}
           </button>
         ))}
-        <button
-          onClick={onThemeToggle}
-          className="rounded-full border border-surface px-3 py-1 text-default transition hover:bg-surface"
-          aria-label="Toggle light/dark theme"
-        >
-          {isDark ? 'Light mode' : 'Dark mode'}
-        </button>
+        <ThemeToggle />
       </div>
     </nav>
   );
