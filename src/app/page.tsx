@@ -7,6 +7,7 @@ import {
   AboutAndSkills,
   ContactSection,
   FeaturedProjects,
+  Footer,
   Hero,
   Navbar,
   Stats,
@@ -25,7 +26,7 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <main>
+    <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
       <Navbar
         onThemeToggle={() => {}}
         isDark={false}
@@ -34,14 +35,17 @@ export default function Home() {
           if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }}
       />
-      <Hero isDark={false} onScrollToProjects={() => {
-        const elem = document.getElementById('projects');
-        if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }} />
-      <Stats />
-      <AboutAndSkills isDark={false} />
-      <FeaturedProjects isDark={false} />
-      <ContactSection isDark={false} />
+      <div className="space-y-8">
+        <Hero isDark={false} onScrollToProjects={() => {
+          const elem = document.getElementById('projects');
+          if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }} />
+        <Stats />
+        <AboutAndSkills isDark={false} />
+        <FeaturedProjects isDark={false} />
+        <ContactSection isDark={false} />
+        <Footer />
+      </div>
     </main>
   );
 }

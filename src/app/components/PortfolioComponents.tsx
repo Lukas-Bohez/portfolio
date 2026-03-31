@@ -57,7 +57,15 @@ export function Navbar({
 
   return (
     <nav className="sticky top-0 z-40 mx-auto mb-5 flex w-full max-w-6xl items-center justify-between rounded-3xl border border-surface bg-surface/90 p-4 text-sm font-medium shadow-lg backdrop-blur">
-      <span className="text-xl font-black tracking-tight">Lukas Bohez</span>
+      <button
+        type="button"
+        className="flex items-center gap-2 text-xl font-black tracking-tight"
+        title="N = Nexus logo (focused systems engineering identity)"
+        onClick={() => onScrollTo('hero')}
+      >
+        <span className="rounded-full border border-surface bg-primary-2 px-2 py-1 text-xs font-black text-default">N</span>
+        Lukas Bohez
+      </button>
       <div className="flex items-center gap-3">
         {navItems.map((item) => (
           <button
@@ -78,27 +86,45 @@ export function Navbar({
 export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () => void; isDark: boolean }) {
   return (
     <motion.section
+      id="hero"
       data-hero=""
       className="mb-10 rounded-3xl border border-surface bg-surface p-8 shadow-xl backdrop-blur text-default"
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
-      <p className="uppercase tracking-widest text-blue-700 dark:text-blue-300">
-        Modern code with artisan impact
-      </p>
-      <h1 className="mt-2 text-4xl font-extrabold leading-tight sm:text-6xl">Lukas Bohez</h1>
-      <p className="mt-4 max-w-3xl text-lg text-default">
-        I build tools that scrape, convert, stream, and host on Linux and Raspberry Pi.
-        Full-stack systems, secure by default, crafted for smooth, effortless workflow operation.
-      </p>
-      <div className="mt-6 flex flex-wrap gap-3">
-        <button
-          onClick={onScrollToProjects}
-          className="rounded-full btn-primary px-5 py-2.5 text-sm font-semibold transition"
-        >
-          View featured work
-        </button>
+      <div className="grid gap-6 lg:grid-cols-1">
+        <div>
+          <p className="uppercase tracking-widest text-blue-700 dark:text-blue-300">Modern code with artisan impact</p>
+          <h1 className="mt-2 text-4xl font-extrabold leading-tight sm:text-6xl">Lukas Bohez</h1>
+          <p className="mt-3 text-sm text-default sm:text-lg">
+            I build secure, maintainable systems for Linux, Raspberry Pi, and self-hosted workflows.
+          </p>
+          <p className="mt-2 inline-flex rounded-full border border-accent bg-accent/10 px-3 py-1 text-xs font-medium text-primary">
+            Actively interviewing for mid-senior roles
+          </p>
+          <p className="mt-4 max-w-xl text-base text-default">
+            Systems, automation, and media pipelines that run reliably in real environments. No vaporware.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              onClick={onScrollToProjects}
+              className="rounded-full btn-primary px-5 py-2.5 text-sm font-semibold transition"
+            >
+              View featured work
+            </button>
+            <button
+              onClick={() => {
+                const elem = document.getElementById('contact');
+                if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="rounded-full border border-surface bg-black/5 px-5 py-2.5 text-sm font-semibold text-default transition hover:bg-surface"
+            >
+              Get in touch
+            </button>
+          </div>
+        </div>
       </div>
     </motion.section>
   );
@@ -106,10 +132,22 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
 
 export function Stats() {
   const metrics = [
-    { label: 'Tools deployed in production', value: 'Live on user systems' },
-    { label: 'Open-source work', value: 'Available for community use' },
-    { label: 'Reliable pipelines', value: 'Designed for high availability' },
-    { label: 'Performance focus', value: 'Built for speed and efficiency' },
+    {
+      label: 'Tools deployed in production',
+      value: 'Live on user systems',
+    },
+    {
+      label: 'Open-source work',
+      value: 'Available for community use',
+    },
+    {
+      label: 'Reliable pipelines',
+      value: 'Designed for high availability',
+    },
+    {
+      label: 'Performance focus',
+      value: 'Built for speed and efficiency',
+    },
   ];
 
   return (
@@ -126,8 +164,8 @@ export function Stats() {
           className="rounded-2xl border border-surface bg-surface p-4 text-center shadow-sm backdrop-blur mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
         >
-          <p className="text-2xl font-bold text-primary">{metric.value}</p>
-          {/* label removed for cleaner stat cards */}
+          <p className="text-sm font-semibold text-default">{metric.label}</p>
+          <p className="mt-2 text-base font-bold text-primary">{metric.value}</p>
         </article>
       ))}
     </motion.div>
@@ -161,10 +199,10 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
           for self-hosted pipelines, media ingestion, and engineering-grade operations.
         </p>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-default">
-          <li>99.9% uptime pipelines, Linux/Raspberry Pi-first infrastructure</li>
-          <li>FastAPI/Flask backend, Docker and Apache orchestration for resiliency</li>
-          <li>Smooth UX with Next.js App Router, Tailwind, and TypeScript</li>
-          <li>Media tooling: yt-dlp, FFmpeg, youtube_explode_dart, SQL workflows</li>
+          <li>Built and maintained long-running self-hosted services with predictable maintenance cycles.</li>
+          <li>Designed data ingestion and conversion flows that recover cleanly from network and disk errors.</li>
+          <li>Platform-agnostic deployments (Raspberry Pi + ARM, x86 Linux, containerized cloud edge).</li>
+          <li>Pragmatic technical docs and handoff-ready README guides for team adoption.</li>
         </ul>
       </div>
 
@@ -174,7 +212,7 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
           {skills.map((skill) => (
             <span
               key={skill}
-              className="rounded-lg border border-black dark:border-white px-3 py-1 text-xs font-semibold text-default mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+              className="rounded-lg border border-black dark:border-white px-3 py-1 text-xs font-semibold text-default will-change-[transform,opacity]"
               data-reveal=""
             >
               {skill}
@@ -191,20 +229,26 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'AI The Spire',
       description:
-        'Personal portfolio and self-hosted lab. Next.js, TailwindCSS, Python, Dart/Flutter, media engineering, and open-source tools. See README for full details.',
+        'Personal portfolio and self-hosted lab with dataset automations and local UX.',
       url: 'https://github.com/Lukas-Bohez/aithespire',
+      tech: ['Next.js', 'TypeScript', 'Tailwind', 'Python'],
+      color: 'from-cyan-500 to-blue-500',
     },
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Native Flutter app for playlist downloading, media conversion, and local playback. Multi-site support, casting, and fast native performance. See repo for binaries and docs.',
+        'Flutter downloader app with multi-site support, conversion pipelines, and local playback.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
+      tech: ['Flutter', 'Dart', 'yt-dlp', 'SQLite'],
+      color: 'from-violet-500 to-purple-500',
     },
     {
       name: 'Vault The Spire',
       description:
-        '2024 encrypted P2P storage + messaging with local-first vault persistence and no cloud dependency.',
-      url: 'https://github.com/Lukas-Bohez/vault-the-spire',
+        'Encrypted P2P storage + messaging with local-first persistence and no cloud dependency.',
+      url: 'https://github.com/Lukas-Bohez/vault_the_spire',
+      tech: ['Rust', 'Libp2p', 'AES', 'PocketBase'],
+      color: 'from-emerald-500 to-teal-500',
     },
   ];
 
@@ -221,8 +265,16 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
             transition={{ duration: 0.4, ease: 'easeOut' }}
             data-reveal=""
           >
+            <div className={`mb-3 h-28 rounded-xl bg-gradient-to-br ${project.color}`}></div>
             <h3 className="text-lg font-semibold">{project.name}</h3>
             <p className="mt-2 text-sm text-default">{project.description}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {project.tech.map((item) => (
+                <span key={`${project.name}-${item}`} className="rounded-full border border-surface px-2 py-1 text-xs text-default">
+                  {item}
+                </span>
+              ))}
+            </div>
             <a
               href={project.url}
               target="_blank"
@@ -278,5 +330,15 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
         </a>
       </div>
     </Section>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer className="mx-auto my-8 w-full max-w-6xl rounded-3xl border border-surface bg-surface/60 p-4 text-center text-sm text-muted">
+      <span title="N = Nexus brand mark for concise, focused engineering">N</span> Lukas Bohez  ·  
+      <a href="mailto:lukasbohez@gmail.com" className="text-primary hover:text-secondary">lukasbohez@gmail.com</a>  ·  
+      <a href="https://github.com/Lukas-Bohez" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-secondary">GitHub</a>
+    </footer>
   );
 }
