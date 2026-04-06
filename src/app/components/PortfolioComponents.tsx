@@ -24,16 +24,16 @@ function Section({ id, title, subtitle, children }: SectionProps) {
   return (
     <motion.section
       id={id}
-      className="mb-10 rounded-3xl border border-surface bg-surface p-6 shadow-lg text-default"
+      className="mb-12 rounded-3xl border border-surface bg-surface p-8 sm:p-10 shadow-lg text-default transition hover:shadow-2xl hover:border-blue-400/50 dark:hover:border-blue-300/50 hover:-translate-y-1"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.55, ease: 'easeOut' }}
       variants={sectionVariants}
     >
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold text-primary">{title}</h2>
-        {subtitle && <p className="mt-2 text-muted">{subtitle}</p>}
+      <div className="mb-8">
+        <h2 className="text-4xl font-bold text-primary">{title}</h2>
+        {subtitle && <p className="mt-3 text-lg text-muted leading-relaxed">{subtitle}</p>}
       </div>
       {children}
     </motion.section>
@@ -56,22 +56,22 @@ export function Navbar({
   ];
 
   return (
-    <nav className="sticky top-0 z-40 mx-auto mb-5 flex w-full max-w-6xl items-center justify-between rounded-3xl border border-surface bg-surface/90 p-4 text-sm font-medium shadow-lg backdrop-blur">
+    <nav className="sticky top-0 z-40 mb-8 flex w-full items-center justify-between gap-4 rounded-2xl sm:rounded-3xl border border-surface bg-surface/98 dark:bg-surface/95 p-4 sm:p-5 text-xs sm:text-sm font-medium shadow-lg backdrop-blur transition hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50">
       <button
         type="button"
-        className="flex items-center gap-2 text-xl font-black tracking-tight"
+        className="flex items-center gap-2 text-base sm:text-xl font-black tracking-tight transition hover:opacity-80"
         title="N = Nexus logo (focused systems engineering identity)"
         onClick={() => onScrollTo('hero')}
       >
-        <span className="rounded-full border border-surface bg-primary-2 px-2 py-1 text-xs font-black text-default">N</span>
-        Lukas Bohez
+        <span className="rounded-full border border-surface bg-primary-2 px-1.5 sm:px-2 py-1 text-xs font-black text-default">N</span>
+        <span className="hidden sm:inline">Lukas Bohez</span>
       </button>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => onScrollTo(item.id)}
-            className="rounded-full px-3 py-1 text-default transition hover:bg-surface"
+            className="rounded-full px-2 sm:px-3 py-1 text-default transition hover:bg-surface/50 hover:text-primary"
             aria-label={`Scroll to ${item.label}`}
           >
             {item.label}
@@ -88,29 +88,29 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
     <motion.section
       id="hero"
       data-hero=""
-      className="mb-10 rounded-3xl border border-surface bg-surface p-8 shadow-xl backdrop-blur text-default"
+      className="mb-10 rounded-3xl border border-surface bg-surface p-8 sm:p-12 shadow-xl backdrop-blur text-default"
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       <div className="grid gap-6 lg:grid-cols-1">
-        <div>
-          <p className="uppercase tracking-widest text-blue-700 dark:text-blue-300">Modern code with artisan impact</p>
-          <h1 className="mt-2 text-4xl font-extrabold leading-tight sm:text-6xl">Lukas Bohez</h1>
-          <p className="mt-3 text-sm text-default sm:text-lg">
+        <div className="max-w-2xl">
+          <p className="uppercase tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-sm sm:text-base">Modern code with artisan impact</p>
+          <h1 className="mt-2 text-5xl sm:text-7xl font-extrabold leading-tight">Lukas Bohez</h1>
+          <p className="mt-4 text-lg sm:text-xl text-default leading-relaxed">
             I build secure, maintainable systems for Linux, Raspberry Pi, and self-hosted workflows.
           </p>
-          <p className="mt-2 inline-flex rounded-full border border-accent bg-accent/10 px-3 py-1 text-xs font-medium text-primary">
+          <p className="mt-4 inline-flex rounded-full border border-blue-400 dark:border-blue-200 bg-blue-400/15 dark:bg-blue-400/20 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-contrast">
             Actively interviewing for mid-senior roles
           </p>
-          <p className="mt-4 max-w-xl text-base text-default">
+          <p className="mt-6 max-w-2xl text-lg text-default leading-relaxed">
             Systems, automation, and media pipelines that run reliably in real environments. No vaporware.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-4">
             <button
               onClick={onScrollToProjects}
-              className="rounded-full btn-primary px-5 py-2.5 text-sm font-semibold transition"
+              className="rounded-full btn-primary px-8 py-3 text-base font-semibold transition hover:shadow-lg hover:shadow-accent/50 hover:scale-105 active:scale-95"
             >
               View featured work
             </button>
@@ -119,7 +119,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
                 const elem = document.getElementById('contact');
                 if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }}
-              className="rounded-full border border-surface bg-black/5 px-5 py-2.5 text-sm font-semibold text-default transition hover:bg-surface"
+              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-8 py-3 text-base font-semibold text-default transition hover:bg-blue-400/10 hover:shadow-md hover:scale-105 active:scale-95"
             >
               Get in touch
             </button>
@@ -152,7 +152,7 @@ export function Stats() {
 
   return (
     <motion.div
-      className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-4"
+      className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-4"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -161,11 +161,11 @@ export function Stats() {
       {metrics.map((metric) => (
         <article
           key={metric.label}
-          className="rounded-2xl border border-surface bg-surface p-4 text-center shadow-sm backdrop-blur mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-7 text-center shadow-md backdrop-blur transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
         >
-          <p className="text-sm font-semibold text-default">{metric.label}</p>
-          <p className="mt-2 text-base font-bold text-primary">{metric.value}</p>
+          <p className="text-base font-semibold text-default leading-relaxed">{metric.label}</p>
+          <p className="mt-3 text-xl font-bold text-blue-400 dark:text-blue-200">{metric.value}</p>
         </article>
       ))}
     </motion.div>
@@ -194,11 +194,11 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
   return (
     <Section id="about" title="About Me" subtitle="Who I am, what I ship, and why I care">
       <div>
-        <p className="text-default">
+        <p className="text-base sm:text-lg text-default leading-relaxed">
           I value tools that are useful rather than trendy. Crafting secure-by-default systems
           for self-hosted pipelines, media ingestion, and engineering-grade operations.
         </p>
-        <ul className="mt-4 list-disc space-y-2 pl-5 text-default">
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-base text-default leading-relaxed">
           <li>Built and maintained long-running self-hosted services with predictable maintenance cycles.</li>
           <li>Designed data ingestion and conversion flows that recover cleanly from network and disk errors.</li>
           <li>Platform-agnostic deployments (Raspberry Pi + ARM, x86 Linux, containerized cloud edge).</li>
@@ -206,13 +206,13 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
         </ul>
       </div>
 
-      <div className="mt-6">
-        <h3 className="text-lg font-bold">Core skills</h3>
-        <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-8">
+        <h3 className="text-2xl font-bold text-primary">Core skills</h3>
+        <div className="mt-5 flex flex-wrap gap-3">
           {skills.map((skill) => (
             <span
               key={skill}
-              className="rounded-lg border border-black dark:border-white px-3 py-1 text-xs font-semibold text-default will-change-[transform,opacity]"
+              className="rounded-lg border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-4 py-2 text-sm sm:text-base font-semibold text-default transition hover:border-blue-400 dark:hover:border-blue-300 hover:bg-blue-400/20 dark:hover:bg-blue-300/20 will-change-[transform,opacity]"
               data-reveal=""
             >
               {skill}
@@ -254,23 +254,23 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
 
   return (
     <Section id="projects" title="Featured Projects" subtitle="Code you can inspect and use today">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
           <motion.article
             key={project.name}
-            className="rounded-2xl border border-surface bg-surface p-5 shadow-sm mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+            className="rounded-2xl border border-surface bg-surface p-5 shadow-md transition hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             data-reveal=""
           >
-            <div className={`mb-3 h-28 rounded-xl bg-gradient-to-br ${project.color}`}></div>
-            <h3 className="text-lg font-semibold">{project.name}</h3>
-            <p className="mt-2 text-sm text-default">{project.description}</p>
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className={`mb-4 h-44 rounded-xl bg-gradient-to-br ${project.color} transition opacity-90 hover:opacity-100`}></div>
+            <h3 className="text-xl font-bold text-primary">{project.name}</h3>
+            <p className="mt-3 text-lg text-default leading-relaxed">{project.description}</p>
+            <div className="mt-5 flex flex-wrap gap-2">
               {project.tech.map((item) => (
-                <span key={`${project.name}-${item}`} className="rounded-full border border-surface px-2 py-1 text-xs text-default">
+                <span key={`${project.name}-${item}`} className="rounded-full border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-base font-medium text-default transition hover:shadow-sm">
                   {item}
                 </span>
               ))}
@@ -279,7 +279,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
               href={project.url}
               target="_blank"
               rel="noreferrer noopener"
-              className="mt-4 inline-flex items-center text-sm font-semibold text-primary hover:text-secondary"
+              className="mt-5 inline-flex items-center text-lg font-semibold text-blue-400 dark:text-blue-200 transition hover:text-blue-500 dark:hover:text-blue-100 hover:translate-x-2"
             >
               Explore ↗
             </a>
@@ -297,36 +297,36 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
       title="Let’s connect"
       subtitle="I’m actively interviewing and available for mid-senior roles"
     >
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-3">
         <a
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-4 text-sm text-default shadow-sm transition hover:-translate-y-1 hover:shadow-md mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
         >
-          <span className="font-semibold">Email</span>
-          <span className="mt-1 text-xs text-muted block">Reach out for contract and full-time opportunities.</span>
+          <span className="font-bold text-lg text-primary">Email</span>
+          <span className="mt-3 text-base text-default block leading-relaxed">Reach out for contract and full-time opportunities.</span>
         </a>
         <a
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-4 text-sm text-default shadow-sm transition hover:-translate-y-1 hover:shadow-md mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
         >
-          <span className="font-semibold">GitHub</span>
-          <span className="mt-1 text-xs text-muted block">Open source work and active contributions.</span>
+          <span className="font-bold text-lg text-primary">GitHub</span>
+          <span className="mt-3 text-base text-default block leading-relaxed">Open source work and active contributions.</span>
         </a>
         <a
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl border border-surface bg-surface p-4 text-sm text-default shadow-sm transition hover:-translate-y-1 hover:shadow-md mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
         >
-          <span className="font-semibold">LinkedIn</span>
-          <span className="mt-1 text-xs text-muted block">Mid-senior roles,<br />open to opportunities.</span>
+          <span className="font-bold text-lg text-primary">LinkedIn</span>
+          <span className="mt-3 text-base text-default block leading-relaxed">Mid-senior roles,<br />open to opportunities.</span>
         </a>
       </div>
     </Section>
@@ -335,10 +335,16 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
 
 export function Footer() {
   return (
-    <footer className="mx-auto my-8 w-full max-w-6xl rounded-3xl border border-surface bg-surface/60 p-4 text-center text-sm text-muted">
-      <span title="N = Nexus brand mark for concise, focused engineering">N</span> Lukas Bohez  ·  
-      <a href="mailto:lukasbohez@gmail.com" className="text-primary hover:text-secondary">lukasbohez@gmail.com</a>  ·  
-      <a href="https://github.com/Lukas-Bohez" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-secondary">GitHub</a>
+    <footer className="my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-8 text-center text-lg text-default transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70">
+      <span className="text-primary font-bold text-2xl" title="N = Nexus brand mark for concise, focused engineering">N</span> 
+      <span className="ml-2 font-bold">Lukas Bohez</span>
+      <div className="mt-4 flex flex-wrap justify-center gap-4">
+        <a href="mailto:lukasbohez@gmail.com" className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline">Email</a>
+        <span className="text-default">·</span>
+        <a href="https://github.com/Lukas-Bohez" target="_blank" rel="noopener noreferrer" className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline">GitHub</a>
+        <span className="text-default">·</span>
+        <a href="https://www.linkedin.com/in/lukas-bohez-3ba566271/" target="_blank" rel="noopener noreferrer" className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline">LinkedIn</a>
+      </div>
     </footer>
   );
 }

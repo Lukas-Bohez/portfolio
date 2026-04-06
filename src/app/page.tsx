@@ -12,6 +12,7 @@ import {
   Navbar,
   Stats,
 } from './components/PortfolioComponents';
+import { Container } from './components/Container';
 
 export default function Home() {
   useCardReveal();
@@ -26,16 +27,18 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-      <Navbar
-        onThemeToggle={() => {}}
-        isDark={false}
-        onScrollTo={(id) => {
-          const elem = document.getElementById(id);
-          if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }}
-      />
-      <div className="space-y-8">
+    <main className="w-full bg-body">
+      <Container>
+        <Navbar
+          onThemeToggle={() => {}}
+          isDark={false}
+          onScrollTo={(id) => {
+            const elem = document.getElementById(id);
+            if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
+        />
+      </Container>
+      <Container className="space-y-12 py-4">
         <Hero isDark={false} onScrollToProjects={() => {
           const elem = document.getElementById('projects');
           if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -44,8 +47,10 @@ export default function Home() {
         <AboutAndSkills isDark={false} />
         <FeaturedProjects isDark={false} />
         <ContactSection isDark={false} />
+      </Container>
+      <Container className="pb-4">
         <Footer />
-      </div>
+      </Container>
     </main>
   );
 }
