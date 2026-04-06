@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "update:portfolio": "./scripts/update-portfolio.sh",
     "export": "next export",
     "export:dist": "next build && node -e \"const fs=require('fs'),path=require('path'); const src='out', dst='dist'; function cp(s,d){ if(!fs.existsSync(d)) fs.mkdirSync(d,{recursive:true}); for(const e of fs.readdirSync(s,{withFileTypes:true})){ const ps=path.join(s,e.name), pd=path.join(d,e.name); if(e.isDirectory()) cp(ps,pd); else fs.copyFileSync(ps,pd); }} cp(src,dst);\"",
     "start": "next start",
