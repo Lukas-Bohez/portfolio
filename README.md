@@ -77,22 +77,13 @@ flutter pub get && dart run build_runner build
 
 ### Option 1: Static export (Apache friendly)
 
-1. Build and export static files:
+1. Set `PORTFOLIO_DEPLOY_DIR` to the Apache docroot that serves `/portfolio`, for example `/var/www/quizthespire.com/portfolio`.
+2. Run the updater:
    ```bash
-   npm run build
-   npm run export
+   PORTFOLIO_DEPLOY_DIR=/var/www/quizthespire.com/portfolio npm run update:portfolio
    ```
-2. This generates an `out` directory with an `index.html` and static asset tree.
-3. Copy `out/` into your Apache docroot (e.g., `/var/www/quizthespire.com/`).
-4. Ensure `DirectoryIndex index.html` is set, and (optionally) add this in `.htaccess`:
-   ```apache
-   RewriteEngine On
-   RewriteBase /
-   RewriteRule ^index\.html$ - [L]
-   RewriteCond %{REQUEST_FILENAME} !-f
-   RewriteRule ^(.*)$ /index.html [L,QSA]
-   ```
-5. Visit your site at `https://quizthespire.com`.
+3. The script rebuilds the static export, refreshes `out/.last-update.txt`, and copies the result into the deploy directory.
+4. Reload Apache or refresh any cached layer if the old version is still being served.
 
 ### Option 2: Next.js server reverse proxy
 
@@ -116,4 +107,3 @@ Thank you for visiting my portfolio codebase. Feedback is welcome!
 - AI setup: repository synchronized with https://github.com/Lukas-Bohez/lbohez-portfolio
 - Latest skills: added notes about full-stack Next.js portfolio + static export deployment.
 - Personal intent: maintain accessible open-source self-hosted tools and media pipelines.
->>>>>>> 1e48e36 (Initial commit)
