@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Lukas Bohez Portfolio',
+  title: 'Lukas Bohez | Portfolio',
   description:
-    'Portfolio of Lukas Bohez - Full-Stack Software Engineer, Next.js, and open-source projects.',
+    'Portfolio of Lukas Bohez featuring QuizTheSpire, Convert the Spire Reborn, and Vault The Spire.',
 };
 
 export default function RootLayout({

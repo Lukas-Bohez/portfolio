@@ -1,8 +1,10 @@
 'use client';
 
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
+import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
 
 import type { ReactNode } from 'react';
 
@@ -63,7 +65,15 @@ export function Navbar({
         title="N = Nexus logo (focused systems engineering identity)"
         onClick={() => onScrollTo('hero')}
       >
-        <span className="rounded-full border border-surface bg-primary-2 px-1.5 sm:px-2 py-1 text-xs font-black text-default">N</span>
+        <span className="relative h-8 w-8 overflow-hidden rounded-full border border-surface bg-secondary shadow-sm sm:h-9 sm:w-9">
+          <Image
+            src={profilePhoto}
+            alt="Portrait of Lukas Bohez"
+            fill
+            sizes="36px"
+            className="object-cover object-[50%_18%] scale-[1.35]"
+          />
+        </span>
         <span className="hidden sm:inline">Lukas Bohez</span>
       </button>
       <div className="flex items-center gap-2 sm:gap-3">
@@ -93,7 +103,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
-      <div className="grid gap-6 lg:grid-cols-1">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
         <div className="max-w-2xl">
           <p className="uppercase tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-sm sm:text-base">Modern code with artisan impact</p>
           <h1 className="mt-2 text-5xl sm:text-7xl font-extrabold leading-tight">Lukas Bohez</h1>
@@ -124,6 +134,25 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
               Get in touch
             </button>
           </div>
+        </div>
+        <div className="flex justify-center lg:justify-end">
+          {profilePhoto ? (
+            <div className="relative h-56 w-56 overflow-hidden rounded-[2rem] border border-surface bg-secondary shadow-xl sm:h-72 sm:w-72">
+              <Image
+                src={profilePhoto}
+                alt="Portrait of Lukas Bohez"
+                fill
+                priority
+                sizes="(min-width: 1024px) 18rem, 14rem"
+                className="object-cover object-[50%_20%] scale-[1.15]"
+              />
+            </div>
+          ) : (
+            <div
+              className="mt-8 h-3 w-28 rounded-full bg-gradient-to-r from-emerald-400 via-sky-400 to-violet-500 shadow-md shadow-emerald-400/20"
+              aria-hidden="true"
+            />
+          )}
         </div>
       </div>
     </motion.section>
@@ -227,17 +256,17 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
 export function FeaturedProjects({ isDark }: { isDark: boolean }) {
   const projects = [
     {
-      name: 'AI The Spire',
+      name: 'QuizTheSpire',
       description:
-        'Personal portfolio and self-hosted lab with dataset automations and local UX.',
-      url: 'https://github.com/Lukas-Bohez/aithespire',
-      tech: ['Next.js', 'TypeScript', 'Tailwind', 'Python'],
+        'Web playlist conversion service with privacy-first hosting, Apache frontend setup, and a live site at quizthespire.com.',
+      url: 'https://quizthespire.com',
+      tech: ['Python', 'FastAPI', 'Apache', 'TypeScript'],
       color: 'from-cyan-500 to-blue-500',
     },
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Flutter downloader app with multi-site support, conversion pipelines, and local playback.',
+        'Cross-platform media downloader with Android support, a built-in browser for discovery, and configurable torrent workflows.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
       tech: ['Flutter', 'Dart', 'yt-dlp', 'SQLite'],
       color: 'from-violet-500 to-purple-500',
@@ -245,7 +274,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Vault The Spire',
       description:
-        'Encrypted P2P storage + messaging with local-first persistence and no cloud dependency.',
+        'Windows-only AI messaging for torrents, plus Android support, a built-in browser for discovery, and extensive customization.',
       url: 'https://github.com/Lukas-Bohez/vault_the_spire',
       tech: ['Rust', 'Libp2p', 'AES', 'PocketBase'],
       color: 'from-emerald-500 to-teal-500',
@@ -258,14 +287,19 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
         {projects.map((project) => (
           <motion.article
             key={project.name}
-            className="rounded-2xl border border-surface bg-surface p-5 shadow-md transition hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+            className="rounded-2xl border border-surface bg-surface p-4 shadow-md transition hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             data-reveal=""
           >
-            <div className={`mb-4 h-44 rounded-xl bg-gradient-to-br ${project.color} transition opacity-90 hover:opacity-100`}></div>
+            <div className="mb-4 flex items-center gap-3">
+              <div className={`h-3 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-90 transition hover:opacity-100`} />
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-surface bg-surface text-xs font-black text-primary shadow-sm">
+                {project.name.replace(/[^A-Z]/g, '').slice(0, 1) || project.name.charAt(0)}
+              </span>
+            </div>
             <h3 className="text-xl font-bold text-primary">{project.name}</h3>
             <p className="mt-3 text-lg text-default leading-relaxed">{project.description}</p>
             <div className="mt-5 flex flex-wrap gap-2">
@@ -336,7 +370,15 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
 export function Footer() {
   return (
     <footer className="my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-8 text-center text-lg text-default transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70">
-      <span className="text-primary font-bold text-2xl" title="N = Nexus brand mark for concise, focused engineering">N</span> 
+      <span className="relative inline-flex h-9 w-9 overflow-hidden rounded-full border border-surface bg-secondary align-middle shadow-sm" title="Portrait of Lukas Bohez">
+        <Image
+          src={profilePhoto}
+          alt="Portrait of Lukas Bohez"
+          fill
+          sizes="36px"
+          className="object-cover object-[50%_18%] scale-[1.35]"
+        />
+      </span>
       <span className="ml-2 font-bold">Lukas Bohez</span>
       <div className="mt-4 flex flex-wrap justify-center gap-4">
         <a href="mailto:lukasbohez@gmail.com" className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline">Email</a>
