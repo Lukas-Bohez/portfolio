@@ -78,12 +78,15 @@ flutter pub get && dart run build_runner build
 ### Option 1: Static export (Apache friendly)
 
 1. Set `PORTFOLIO_DEPLOY_DIR` to the Apache docroot that serves `/portfolio`, for example `/var/www/quizthespire.com/portfolio`.
-2. Run the updater:
+2. (Optional) set `PORTFOLIO_URL` if you want live verification against another URL.
+3. Run the updater:
    ```bash
-   PORTFOLIO_DEPLOY_DIR=/var/www/quizthespire.com/portfolio npm run update:portfolio
+   PORTFOLIO_DEPLOY_DIR=/var/www/quizthespire.com/portfolio \
+   PORTFOLIO_URL=https://quizthespire.com/portfolio/ \
+   npm run update:portfolio
    ```
-3. The script rebuilds the static export, refreshes `out/.last-update.txt`, and copies the result into the deploy directory.
-4. Reload Apache or refresh any cached layer if the old version is still being served.
+4. The script rebuilds the static export, refreshes `out/.last-update.txt`, copies the result into the deploy directory, and verifies that the live page includes the new build id.
+5. If verification fails, check Apache mapping for `/portfolio` and any reverse-proxy/CDN cache.
 
 ### Option 2: Next.js server reverse proxy
 
