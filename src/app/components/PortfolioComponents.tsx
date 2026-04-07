@@ -164,6 +164,29 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
   );
 }
 
+export function RecruiterWowStrip() {
+  const taglines = [
+    'Deploys faster than Buzz Lightyear leaving the toy chest',
+    'Debugging bugs like a Warframe speedrun with logs on',
+    'Backend calm under pressure, frontend sparkle under spotlight',
+    'From prototype to production without the drama arc',
+    'Ship today, improve tomorrow, keep it maintainable forever',
+  ];
+
+  return (
+    <section className="mb-12 overflow-hidden rounded-3xl border border-surface bg-surface p-5 sm:p-6 shadow-lg" data-reveal="" data-reveal-order={0}>
+      <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Recruiter wow reel</p>
+      <div className="marquee-track" aria-label="Scrolling highlights">
+        {[...taglines, ...taglines].map((line, index) => (
+          <span key={`${line}-${index}`} className="marquee-chip">
+            {line}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function Stats() {
   const metrics = [
     {
@@ -329,6 +352,43 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
             >
               Explore ↗
             </a>
+          </motion.article>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+export function HumorSection() {
+  const stories = [
+    {
+      title: 'The Toy Box Rule',
+      copy: 'If a feature cannot be explained in 30 seconds, it gets refactored. Recruiters should not need lore to understand impact.',
+    },
+    {
+      title: 'Warframe Energy Economy',
+      copy: 'I treat performance budgets like energy pools: spend where it matters, regenerate quickly, and never waste cycles on vanity.',
+    },
+    {
+      title: 'No Infinite Loading Cutscene',
+      copy: 'Every animation now has intent, timing, and an off-ramp. The portfolio feels alive, not trapped in a cinematic loop.',
+    },
+  ];
+
+  return (
+    <Section id="personality" title="Build Personality" subtitle="Memorable engineering with playful but professional storytelling">
+      <div className="grid gap-5 md:grid-cols-3">
+        {stories.map((story, index) => (
+          <motion.article
+            key={story.title}
+            className="rounded-2xl border border-surface bg-surface p-6 shadow-md"
+            data-reveal=""
+            data-reveal-order={index}
+            whileHover={{ y: -10, rotateY: index % 2 === 0 ? -5 : 5, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 210, damping: 18 }}
+          >
+            <h3 className="text-xl font-bold text-primary">{story.title}</h3>
+            <p className="mt-3 text-base leading-relaxed text-default">{story.copy}</p>
           </motion.article>
         ))}
       </div>

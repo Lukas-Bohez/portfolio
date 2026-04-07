@@ -95,6 +95,11 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+@keyframes marqueeSlide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .hero-orb {
   position: absolute;
   border-radius: 9999px;
@@ -136,10 +141,31 @@ body {
   animation: gradientSweep 5s ease infinite;
 }
 
+.marquee-track {
+  display: flex;
+  gap: 0.8rem;
+  width: max-content;
+  animation: marqueeSlide 24s linear infinite;
+  will-change: transform;
+}
+
+.marquee-chip {
+  white-space: nowrap;
+  border: 1px solid color-mix(in oklab, var(--accent), white 40%);
+  background: color-mix(in oklab, var(--accent), transparent 88%);
+  color: var(--text);
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-orb,
   .hero-grid,
-  .gradient-sweep {
+  .gradient-sweep,
+  .marquee-track {
     animation: none;
   }
 }
