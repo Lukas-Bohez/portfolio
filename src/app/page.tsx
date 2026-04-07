@@ -3,7 +3,6 @@
 import { useCardReveal } from './hooks/useCardReveal'
 
 import {
-  AboutAndSkills,
   ContactSection,
   FeaturedProjects,
   Footer,
@@ -37,7 +36,6 @@ export default function Home() {
         }} />
         <RecruiterWowStrip />
         <Stats />
-        <AboutAndSkills isDark={false} />
         <FeaturedProjects isDark={false} />
         <HumorSection />
         <ContactSection isDark={false} />

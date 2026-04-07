@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Lukas Bohez | Portfolio',
   description:
-    'Portfolio of Lukas Bohez featuring QuizTheSpire, Convert the Spire Reborn, and Vault The Spire.',
+    'Portfolio of Lukas Bohez featuring Python, TypeScript, and self-hosted product work across QuizTheSpire, Convert the Spire Reborn, and Vault The Spire.',
 };
 
 export default function RootLayout({

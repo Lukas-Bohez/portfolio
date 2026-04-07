@@ -53,7 +53,7 @@ export function Navbar({
 }) {
   const navItems = [
     { label: 'Projects', id: 'projects' },
-    { label: 'About', id: 'about' },
+    { label: 'What I Do', id: 'what-i-do' },
     { label: 'Contact', id: 'contact' },
   ];
 
@@ -112,7 +112,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
       </div>
       <div className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
         <div className="max-w-2xl">
-          <p className="uppercase tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-sm sm:text-base">Modern code with artisan impact</p>
+          <p className="uppercase tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-sm sm:text-base">Pragmatic code with scalable impact</p>
           <h1 className="mt-2 text-5xl sm:text-7xl font-extrabold leading-tight">Lukas Bohez</h1>
           <p className="mt-4 text-lg sm:text-xl text-default leading-relaxed">
             I build production-ready Python and full-stack systems that are fast to ship, reliable to run, and easy to maintain.
@@ -154,6 +154,8 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
                 alt="Portrait of Lukas Bohez"
                 fill
                 priority
+                loading="eager"
+                fetchPriority="high"
                 sizes="(min-width: 1024px) 18rem, 14rem"
                 className="object-cover object-[50%_20%] scale-[1.15]"
               />
@@ -253,7 +255,7 @@ export function RecruiterWowStrip() {
   return (
     <section className="mb-12 overflow-hidden rounded-3xl border border-surface bg-surface p-5 sm:p-6 shadow-lg" data-reveal="" data-reveal-order={0}>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Core skills</p>
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Technical Arsenal</p>
         <div className="flex items-center gap-2">
           <button type="button" className="rail-control-btn" onClick={() => stepBy('prev')} aria-label="Scroll skills left">◀</button>
           <button type="button" className="rail-control-btn" onClick={() => setIsPaused((prev) => !prev)} aria-label={isPaused ? 'Resume auto scrolling' : 'Pause auto scrolling'}>
@@ -296,86 +298,68 @@ export function Stats() {
       value: 'Clear docs, articles, and handoff notes',
     },
     {
-      label: 'Recruiter-ready portfolio',
-      value: 'Code, impact, and deployment story',
+      label: 'Transparent delivery',
+      value: 'Code, impact, and deployment details that are easy to inspect',
     },
   ];
 
   return (
-    <motion.div
-      className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-4"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.55, ease: 'easeOut' }}
-    >
-      {metrics.map((metric, index) => (
-        <motion.article
-          key={metric.label}
-          className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-7 text-center shadow-md backdrop-blur transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
-          data-reveal=""
-          data-reveal-order={index}
-          whileHover={{ y: -8, scale: 1.02, rotateX: 6 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-        >
-          <p className="text-base font-semibold text-default leading-relaxed">{metric.label}</p>
-          <p className="mt-3 text-xl font-bold text-blue-400 dark:text-blue-200">{metric.value}</p>
-        </motion.article>
-      ))}
-    </motion.div>
+    <Section id="what-i-do" title="What I Do" subtitle="Value, scope, and delivery shape how I work">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {metrics.map((metric, index) => (
+          <motion.article
+            key={metric.label}
+            className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-7 shadow-md backdrop-blur transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70 hover:-translate-y-1 will-change-[transform,opacity]"
+            data-reveal=""
+            data-reveal-order={index}
+            whileHover={{ y: -8, scale: 1.02, rotateX: 6 }}
+            transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+          >
+            <p className="text-base font-semibold text-primary uppercase tracking-[0.14em]">{metric.label}</p>
+            <p className="mt-3 text-lg text-default leading-relaxed">{metric.value}</p>
+          </motion.article>
+        ))}
+      </div>
+    </Section>
   );
 }
 
 export function AboutAndSkills({ isDark }: { isDark: boolean }) {
-  const skills = [
-    'Next.js',
-    'TypeScript',
-    'TailwindCSS',
-    'React',
-    'CSS',
-    'Flutter',
-    'JavaScript',
-    'HTML',
-    'Python',
-    'SQL',
-    'SQLite',
-    'FastAPI',
-    'Docker',
-    'GitHub Actions',
-    'Linux',
+  const principles = [
+    {
+      title: 'Production-Focused Engineering',
+      copy: 'I build stable, live services that are designed for real-world reliability instead of demo-only polish.',
+    },
+    {
+      title: 'Backend-First Mindset',
+      copy: 'I design durable data flows, Python APIs, and release workflows that support long-term maintainability.',
+    },
+    {
+      title: 'Technical Communication',
+      copy: 'I write clear documentation, articles, and handoff notes that reduce support overhead and speed up adoption.',
+    },
+    {
+      title: 'End-to-End Ownership',
+      copy: 'I move confidently from architecture to implementation to deployment, without losing performance or clarity.',
+    },
   ];
 
   return (
-    <Section id="about" title="About Me" subtitle="Who I am, what I ship, and why I care">
-      <div>
-        <p className="text-base sm:text-lg text-default leading-relaxed">
-          I build useful software with a strong backend core. My work combines Python services,
-          practical frontend design, and deployment discipline so teams can ship and iterate confidently.
-        </p>
-        <ul className="mt-4 list-disc space-y-2 pl-5 text-base text-default leading-relaxed">
-          <li>Shipped and maintained live web products with Python backends and stable release workflows.</li>
-          <li>Turned product pivots into clear technical changes without losing performance or maintainability.</li>
-          <li>Built onboarding content, articles, and product documentation that reduce support overhead.</li>
-          <li>Comfortable owning the full loop: architecture, implementation, deployment, and iteration.</li>
-        </ul>
-      </div>
-
-      <div className="mt-8">
-        <h3 className="text-2xl font-bold text-primary">Core skills</h3>
-        <div className="mt-5 flex flex-wrap gap-3">
-          {skills.map((skill, index) => (
-            <motion.span
-              key={skill}
-              className="rounded-lg border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-4 py-2 text-sm sm:text-base font-semibold text-default transition hover:border-blue-400 dark:hover:border-blue-300 hover:bg-blue-400/20 dark:hover:bg-blue-300/20 will-change-[transform,opacity]"
-              data-reveal=""
-              data-reveal-order={index}
-              whileHover={{ y: -4, scale: 1.06, rotate: -1 }}
-              whileTap={{ scale: 0.96 }}
-            >
-              {skill}
-            </motion.span>
-          ))}
-        </div>
+    <Section id="about" title="Engineering Foundations" subtitle="The habits that keep the work shippable and easy to trust">
+      <div className="grid gap-5 md:grid-cols-2">
+        {principles.map((principle, index) => (
+          <motion.article
+            key={principle.title}
+            className="rounded-2xl border border-surface bg-surface p-6 shadow-md"
+            data-reveal=""
+            data-reveal-order={index}
+            whileHover={{ y: -8, scale: 1.015, rotateX: 4 }}
+            transition={{ type: 'spring', stiffness: 210, damping: 18 }}
+          >
+            <h3 className="text-xl font-bold text-primary">{principle.title}</h3>
+            <p className="mt-3 text-base leading-relaxed text-default">{principle.copy}</p>
+          </motion.article>
+        ))}
       </div>
     </Section>
   );
@@ -384,7 +368,7 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
 export function FeaturedProjects({ isDark }: { isDark: boolean }) {
   const projects = [
     {
-      name: 'QuizTheSpire',
+      name: 'Quiz The Spire',
       description:
         'Online quiz platform powered by a Python backend, with article publishing and project showcases. It is the live hub where I present my tools and host my portfolio at quizthespire.com.',
       url: 'https://quizthespire.com',
@@ -459,20 +443,20 @@ export function HumorSection() {
   const stories = [
     {
       title: 'Fast Clarity Rule',
-      copy: 'If a feature cannot be explained quickly, it gets refined. Recruiters should immediately see value, not decode a puzzle.',
+      copy: 'If a feature cannot be explained quickly, it gets refined until the intent is obvious and the implementation stays honest.',
     },
     {
       title: 'Performance Budget Discipline',
-      copy: 'I treat runtime budgets like real currency: spend where it improves outcomes and avoid costly visual noise.',
+      copy: 'I treat runtime budgets like real currency: spend where it improves outcomes and avoid costly visual noise or premature complexity.',
     },
     {
       title: 'No Endless Loading Theater',
-      copy: 'Every animation now has intent, timing, and an off-ramp so the experience feels dynamic and controlled.',
+      copy: 'Every animation has intent, timing, and an off-ramp so the experience feels dynamic, controlled, and easy to trust.',
     },
   ];
 
   return (
-    <Section id="personality" title="Build Personality" subtitle="Memorable engineering with playful but professional storytelling">
+    <Section id="philosophy" title="Engineering Philosophy" subtitle="Memorable engineering with playful but professional storytelling">
       <div className="grid gap-5 md:grid-cols-3">
         {stories.map((story, index) => (
           <motion.article
