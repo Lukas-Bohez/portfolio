@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
 import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
 
-import type { ReactNode } from 'react';
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 
 
 
@@ -78,14 +78,16 @@ export function Navbar({
       </button>
       <div className="flex items-center gap-2 sm:gap-3">
         {navItems.map((item) => (
-          <button
+          <motion.button
             key={item.id}
             onClick={() => onScrollTo(item.id)}
             className="rounded-full px-2 sm:px-3 py-1 text-default transition hover:bg-surface/50 hover:text-primary"
             aria-label={`Scroll to ${item.label}`}
+            whileHover={{ y: -2, scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
           >
             {item.label}
-          </button>
+          </motion.button>
         ))}
         <ThemeToggle />
       </div>
@@ -142,7 +144,11 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
         </div>
         <div className="flex justify-center lg:justify-end">
           {profilePhoto ? (
-            <div className="relative h-56 w-56 overflow-hidden rounded-[2rem] border border-surface bg-secondary shadow-xl sm:h-72 sm:w-72">
+            <motion.div
+              className="relative h-56 w-56 overflow-hidden rounded-[2rem] border border-surface bg-secondary shadow-xl sm:h-72 sm:w-72"
+              animate={{ y: [0, -10, 0], rotate: [0, 1, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            >
               <Image
                 src={profilePhoto}
                 alt="Portrait of Lukas Bohez"
@@ -151,7 +157,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
                 sizes="(min-width: 1024px) 18rem, 14rem"
                 className="object-cover object-[50%_20%] scale-[1.15]"
               />
-            </div>
+            </motion.div>
           ) : (
             <div
               className="mt-8 h-3 w-28 rounded-full bg-gradient-to-r from-emerald-400 via-sky-400 to-violet-500 shadow-md shadow-emerald-400/20"
@@ -165,19 +171,107 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
 }
 
 export function RecruiterWowStrip() {
-  const taglines = [
-    'Deploys faster than Buzz Lightyear leaving the toy chest',
-    'Debugging bugs like a Warframe speedrun with logs on',
-    'Backend calm under pressure, frontend sparkle under spotlight',
-    'From prototype to production without the drama arc',
-    'Ship today, improve tomorrow, keep it maintainable forever',
+  const skills = [
+    'Python',
+    'FastAPI',
+    'Next.js',
+    'TypeScript',
+    'Framer Motion',
+    'SQL',
+    'SQLite',
+    'Docker',
+    'Linux',
+    'CI/CD',
+    'API Design',
+    'System Reliability',
+    'Performance Tuning',
+    'Technical Writing',
+    'Self-Hosted Deployment',
   ];
+  const trackRef = useRef<HTMLDivElement>(null);
+  const dragState = useRef({ active: false, startX: 0, startScrollLeft: 0 });
+  const [isPaused, setIsPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let frameId = 0;
+
+    const tick = () => {
+      if (!isPaused && !isDragging) {
+        track.scrollLeft += 0.65;
+        if (track.scrollLeft >= track.scrollWidth / 2) {
+          track.scrollLeft = 0;
+        }
+      }
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frameId);
+  }, [isPaused, isDragging]);
+
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track) return;
+    dragState.current = {
+      active: true,
+      startX: event.clientX,
+      startScrollLeft: track.scrollLeft,
+    };
+    setIsDragging(true);
+    track.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track || !dragState.current.active) return;
+    const delta = event.clientX - dragState.current.startX;
+    track.scrollLeft = dragState.current.startScrollLeft - delta;
+  };
+
+  const onPointerEnd = (event: PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track) return;
+    dragState.current.active = false;
+    setIsDragging(false);
+    if (track.hasPointerCapture(event.pointerId)) {
+      track.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  const stepBy = (direction: 'prev' | 'next') => {
+    const track = trackRef.current;
+    if (!track) return;
+    const amount = Math.min(track.clientWidth * 0.7, 460);
+    const sign = direction === 'next' ? 1 : -1;
+    track.scrollBy({ left: sign * amount, behavior: 'smooth' });
+  };
 
   return (
     <section className="mb-12 overflow-hidden rounded-3xl border border-surface bg-surface p-5 sm:p-6 shadow-lg" data-reveal="" data-reveal-order={0}>
-      <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Recruiter wow reel</p>
-      <div className="marquee-track" aria-label="Scrolling highlights">
-        {[...taglines, ...taglines].map((line, index) => (
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Core skills</p>
+        <div className="flex items-center gap-2">
+          <button type="button" className="rail-control-btn" onClick={() => stepBy('prev')} aria-label="Scroll skills left">◀</button>
+          <button type="button" className="rail-control-btn" onClick={() => setIsPaused((prev) => !prev)} aria-label={isPaused ? 'Resume auto scrolling' : 'Pause auto scrolling'}>
+            {isPaused ? 'Play' : 'Pause'}
+          </button>
+          <button type="button" className="rail-control-btn" onClick={() => stepBy('next')} aria-label="Scroll skills right">▶</button>
+        </div>
+      </div>
+      <div
+        ref={trackRef}
+        className={`skills-rail ${isDragging ? 'is-dragging' : ''}`}
+        aria-label="Draggable skills rail"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerEnd}
+        onPointerCancel={onPointerEnd}
+      >
+        {[...skills, ...skills].map((line, index) => (
           <span key={`${line}-${index}`} className="marquee-chip">
             {line}
           </span>
@@ -270,14 +364,16 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
         <h3 className="text-2xl font-bold text-primary">Core skills</h3>
         <div className="mt-5 flex flex-wrap gap-3">
           {skills.map((skill, index) => (
-            <span
+            <motion.span
               key={skill}
               className="rounded-lg border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-4 py-2 text-sm sm:text-base font-semibold text-default transition hover:border-blue-400 dark:hover:border-blue-300 hover:bg-blue-400/20 dark:hover:bg-blue-300/20 will-change-[transform,opacity]"
               data-reveal=""
               data-reveal-order={index}
+              whileHover={{ y: -4, scale: 1.06, rotate: -1 }}
+              whileTap={{ scale: 0.96 }}
             >
               {skill}
-            </span>
+            </motion.span>
           ))}
         </div>
       </div>
@@ -362,16 +458,16 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
 export function HumorSection() {
   const stories = [
     {
-      title: 'The Toy Box Rule',
-      copy: 'If a feature cannot be explained in 30 seconds, it gets refactored. Recruiters should not need lore to understand impact.',
+      title: 'Fast Clarity Rule',
+      copy: 'If a feature cannot be explained quickly, it gets refined. Recruiters should immediately see value, not decode a puzzle.',
     },
     {
-      title: 'Warframe Energy Economy',
-      copy: 'I treat performance budgets like energy pools: spend where it matters, regenerate quickly, and never waste cycles on vanity.',
+      title: 'Performance Budget Discipline',
+      copy: 'I treat runtime budgets like real currency: spend where it improves outcomes and avoid costly visual noise.',
     },
     {
-      title: 'No Infinite Loading Cutscene',
-      copy: 'Every animation now has intent, timing, and an off-ramp. The portfolio feels alive, not trapped in a cinematic loop.',
+      title: 'No Endless Loading Theater',
+      copy: 'Every animation now has intent, timing, and an off-ramp so the experience feels dynamic and controlled.',
     },
   ];
 
@@ -404,39 +500,45 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
       subtitle="I’m actively interviewing and available for mid-senior roles"
     >
       <div className="grid gap-5 sm:grid-cols-3">
-        <a
+        <motion.a
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
           className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={0}
+          whileHover={{ y: -10, rotateX: 5 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
         >
           <span className="font-bold text-lg text-primary">Email</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Reach out for contract and full-time opportunities.</span>
-        </a>
-        <a
+        </motion.a>
+        <motion.a
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
           className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={1}
+          whileHover={{ y: -10, rotateX: 5 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
         >
           <span className="font-bold text-lg text-primary">GitHub</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Open source work and active contributions.</span>
-        </a>
-        <a
+        </motion.a>
+        <motion.a
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={2}
+          whileHover={{ y: -10, rotateX: 5 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
         >
           <span className="font-bold text-lg text-primary">LinkedIn</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Mid-senior roles,<br />open to opportunities.</span>
-        </a>
+        </motion.a>
       </div>
     </Section>
   );
