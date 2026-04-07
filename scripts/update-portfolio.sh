@@ -35,7 +35,7 @@ if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
 fi
 
 echo "[update-portfolio] Building static export..."
-npm run build
+NEXT_BASE_PATH="${NEXT_BASE_PATH:-/portfolio}" npm run build
 
 mkdir -p "${ROOT_DIR}/out"
 date -u +"%Y-%m-%dT%H:%M:%SZ" > "${STAMP_FILE}"

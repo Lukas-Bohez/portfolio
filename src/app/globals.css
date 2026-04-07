@@ -36,7 +36,7 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), 'Segoe UI', sans-serif;
 }
 
 /* Shared palette utility classes */
@@ -75,4 +75,71 @@ body {
   overflow-x: hidden;
   font-size: 1rem;
   line-height: 1.6;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -18px, 0) scale(1.08); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes gridPulse {
+  0% { opacity: 0.14; transform: translateY(0); }
+  50% { opacity: 0.28; transform: translateY(-4px); }
+  100% { opacity: 0.14; transform: translateY(0); }
+}
+
+@keyframes gradientSweep {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(18px);
+  opacity: 0.3;
+  animation: floatOrb 7s ease-in-out infinite;
+}
+
+.hero-orb-one {
+  top: -72px;
+  right: -54px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.42), rgba(37, 99, 235, 0));
+}
+
+.hero-orb-two {
+  bottom: -96px;
+  left: -80px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0));
+  animation-delay: 1.4s;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(circle at center, black 18%, transparent 72%);
+  animation: gridPulse 4.5s ease-in-out infinite;
+}
+
+.gradient-sweep {
+  background-size: 220% 220%;
+  animation: gradientSweep 5s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb,
+  .hero-grid,
+  .gradient-sweep {
+    animation: none;
+  }
 }

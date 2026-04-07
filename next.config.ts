@@ -1,9 +1,15 @@
 import type { NextConfig } from 'next';
 
+const configuredBasePath = (process.env.NEXT_BASE_PATH || '').trim();
+const hasBasePath = configuredBasePath.length > 0;
 
 const nextConfig: NextConfig = {
-  basePath: '/portfolio',
-  assetPrefix: '/portfolio/',
+  ...(hasBasePath
+    ? {
+        basePath: configuredBasePath,
+        assetPrefix: `${configuredBasePath}/`,
+      }
+    : {}),
   output: 'export',
   trailingSlash: true,
   images: {

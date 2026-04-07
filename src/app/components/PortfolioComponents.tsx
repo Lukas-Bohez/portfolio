@@ -98,12 +98,17 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
     <motion.section
       id="hero"
       data-hero=""
-      className="mb-10 rounded-3xl border border-surface bg-surface p-8 sm:p-12 shadow-xl backdrop-blur text-default"
+      className="relative mb-10 overflow-hidden rounded-3xl border border-surface bg-surface p-8 sm:p-12 shadow-xl backdrop-blur text-default"
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
     >
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="hero-orb hero-orb-one" />
+        <div className="hero-orb hero-orb-two" />
+        <div className="hero-grid" />
+      </div>
+      <div className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
         <div className="max-w-2xl">
           <p className="uppercase tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-sm sm:text-base">Modern code with artisan impact</p>
           <h1 className="mt-2 text-5xl sm:text-7xl font-extrabold leading-tight">Lukas Bohez</h1>
@@ -187,15 +192,18 @@ export function Stats() {
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.55, ease: 'easeOut' }}
     >
-      {metrics.map((metric) => (
-        <article
+      {metrics.map((metric, index) => (
+        <motion.article
           key={metric.label}
           className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-7 text-center shadow-md backdrop-blur transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
+          data-reveal-order={index}
+          whileHover={{ y: -8, scale: 1.02, rotateX: 6 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 18 }}
         >
           <p className="text-base font-semibold text-default leading-relaxed">{metric.label}</p>
           <p className="mt-3 text-xl font-bold text-blue-400 dark:text-blue-200">{metric.value}</p>
-        </article>
+        </motion.article>
       ))}
     </motion.div>
   );
@@ -238,11 +246,12 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
       <div className="mt-8">
         <h3 className="text-2xl font-bold text-primary">Core skills</h3>
         <div className="mt-5 flex flex-wrap gap-3">
-          {skills.map((skill) => (
+          {skills.map((skill, index) => (
             <span
               key={skill}
               className="rounded-lg border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-4 py-2 text-sm sm:text-base font-semibold text-default transition hover:border-blue-400 dark:hover:border-blue-300 hover:bg-blue-400/20 dark:hover:bg-blue-300/20 will-change-[transform,opacity]"
               data-reveal=""
+              data-reveal-order={index}
             >
               {skill}
             </span>
@@ -284,18 +293,21 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
   return (
     <Section id="projects" title="Featured Projects" subtitle="Code you can inspect and use today">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <motion.article
             key={project.name}
             className="rounded-2xl border border-surface bg-surface p-4 shadow-md transition hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -12, scale: 1.02, rotateX: 6, rotateY: -4 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             data-reveal=""
+            data-reveal-order={index}
+            style={{ transformStyle: 'preserve-3d' }}
           >
             <div className="mb-4 flex items-center gap-3">
-              <div className={`h-3 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-90 transition hover:opacity-100`} />
+              <div className={`h-3 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-90 transition hover:opacity-100 gradient-sweep`} />
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-surface bg-surface text-xs font-black text-primary shadow-sm">
                 {project.name.replace(/[^A-Z]/g, '').slice(0, 1) || project.name.charAt(0)}
               </span>
@@ -338,6 +350,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           rel="noreferrer noopener"
           className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
+          data-reveal-order={0}
         >
           <span className="font-bold text-lg text-primary">Email</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Reach out for contract and full-time opportunities.</span>
@@ -348,6 +361,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           rel="noreferrer noopener"
           className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
+          data-reveal-order={1}
         >
           <span className="font-bold text-lg text-primary">GitHub</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Open source work and active contributions.</span>
@@ -358,6 +372,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           rel="noopener noreferrer"
           className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
+          data-reveal-order={2}
         >
           <span className="font-bold text-lg text-primary">LinkedIn</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Mid-senior roles,<br />open to opportunities.</span>

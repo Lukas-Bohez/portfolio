@@ -85,8 +85,10 @@ flutter pub get && dart run build_runner build
    PORTFOLIO_URL=https://quizthespire.com/portfolio/ \
    npm run update:portfolio
    ```
-4. The script rebuilds the static export, refreshes `out/.last-update.txt`, copies the result into the deploy directory, and verifies that the live page includes the new build id.
-5. If verification fails, check Apache mapping for `/portfolio` and any reverse-proxy/CDN cache.
+   By default this deploy path builds with `NEXT_BASE_PATH=/portfolio`.
+4. For root-hosted deployments (no subpath), set `NEXT_BASE_PATH` to an empty value before building.
+5. The script rebuilds the static export, refreshes `out/.last-update.txt`, copies the result into the deploy directory, and verifies that the live page includes the new build id.
+6. If verification fails, check Apache mapping for `/portfolio` and any reverse-proxy/CDN cache.
 
 ### Option 2: Next.js server reverse proxy
 

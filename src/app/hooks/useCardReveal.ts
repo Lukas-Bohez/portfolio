@@ -4,6 +4,15 @@ import { useEffect } from "react"
 export function useCardReveal() {
   useEffect(() => {
     const cards = document.querySelectorAll<HTMLElement>("[data-reveal]")
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (prefersReducedMotion) {
+      cards.forEach((card) => {
+        card.style.opacity = "1"
+        card.style.transform = "none"
+      })
+      return
+    }
 
     // Set initial state — cards start offscreen-right, tilted, invisible
     cards.forEach((card) => {
@@ -16,11 +25,13 @@ export function useCardReveal() {
       (entries) => {
         entries.forEach((entry) => {
           const card = entry.target as HTMLElement
+          const revealOrder = Number(card.dataset.revealOrder || "0")
+          const staggerDelay = Math.min(Math.max(revealOrder, 0) * 60, 360)
 
           if (entry.isIntersecting) {
             // Entering viewport — float in from right, straighten up
             card.style.transition =
-              "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease"
+              `transform 0.62s cubic-bezier(0.22, 1, 0.36, 1) ${staggerDelay}ms, opacity 0.52s ease ${staggerDelay}ms`
             card.style.opacity = "1"
             card.style.transform = "translateX(0px) rotate(0deg) scale(1)"
           } else {
@@ -31,7 +42,7 @@ export function useCardReveal() {
             if (leavingFromTop) {
               // Float away to the right and up, tilting slightly
               card.style.transition =
-                "transform 0.4s cubic-bezier(0.4, 0, 1, 1), opacity 0.35s ease"
+                "transform 0.42s cubic-bezier(0.4, 0, 1, 1), opacity 0.35s ease"
               card.style.opacity = "0"
               card.style.transform = "translateX(60px) rotate(-3deg) scale(0.96)"
             } else {
