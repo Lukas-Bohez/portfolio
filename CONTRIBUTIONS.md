@@ -7,9 +7,11 @@
 
 ## Repo Contributions
 
-- Main repo manager for AI The Spire, Convert the Spire Reborn, and QuizTheSpire
+- Main repo manager for Vault The Spire, Convert the Spire Reborn, and QuizTheSpire
+- Implements platform-specific optimizations across Windows, Linux, Android, and macOS
+- Database schema design (SQLite with SQLCipher), native plugin integration, and media pipeline architecture
 - Fixes for platform bugs (Android resolution, 4K desktop issues)
-- Ongoing improvements for media pipeline reliability and privacy-first defaults
+- Ongoing improvements for torrent handling, media conversion reliability, and privacy-first defaults
 
 ## How to contribute
 

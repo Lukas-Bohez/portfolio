@@ -15,6 +15,9 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, scale: 1 },
 };
 
+const quickHoverIn = { duration: 0.14, ease: [0.4, 0, 1, 1] as const };
+const smoothHoverOut = { duration: 0.34, ease: [0.16, 1, 0.3, 1] as const };
+
 type SectionProps = {
   id?: string;
   title: string;
@@ -309,11 +312,11 @@ export function Stats() {
         {metrics.map((metric, index) => (
           <motion.article
             key={metric.label}
-            className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-7 shadow-md backdrop-blur transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70 hover:-translate-y-1 will-change-[transform,opacity]"
+            className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-7 shadow-md backdrop-blur transition-all duration-300 ease-out hover:duration-150 hover:ease-in hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70 will-change-[transform,opacity]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -8, scale: 1.02, rotateX: 6 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+            whileHover={{ y: -8, scale: 1.02, rotateX: 6, transition: quickHoverIn }}
+            transition={smoothHoverOut}
           >
             <p className="text-base font-semibold text-primary uppercase tracking-[0.14em]">{metric.label}</p>
             <p className="mt-3 text-lg text-default leading-relaxed">{metric.value}</p>
@@ -350,11 +353,11 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
         {principles.map((principle, index) => (
           <motion.article
             key={principle.title}
-            className="rounded-2xl border border-surface bg-surface p-6 shadow-md"
+            className="rounded-2xl border border-surface bg-surface p-6 shadow-md transition-all duration-300 ease-out hover:duration-150 hover:ease-in hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -8, scale: 1.015, rotateX: 4 }}
-            transition={{ type: 'spring', stiffness: 210, damping: 18 }}
+            whileHover={{ y: -8, scale: 1.015, rotateX: 4, transition: quickHoverIn }}
+            transition={smoothHoverOut}
           >
             <h3 className="text-xl font-bold text-primary">{principle.title}</h3>
             <p className="mt-3 text-base leading-relaxed text-default">{principle.copy}</p>
@@ -378,17 +381,17 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Cross-platform media utility focused on reliability, fast iteration, and practical user workflows across desktop and Android.',
+        'Native Flutter media suite for downloading, playback, conversion, and casting with local library management across Windows, Linux, Android, and macOS. Implements SQLite persistence with browser.db schema, desktop FFI bindings, and reactive ChangeNotifier state management.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
-      tech: ['Flutter', 'Dart', 'yt-dlp', 'SQLite'],
+      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', 'Native Plugins'],
       color: 'from-violet-500 to-purple-500',
     },
     {
       name: 'Vault The Spire',
       description:
-        'Secure messaging and data tooling project that explores privacy-minded architecture, peer networking, and maintainable systems design.',
+        'Privacy-first Flutter torrent client with local AI integration and built-in browser. Cross-platform with encrypted SQLite backend, DAO-based data access, SQLCipher encryption, and OS-protected credential storage. Torrent support on Android and Windows with Ollama local AI on Windows.',
       url: 'https://github.com/Lukas-Bohez/vault_the_spire',
-      tech: ['Rust', 'Libp2p', 'AES', 'PocketBase'],
+      tech: ['Flutter', 'Dart', 'SQLite', 'SQLCipher', 'Native Torrenting', 'Secure Storage'],
       color: 'from-emerald-500 to-teal-500',
     },
   ];
@@ -399,12 +402,12 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
         {projects.map((project, index) => (
           <motion.article
             key={project.name}
-            className="rounded-2xl border border-surface bg-surface p-4 shadow-md transition hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+            className="rounded-2xl border border-surface bg-surface p-4 shadow-md transition-all duration-300 ease-out hover:duration-150 hover:ease-in hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -12, scale: 1.02, rotateX: 6, rotateY: -4 }}
+            whileHover={{ y: -12, scale: 1.02, rotateX: 6, rotateY: -4, transition: quickHoverIn }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            transition={smoothHoverOut}
             data-reveal=""
             data-reveal-order={index}
             style={{ transformStyle: 'preserve-3d' }}
@@ -461,11 +464,11 @@ export function HumorSection() {
         {stories.map((story, index) => (
           <motion.article
             key={story.title}
-            className="rounded-2xl border border-surface bg-surface p-6 shadow-md"
+            className="rounded-2xl border border-surface bg-surface p-6 shadow-md transition-all duration-300 ease-out hover:duration-150 hover:ease-in hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -10, rotateY: index % 2 === 0 ? -5 : 5, scale: 1.015 }}
-            transition={{ type: 'spring', stiffness: 210, damping: 18 }}
+            whileHover={{ y: -10, rotateY: index % 2 === 0 ? -5 : 5, scale: 1.015, transition: quickHoverIn }}
+            transition={smoothHoverOut}
           >
             <h3 className="text-xl font-bold text-primary">{story.title}</h3>
             <p className="mt-3 text-base leading-relaxed text-default">{story.copy}</p>
@@ -488,11 +491,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition-all duration-300 ease-out hover:duration-150 hover:ease-in hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={0}
-          whileHover={{ y: -10, rotateX: 5 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+          whileHover={{ y: -10, rotateX: 5, transition: quickHoverIn }}
+          transition={smoothHoverOut}
         >
           <span className="font-bold text-lg text-primary">Email</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Reach out for contract and full-time opportunities.</span>
@@ -501,11 +504,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition-all duration-300 ease-out hover:duration-150 hover:ease-in hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={1}
-          whileHover={{ y: -10, rotateX: 5 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+          whileHover={{ y: -10, rotateX: 5, transition: quickHoverIn }}
+          transition={smoothHoverOut}
         >
           <span className="font-bold text-lg text-primary">GitHub</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Open source work and active contributions.</span>
@@ -514,11 +517,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition-all duration-300 ease-out hover:duration-150 hover:ease-in hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={2}
-          whileHover={{ y: -10, rotateX: 5 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+          whileHover={{ y: -10, rotateX: 5, transition: quickHoverIn }}
+          transition={smoothHoverOut}
         >
           <span className="font-bold text-lg text-primary">LinkedIn</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Mid-senior roles,<br />open to opportunities.</span>
