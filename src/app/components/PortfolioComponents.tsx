@@ -108,13 +108,13 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
           <p className="uppercase tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-sm sm:text-base">Modern code with artisan impact</p>
           <h1 className="mt-2 text-5xl sm:text-7xl font-extrabold leading-tight">Lukas Bohez</h1>
           <p className="mt-4 text-lg sm:text-xl text-default leading-relaxed">
-            I build secure, maintainable systems for Linux, Raspberry Pi, and self-hosted workflows.
+            I build production-ready Python and full-stack systems that are fast to ship, reliable to run, and easy to maintain.
           </p>
           <p className="mt-4 inline-flex rounded-full border border-blue-400 dark:border-blue-200 bg-blue-400/15 dark:bg-blue-400/20 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-contrast">
             Actively interviewing for mid-senior roles
           </p>
           <p className="mt-6 max-w-2xl text-lg text-default leading-relaxed">
-            Systems, automation, and media pipelines that run reliably in real environments. No vaporware.
+            I focus on backend architecture, pragmatic UX, and self-hosted delivery from prototype to live product.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -162,20 +162,20 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
 export function Stats() {
   const metrics = [
     {
-      label: 'Tools deployed in production',
-      value: 'Live on user systems',
+      label: 'Production-focused engineering',
+      value: 'Live services, not demos',
     },
     {
-      label: 'Open-source work',
-      value: 'Available for community use',
+      label: 'Backend-first mindset',
+      value: 'Python APIs + durable data flows',
     },
     {
-      label: 'Reliable pipelines',
-      value: 'Designed for high availability',
+      label: 'Product communication',
+      value: 'Clear docs, articles, and handoff notes',
     },
     {
-      label: 'Performance focus',
-      value: 'Built for speed and efficiency',
+      label: 'Recruiter-ready portfolio',
+      value: 'Code, impact, and deployment story',
     },
   ];
 
@@ -224,14 +224,14 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
     <Section id="about" title="About Me" subtitle="Who I am, what I ship, and why I care">
       <div>
         <p className="text-base sm:text-lg text-default leading-relaxed">
-          I value tools that are useful rather than trendy. Crafting secure-by-default systems
-          for self-hosted pipelines, media ingestion, and engineering-grade operations.
+          I build useful software with a strong backend core. My work combines Python services,
+          practical frontend design, and deployment discipline so teams can ship and iterate confidently.
         </p>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-base text-default leading-relaxed">
-          <li>Built and maintained long-running self-hosted services with predictable maintenance cycles.</li>
-          <li>Designed data ingestion and conversion flows that recover cleanly from network and disk errors.</li>
-          <li>Platform-agnostic deployments (Raspberry Pi + ARM, x86 Linux, containerized cloud edge).</li>
-          <li>Pragmatic technical docs and handoff-ready README guides for team adoption.</li>
+          <li>Shipped and maintained live web products with Python backends and stable release workflows.</li>
+          <li>Turned product pivots into clear technical changes without losing performance or maintainability.</li>
+          <li>Built onboarding content, articles, and product documentation that reduce support overhead.</li>
+          <li>Comfortable owning the full loop: architecture, implementation, deployment, and iteration.</li>
         </ul>
       </div>
 
@@ -258,15 +258,15 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'QuizTheSpire',
       description:
-        'Web playlist conversion service with privacy-first hosting, Apache frontend setup, and a live site at quizthespire.com.',
+        'Online quiz platform powered by a Python backend, with article publishing and project showcases. It is the live hub where I present my tools and host my portfolio at quizthespire.com.',
       url: 'https://quizthespire.com',
-      tech: ['Python', 'FastAPI', 'Apache', 'TypeScript'],
+      tech: ['Python', 'FastAPI', 'Apache', 'Content Management'],
       color: 'from-cyan-500 to-blue-500',
     },
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Cross-platform media downloader with Android support, a built-in browser for discovery, and configurable torrent workflows.',
+        'Cross-platform media utility focused on reliability, fast iteration, and practical user workflows across desktop and Android.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
       tech: ['Flutter', 'Dart', 'yt-dlp', 'SQLite'],
       color: 'from-violet-500 to-purple-500',
@@ -274,7 +274,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Vault The Spire',
       description:
-        'Windows-only AI messaging for torrents, plus Android support, a built-in browser for discovery, and extensive customization.',
+        'Secure messaging and data tooling project that explores privacy-minded architecture, peer networking, and maintainable systems design.',
       url: 'https://github.com/Lukas-Bohez/vault_the_spire',
       tech: ['Rust', 'Libp2p', 'AES', 'PocketBase'],
       color: 'from-emerald-500 to-teal-500',

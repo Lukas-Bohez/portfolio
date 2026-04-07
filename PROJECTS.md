@@ -18,9 +18,9 @@
 
 ## QuizTheSpire
 
-- Web application designed for playlist conversion and media management
-- Backend in Python (FastAPI) with Apache2 frontend hosting
-- Focus on performance, privacy, and ad-free user experience
+- Online quiz platform with article publishing and project showcase pages
+- Python backend (FastAPI) with Apache2 hosting and production deployment
+- Acts as the live hub for tools, portfolio presence, and product communication
 
 ## SportScore!
 

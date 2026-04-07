@@ -60,7 +60,7 @@ flutter pub get && dart run build_runner build
 - GitHub: [github.com/Lukas-Bohez](https://github.com/Lukas-Bohez)
 - Sponsors: [github.com/sponsors/Lukas-Bohez](https://github.com/sponsors/Lukas-Bohez)
 - Support: [buymeacoffee.com/LukasBohez](buymeacoffee.com/OrokaConner)
-- Personal tool: [quizthespire.com](https://quizthespire.com)
+- Live product hub (quiz platform + articles + portfolio): [quizthespire.com](https://quizthespire.com)
 - LinkedIn: [linkedin.com/in/lukas-bohez](https://www.linkedin.com/in/lukas-bohez)
 - Email: lukasbohez@gmail.com
 
