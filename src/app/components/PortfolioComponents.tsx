@@ -11,8 +11,8 @@ import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from '
 
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.985 },
-  visible: { opacity: 1, y: 0, scale: 1 },
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
 };
 
 type SectionProps = {
@@ -26,11 +26,11 @@ function Section({ id, title, subtitle, children }: SectionProps) {
   return (
     <motion.section
       id={id}
-      className="mb-10 scroll-mt-24 sm:mb-12 sm:scroll-mt-28 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 md:hover:-translate-y-0.5"
+      className="mb-10 scroll-mt-24 sm:mb-12 sm:scroll-mt-28 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.08 }}
-      transition={{ duration: 0.32, ease: 'easeOut' }}
+      viewport={{ once: true, amount: 0.03 }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
       variants={sectionVariants}
     >
       <div className="mb-8">
@@ -312,8 +312,8 @@ export function Stats() {
             className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-5 sm:p-7 shadow-md backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70 md:hover:-translate-y-0.5 will-change-[transform,opacity]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -4, scale: 1.01 }}
-            transition={{ type: 'spring', stiffness: 180, damping: 22 }}
+            whileHover={{ y: -2, scale: 1.003 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
           >
             <p className="text-sm sm:text-base font-semibold text-primary uppercase tracking-[0.12em]">{metric.label}</p>
             <p className="mt-2.5 sm:mt-3 text-base sm:text-lg text-default leading-relaxed">{metric.value}</p>
@@ -353,8 +353,8 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
             className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -4, scale: 1.01 }}
-            transition={{ type: 'spring', stiffness: 180, damping: 22 }}
+            whileHover={{ y: -2, scale: 1.003 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
           >
             <h3 className="text-lg sm:text-xl font-bold text-primary">{principle.title}</h3>
             <p className="mt-3 text-base leading-relaxed text-default">{principle.copy}</p>
@@ -416,9 +416,9 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
             className="w-full rounded-2xl border border-surface bg-surface p-4 sm:p-5 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -6, scale: 1.01 }}
+            whileHover={{ y: -2, scale: 1.004 }}
             viewport={{ once: true, amount: 0.08 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             data-reveal=""
             data-reveal-order={index}
             style={{ transformStyle: 'preserve-3d' }}
@@ -443,7 +443,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
                 href={project.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-1"
+                className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
               >
                 Explore ↗
               </a>
@@ -452,7 +452,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
                   href={project.downloadUrl}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-500 dark:text-blue-200 transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-600 dark:md:hover:text-blue-100 md:hover:translate-x-1"
+                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-500 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-600 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
                 >
                   {project.downloadLabel || 'Download'} ↗
                 </a>
@@ -490,8 +490,8 @@ export function HumorSection() {
             className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -4, scale: 1.01 }}
-            transition={{ type: 'spring', stiffness: 180, damping: 22 }}
+            whileHover={{ y: -2, scale: 1.003 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
           >
             <h3 className="text-lg sm:text-xl font-bold text-primary">{story.title}</h3>
             <p className="mt-3 text-base leading-relaxed text-default">{story.copy}</p>
@@ -514,11 +514,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={0}
-          whileHover={{ y: -5, scale: 1.01 }}
-          transition={{ type: 'spring', stiffness: 180, damping: 22 }}
+          whileHover={{ y: -2, scale: 1.003 }}
+          transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">Email</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Reach out for contract and full-time opportunities.</span>
@@ -527,11 +527,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={1}
-          whileHover={{ y: -5, scale: 1.01 }}
-          transition={{ type: 'spring', stiffness: 180, damping: 22 }}
+          whileHover={{ y: -2, scale: 1.003 }}
+          transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">GitHub</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Open source work and active contributions.</span>
@@ -540,11 +540,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={2}
-          whileHover={{ y: -5, scale: 1.01 }}
-          transition={{ type: 'spring', stiffness: 180, damping: 22 }}
+          whileHover={{ y: -2, scale: 1.003 }}
+          transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">LinkedIn</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Mid-senior roles,<br />open to opportunities.</span>
