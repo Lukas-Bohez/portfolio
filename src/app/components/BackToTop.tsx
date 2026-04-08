@@ -33,7 +33,7 @@ export default function BackToTop() {
         pointerEvents: visible ? "auto" : "none",
         opacity: visible ? 1 : 0,
         transform: visible ? "scale(1)" : "translateY(8px) scale(0.92)",
-        transition: "opacity 0.28s ease, transform 0.36s cubic-bezier(0.22, 1, 0.36, 1)",
+        transition: "opacity 0.16s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
         position: "fixed",
         bottom: "max(14px, env(safe-area-inset-bottom))",
         right: "max(12px, env(safe-area-inset-right))",

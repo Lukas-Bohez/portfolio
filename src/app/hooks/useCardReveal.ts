@@ -14,10 +14,10 @@ export function useCardReveal() {
       return
     }
 
-    // Subtle reveal baseline keeps motion smooth and avoids aggressive card tilts.
+    // Keep reveals responsive so cards are visible almost immediately when entering view.
     cards.forEach((card) => {
       card.style.opacity = "0"
-      card.style.transform = "translateY(16px) scale(0.985)"
+      card.style.transform = "translateY(10px) scale(0.995)"
       card.style.transition = "none"
     })
 
@@ -26,12 +26,12 @@ export function useCardReveal() {
         entries.forEach((entry) => {
           const card = entry.target as HTMLElement
           const revealOrder = Number(card.dataset.revealOrder || "0")
-          const staggerDelay = Math.min(Math.max(revealOrder, 0) * 60, 360)
+          const staggerDelay = Math.min(Math.max(revealOrder, 0) * 24, 120)
 
           if (entry.isIntersecting) {
             // Reveal once to avoid repeated animation churn while scrolling.
             card.style.transition =
-              `transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${staggerDelay}ms, opacity 0.42s ease ${staggerDelay}ms`
+              `transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) ${staggerDelay}ms, opacity 0.22s ease ${staggerDelay}ms`
             card.style.opacity = "1"
             card.style.transform = "translateY(0px) scale(1)"
             observer.unobserve(card)
@@ -39,8 +39,8 @@ export function useCardReveal() {
         })
       },
       {
-        threshold: 0.16,
-        rootMargin: "0px 0px -6% 0px"
+        threshold: 0.02,
+        rootMargin: "0px 0px 12% 0px"
       }
     )
 

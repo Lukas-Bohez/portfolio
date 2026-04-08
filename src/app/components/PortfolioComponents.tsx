@@ -26,11 +26,11 @@ function Section({ id, title, subtitle, children }: SectionProps) {
   return (
     <motion.section
       id={id}
-      className="mb-10 scroll-mt-24 sm:mb-12 sm:scroll-mt-28 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 md:hover:-translate-y-0.5"
+      className="mb-10 scroll-mt-24 sm:mb-12 sm:scroll-mt-28 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 md:hover:-translate-y-0.5"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.55, ease: 'easeOut' }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: 0.32, ease: 'easeOut' }}
       variants={sectionVariants}
     >
       <div className="mb-8">
@@ -58,7 +58,7 @@ export function Navbar({
   ];
 
   return (
-    <nav className="sticky top-0 z-40 mb-6 sm:mb-8 flex w-full items-center justify-between gap-2 sm:gap-4 rounded-2xl sm:rounded-3xl border border-surface bg-surface/98 dark:bg-surface/95 p-3.5 sm:p-5 text-[11px] sm:text-sm font-medium shadow-lg backdrop-blur transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50">
+    <nav className="sticky top-0 z-40 mb-6 sm:mb-8 flex w-full items-center justify-between gap-2 sm:gap-4 rounded-2xl sm:rounded-3xl border border-surface bg-surface/98 dark:bg-surface/95 p-3.5 sm:p-5 text-[11px] sm:text-sm font-medium shadow-lg backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50">
       <button
         type="button"
         className="flex min-w-0 items-center gap-2 text-base sm:text-xl font-black tracking-tight transition duration-200 hover:opacity-85"
@@ -103,7 +103,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
       className="relative mb-8 sm:mb-10 overflow-hidden rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-12 shadow-xl backdrop-blur text-default"
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
+      transition={{ duration: 0.38, ease: 'easeOut' }}
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="hero-orb hero-orb-one" />
@@ -127,7 +127,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
             <button
               onClick={onScrollToProjects}
-              className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+              className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               View featured work
             </button>
@@ -136,7 +136,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
                 const elem = document.getElementById('contact');
                 if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }}
-              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               Get in touch
             </button>
@@ -309,7 +309,7 @@ export function Stats() {
         {metrics.map((metric, index) => (
           <motion.article
             key={metric.label}
-            className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-5 sm:p-7 shadow-md backdrop-blur transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70 md:hover:-translate-y-0.5 will-change-[transform,opacity]"
+            className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-5 sm:p-7 shadow-md backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70 md:hover:-translate-y-0.5 will-change-[transform,opacity]"
             data-reveal=""
             data-reveal-order={index}
             whileHover={{ y: -4, scale: 1.01 }}
@@ -350,7 +350,7 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
         {principles.map((principle, index) => (
           <motion.article
             key={principle.title}
-            className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
             data-reveal=""
             data-reveal-order={index}
             whileHover={{ y: -4, scale: 1.01 }}
@@ -413,12 +413,12 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
         {projects.map((project, index) => (
           <motion.article
             key={project.name}
-            className="w-full rounded-2xl border border-surface bg-surface p-4 sm:p-5 shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+            className="w-full rounded-2xl border border-surface bg-surface p-4 sm:p-5 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ y: -6, scale: 1.01 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.08 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             data-reveal=""
             data-reveal-order={index}
             style={{ transformStyle: 'preserve-3d' }}
@@ -433,7 +433,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
             <p className="mt-3 text-base sm:text-lg text-default leading-relaxed">{project.description}</p>
             <div className="mt-5 flex flex-wrap gap-2">
               {project.tech.map((item) => (
-                <span key={`${project.name}-${item}`} className="rounded-full border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-200 md:hover:shadow-sm">
+                <span key={`${project.name}-${item}`} className="rounded-full border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-150 md:hover:shadow-sm">
                   {item}
                 </span>
               ))}
@@ -443,7 +443,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
                 href={project.url}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-1"
+                className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-1"
               >
                 Explore ↗
               </a>
@@ -452,7 +452,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
                   href={project.downloadUrl}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-500 dark:text-blue-200 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-600 dark:md:hover:text-blue-100 md:hover:translate-x-1"
+                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-500 dark:text-blue-200 transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-600 dark:md:hover:text-blue-100 md:hover:translate-x-1"
                 >
                   {project.downloadLabel || 'Download'} ↗
                 </a>
@@ -487,7 +487,7 @@ export function HumorSection() {
         {stories.map((story, index) => (
           <motion.article
             key={story.title}
-            className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
             data-reveal=""
             data-reveal-order={index}
             whileHover={{ y: -4, scale: 1.01 }}
@@ -514,7 +514,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={0}
           whileHover={{ y: -5, scale: 1.01 }}
@@ -527,7 +527,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={1}
           whileHover={{ y: -5, scale: 1.01 }}
@@ -540,7 +540,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={2}
           whileHover={{ y: -5, scale: 1.01 }}
@@ -556,7 +556,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
 
 export function Footer() {
   return (
-    <footer className="my-8 sm:my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-5 sm:p-8 text-center text-base sm:text-lg text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70">
+    <footer className="my-8 sm:my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-5 sm:p-8 text-center text-base sm:text-lg text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70">
       <span className="relative inline-flex h-9 w-9 overflow-hidden rounded-full border border-surface bg-secondary align-middle shadow-sm" title="Portrait of Lukas Bohez">
         <Image
           src={profilePhoto}
