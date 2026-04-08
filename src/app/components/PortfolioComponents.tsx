@@ -11,7 +11,7 @@ import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from '
 
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 24, scale: 0.98 },
+  hidden: { opacity: 0, y: 20, scale: 0.985 },
   visible: { opacity: 1, y: 0, scale: 1 },
 };
 
@@ -26,7 +26,7 @@ function Section({ id, title, subtitle, children }: SectionProps) {
   return (
     <motion.section
       id={id}
-      className="mb-12 rounded-3xl border border-surface bg-surface p-8 sm:p-10 shadow-lg text-default transition hover:shadow-2xl hover:border-blue-400/50 dark:hover:border-blue-300/50 hover:-translate-y-1"
+      className="mb-10 sm:mb-12 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 md:hover:-translate-y-0.5"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -34,8 +34,8 @@ function Section({ id, title, subtitle, children }: SectionProps) {
       variants={sectionVariants}
     >
       <div className="mb-8">
-        <h2 className="text-4xl font-bold text-primary">{title}</h2>
-        {subtitle && <p className="mt-3 text-lg text-muted leading-relaxed">{subtitle}</p>}
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight">{title}</h2>
+        {subtitle && <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted leading-relaxed">{subtitle}</p>}
       </div>
       {children}
     </motion.section>
@@ -58,10 +58,10 @@ export function Navbar({
   ];
 
   return (
-    <nav className="sticky top-0 z-40 mb-8 flex w-full items-center justify-between gap-4 rounded-2xl sm:rounded-3xl border border-surface bg-surface/98 dark:bg-surface/95 p-4 sm:p-5 text-xs sm:text-sm font-medium shadow-lg backdrop-blur transition hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50">
+    <nav className="sticky top-0 z-40 mb-6 sm:mb-8 flex w-full items-center justify-between gap-2 sm:gap-4 rounded-2xl sm:rounded-3xl border border-surface bg-surface/98 dark:bg-surface/95 p-3.5 sm:p-5 text-[11px] sm:text-sm font-medium shadow-lg backdrop-blur transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50">
       <button
         type="button"
-        className="flex items-center gap-2 text-base sm:text-xl font-black tracking-tight transition hover:opacity-80"
+        className="flex min-w-0 items-center gap-2 text-base sm:text-xl font-black tracking-tight transition duration-200 hover:opacity-85"
         title="N = Nexus logo (focused systems engineering identity)"
         onClick={() => onScrollTo('hero')}
       >
@@ -76,14 +76,14 @@ export function Navbar({
         </span>
         <span className="hidden sm:inline">Lukas Bohez</span>
       </button>
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-3">
         {navItems.map((item) => (
           <motion.button
             key={item.id}
             onClick={() => onScrollTo(item.id)}
-            className="rounded-full px-2 sm:px-3 py-1 text-default transition hover:bg-surface/50 hover:text-primary"
+            className="rounded-full px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary"
             aria-label={`Scroll to ${item.label}`}
-            whileHover={{ y: -2, scale: 1.04 }}
+            whileHover={{ y: -1, scale: 1.02 }}
             whileTap={{ scale: 0.96 }}
           >
             {item.label}
@@ -100,7 +100,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
     <motion.section
       id="hero"
       data-hero=""
-      className="relative mb-10 overflow-hidden rounded-3xl border border-surface bg-surface p-8 sm:p-12 shadow-xl backdrop-blur text-default"
+      className="relative mb-8 sm:mb-10 overflow-hidden rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-12 shadow-xl backdrop-blur text-default"
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -110,24 +110,24 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
         <div className="hero-orb hero-orb-two" />
         <div className="hero-grid" />
       </div>
-      <div className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+      <div className="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
         <div className="max-w-2xl">
-          <p className="uppercase tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-sm sm:text-base">Pragmatic code with scalable impact</p>
-          <h1 className="mt-2 text-5xl sm:text-7xl font-extrabold leading-tight">Lukas Bohez</h1>
-          <p className="mt-4 text-lg sm:text-xl text-default leading-relaxed">
+          <p className="uppercase tracking-[0.12em] sm:tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-xs sm:text-base">Pragmatic code with scalable impact</p>
+          <h1 className="mt-2 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">Lukas Bohez</h1>
+          <p className="mt-4 text-base sm:text-xl text-default leading-relaxed">
             I build production-ready Python and full-stack systems that are fast to ship, reliable to run, and easy to maintain.
           </p>
-          <p className="mt-4 inline-flex rounded-full border border-blue-400 dark:border-blue-200 bg-blue-400/15 dark:bg-blue-400/20 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-contrast">
+          <p className="mt-4 inline-flex rounded-full border border-blue-400 dark:border-blue-200 bg-blue-400/15 dark:bg-blue-400/20 px-3.5 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold text-contrast">
             Actively interviewing for mid-senior roles
           </p>
-          <p className="mt-6 max-w-2xl text-lg text-default leading-relaxed">
+          <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
             I focus on backend architecture, pragmatic UX, and self-hosted delivery from prototype to live product.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
             <button
               onClick={onScrollToProjects}
-              className="rounded-full btn-primary px-8 py-3 text-base font-semibold transition hover:shadow-lg hover:shadow-accent/50 hover:scale-105 active:scale-95"
+              className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98]"
             >
               View featured work
             </button>
@@ -136,7 +136,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
                 const elem = document.getElementById('contact');
                 if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }}
-              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-8 py-3 text-base font-semibold text-default transition hover:bg-blue-400/10 hover:shadow-md hover:scale-105 active:scale-95"
+              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98]"
             >
               Get in touch
             </button>
@@ -145,9 +145,9 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
         <div className="flex justify-center lg:justify-end">
           {profilePhoto ? (
             <motion.div
-              className="relative h-56 w-56 overflow-hidden rounded-[2rem] border border-surface bg-secondary shadow-xl sm:h-72 sm:w-72"
-              animate={{ y: [0, -10, 0], rotate: [0, 1, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative h-48 w-48 sm:h-64 sm:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-surface bg-secondary shadow-xl"
+              animate={{ y: [0, -6, 0], rotate: [0, 0.6, 0] }}
+              transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
             >
               <Image
                 src={profilePhoto}
@@ -253,9 +253,9 @@ export function RecruiterWowStrip() {
   };
 
   return (
-    <section className="mb-12 overflow-hidden rounded-3xl border border-surface bg-surface p-5 sm:p-6 shadow-lg" data-reveal="" data-reveal-order={0}>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Technical Arsenal</p>
+    <section className="mb-10 sm:mb-12 overflow-hidden rounded-3xl border border-surface bg-surface p-4 sm:p-6 shadow-lg" data-reveal="" data-reveal-order={0}>
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+        <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-primary">Technical Arsenal</p>
         <div className="flex items-center gap-2">
           <button type="button" className="rail-control-btn" onClick={() => stepBy('prev')} aria-label="Scroll skills left">◀</button>
           <button type="button" className="rail-control-btn" onClick={() => setIsPaused((prev) => !prev)} aria-label={isPaused ? 'Resume auto scrolling' : 'Pause auto scrolling'}>
@@ -305,18 +305,18 @@ export function Stats() {
 
   return (
     <Section id="what-i-do" title="What I Do" subtitle="Value, scope, and delivery shape how I work">
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
         {metrics.map((metric, index) => (
           <motion.article
             key={metric.label}
-            className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-7 shadow-md backdrop-blur transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70 hover:-translate-y-1 will-change-[transform,opacity]"
+            className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-5 sm:p-7 shadow-md backdrop-blur transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70 md:hover:-translate-y-0.5 will-change-[transform,opacity]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -8, scale: 1.02, rotateX: 6 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+            whileHover={{ y: -4, scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 180, damping: 22 }}
           >
-            <p className="text-base font-semibold text-primary uppercase tracking-[0.14em]">{metric.label}</p>
-            <p className="mt-3 text-lg text-default leading-relaxed">{metric.value}</p>
+            <p className="text-sm sm:text-base font-semibold text-primary uppercase tracking-[0.12em]">{metric.label}</p>
+            <p className="mt-2.5 sm:mt-3 text-base sm:text-lg text-default leading-relaxed">{metric.value}</p>
           </motion.article>
         ))}
       </div>
@@ -350,13 +350,13 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
         {principles.map((principle, index) => (
           <motion.article
             key={principle.title}
-            className="rounded-2xl border border-surface bg-surface p-6 shadow-md"
+            className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -8, scale: 1.015, rotateX: 4 }}
-            transition={{ type: 'spring', stiffness: 210, damping: 18 }}
+            whileHover={{ y: -4, scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 180, damping: 22 }}
           >
-            <h3 className="text-xl font-bold text-primary">{principle.title}</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-primary">{principle.title}</h3>
             <p className="mt-3 text-base leading-relaxed text-default">{principle.copy}</p>
           </motion.article>
         ))}
@@ -395,16 +395,16 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
 
   return (
     <Section id="projects" title="Featured Projects" subtitle="Code you can inspect and use today">
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
           <motion.article
             key={project.name}
-            className="rounded-2xl border border-surface bg-surface p-4 shadow-md transition hover:shadow-lg hover:border-blue-400/50 dark:hover:border-blue-300/50 hover:-translate-y-1 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+            className="rounded-2xl border border-surface bg-surface p-4 sm:p-5 shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 md:hover:-translate-y-1 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -12, scale: 1.02, rotateX: 6, rotateY: -4 }}
+            whileHover={{ y: -6, scale: 1.01 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
             data-reveal=""
             data-reveal-order={index}
             style={{ transformStyle: 'preserve-3d' }}
@@ -415,11 +415,11 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
                 {project.name.replace(/[^A-Z]/g, '').slice(0, 1) || project.name.charAt(0)}
               </span>
             </div>
-            <h3 className="text-xl font-bold text-primary">{project.name}</h3>
-            <p className="mt-3 text-lg text-default leading-relaxed">{project.description}</p>
+            <h3 className="text-lg sm:text-xl font-bold text-primary">{project.name}</h3>
+            <p className="mt-3 text-base sm:text-lg text-default leading-relaxed">{project.description}</p>
             <div className="mt-5 flex flex-wrap gap-2">
               {project.tech.map((item) => (
-                <span key={`${project.name}-${item}`} className="rounded-full border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-base font-medium text-default transition hover:shadow-sm">
+                <span key={`${project.name}-${item}`} className="rounded-full border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-200 md:hover:shadow-sm">
                   {item}
                 </span>
               ))}
@@ -428,7 +428,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
               href={project.url}
               target="_blank"
               rel="noreferrer noopener"
-              className="mt-5 inline-flex items-center text-lg font-semibold text-blue-400 dark:text-blue-200 transition hover:text-blue-500 dark:hover:text-blue-100 hover:translate-x-2"
+              className="mt-5 inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-1"
             >
               Explore ↗
             </a>
@@ -461,13 +461,13 @@ export function HumorSection() {
         {stories.map((story, index) => (
           <motion.article
             key={story.title}
-            className="rounded-2xl border border-surface bg-surface p-6 shadow-md"
+            className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -10, rotateY: index % 2 === 0 ? -5 : 5, scale: 1.015 }}
-            transition={{ type: 'spring', stiffness: 210, damping: 18 }}
+            whileHover={{ y: -4, scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 180, damping: 22 }}
           >
-            <h3 className="text-xl font-bold text-primary">{story.title}</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-primary">{story.title}</h3>
             <p className="mt-3 text-base leading-relaxed text-default">{story.copy}</p>
           </motion.article>
         ))}
@@ -488,11 +488,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={0}
-          whileHover={{ y: -10, rotateX: 5 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+          whileHover={{ y: -5, scale: 1.01 }}
+          transition={{ type: 'spring', stiffness: 180, damping: 22 }}
         >
           <span className="font-bold text-lg text-primary">Email</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Reach out for contract and full-time opportunities.</span>
@@ -501,11 +501,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={1}
-          whileHover={{ y: -10, rotateX: 5 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+          whileHover={{ y: -5, scale: 1.01 }}
+          transition={{ type: 'spring', stiffness: 180, damping: 22 }}
         >
           <span className="font-bold text-lg text-primary">GitHub</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Open source work and active contributions.</span>
@@ -514,11 +514,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl border border-surface bg-surface p-7 text-base text-default shadow-md transition hover:-translate-y-2 hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-300/50 mb-[clamp(24px,4vh,48px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-1 md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={2}
-          whileHover={{ y: -10, rotateX: 5 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+          whileHover={{ y: -5, scale: 1.01 }}
+          transition={{ type: 'spring', stiffness: 180, damping: 22 }}
         >
           <span className="font-bold text-lg text-primary">LinkedIn</span>
           <span className="mt-3 text-base text-default block leading-relaxed">Mid-senior roles,<br />open to opportunities.</span>
@@ -530,7 +530,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
 
 export function Footer() {
   return (
-    <footer className="my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-8 text-center text-lg text-default transition hover:shadow-lg hover:border-blue-400/70 dark:hover:border-blue-300/70">
+    <footer className="my-8 sm:my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-5 sm:p-8 text-center text-base sm:text-lg text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70">
       <span className="relative inline-flex h-9 w-9 overflow-hidden rounded-full border border-surface bg-secondary align-middle shadow-sm" title="Portrait of Lukas Bohez">
         <Image
           src={profilePhoto}

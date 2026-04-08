@@ -14,10 +14,10 @@ export function useCardReveal() {
       return
     }
 
-    // Set initial state — cards start offscreen-right, tilted, invisible
+    // Subtle reveal baseline keeps motion smooth and avoids aggressive card tilts.
     cards.forEach((card) => {
       card.style.opacity = "0"
-      card.style.transform = "translateX(80px) rotate(4deg) scale(0.97)"
+      card.style.transform = "translateY(16px) scale(0.985)"
       card.style.transition = "none"
     })
 
@@ -31,9 +31,9 @@ export function useCardReveal() {
           if (entry.isIntersecting) {
             // Reveal once to avoid repeated animation churn while scrolling.
             card.style.transition =
-              `transform 0.62s cubic-bezier(0.22, 1, 0.36, 1) ${staggerDelay}ms, opacity 0.52s ease ${staggerDelay}ms`
+              `transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) ${staggerDelay}ms, opacity 0.42s ease ${staggerDelay}ms`
             card.style.opacity = "1"
-            card.style.transform = "translateX(0px) rotate(0deg) scale(1)"
+            card.style.transform = "translateY(0px) scale(1)"
             observer.unobserve(card)
           }
         })
