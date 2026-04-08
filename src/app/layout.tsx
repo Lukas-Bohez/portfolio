@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Lukas Bohez | Portfolio',
   description:
-    'Portfolio of Lukas Bohez. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire (content hub), Convert the Spire Reborn (media suite with yt-dlp and SQLite), and Vault The Spire (privacy-first Flutter torrent client with local AI).',
+    'Portfolio of Lukas Bohez. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn, Vault The Spire, and the Lofi browser extension with direct download links for each.',
 };
 
 export default function RootLayout({

@@ -121,7 +121,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
             Actively interviewing for mid-senior roles
           </p>
           <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
-            I focus on backend architecture, pragmatic UX, and self-hosted delivery from prototype to live product.
+            I focus on backend architecture, pragmatic UX, and self-hosted delivery from prototype to live product. This portfolio highlights download-ready tools like Convert The Spire Reborn, Vault The Spire, and the Lofi browser extension.
           </p>
 
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
@@ -376,10 +376,22 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
       color: 'from-cyan-500 to-blue-500',
     },
     {
+      name: 'Lofi Extension',
+      description:
+        'Ambient browser extension for lo-fi background music with direct downloads for Chromium browsers and Firefox. Designed to help users stay focused while browsing or working online.',
+      url: 'https://quizthespire.com/pages/lofi-download/',
+      downloadUrl: 'https://quizthespire.com/pages/lofi-download/',
+      downloadLabel: 'Download extension',
+      tech: ['JavaScript', 'Browser Extension', 'Audio Player', 'UX'],
+      color: 'from-pink-500 to-orange-500',
+    },
+    {
       name: 'Convert the Spire Reborn',
       description:
         'Native Flutter media suite for downloading, playback, conversion, and casting with local library management across Windows, Linux, Android, and macOS. Implements SQLite persistence with browser.db schema, desktop FFI bindings, and reactive ChangeNotifier state management.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
+      downloadUrl: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/latest',
+      downloadLabel: 'Download release',
       tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', 'Native Plugins'],
       color: 'from-violet-500 to-purple-500',
     },
@@ -388,6 +400,8 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
       description:
         'Privacy-first Flutter torrent client with local AI integration and built-in browser. Cross-platform with encrypted SQLite backend, DAO-based data access, SQLCipher encryption, and OS-protected credential storage. Torrent support on Android and Windows with Ollama local AI on Windows.',
       url: 'https://github.com/Lukas-Bohez/vault_the_spire',
+      downloadUrl: 'https://github.com/Lukas-Bohez/vault_the_spire/releases/latest',
+      downloadLabel: 'Download latest',
       tech: ['Flutter', 'Dart', 'SQLite', 'SQLCipher', 'Native Torrenting', 'Secure Storage'],
       color: 'from-emerald-500 to-teal-500',
     },
@@ -395,11 +409,11 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
 
   return (
     <Section id="projects" title="Featured Projects" subtitle="Code you can inspect and use today">
-      <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col gap-4">
         {projects.map((project, index) => (
           <motion.article
             key={project.name}
-            className="rounded-2xl border border-surface bg-surface p-4 sm:p-5 shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 md:hover:-translate-y-1 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+            className="w-full rounded-2xl border border-surface bg-surface p-4 sm:p-5 shadow-md transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ y: -6, scale: 1.01 }}
@@ -424,14 +438,26 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
                 </span>
               ))}
             </div>
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="mt-5 inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-1"
-            >
-              Explore ↗
-            </a>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-1"
+              >
+                Explore ↗
+              </a>
+              {project.downloadUrl ? (
+                <a
+                  href={project.downloadUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-500 dark:text-blue-200 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-600 dark:md:hover:text-blue-100 md:hover:translate-x-1"
+                >
+                  {project.downloadLabel || 'Download'} ↗
+                </a>
+              ) : null}
+            </div>
           </motion.article>
         ))}
       </div>
