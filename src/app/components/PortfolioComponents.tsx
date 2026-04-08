@@ -26,7 +26,7 @@ function Section({ id, title, subtitle, children }: SectionProps) {
   return (
     <motion.section
       id={id}
-      className="mb-10 sm:mb-12 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 md:hover:-translate-y-0.5"
+      className="mb-10 scroll-mt-24 sm:mb-12 sm:scroll-mt-28 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 md:hover:-translate-y-0.5"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
@@ -81,7 +81,7 @@ export function Navbar({
           <motion.button
             key={item.id}
             onClick={() => onScrollTo(item.id)}
-            className="rounded-full px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary"
+            className="rounded-full px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             aria-label={`Scroll to ${item.label}`}
             whileHover={{ y: -1, scale: 1.02 }}
             whileTap={{ scale: 0.96 }}
@@ -127,7 +127,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
             <button
               onClick={onScrollToProjects}
-              className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98]"
+              className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               View featured work
             </button>
@@ -136,7 +136,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
                 const elem = document.getElementById('contact');
                 if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }}
-              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98]"
+              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               Get in touch
             </button>
@@ -378,17 +378,17 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Cross-platform media utility focused on reliability, fast iteration, and practical user workflows across desktop and Android.',
+        'Native Flutter media suite for downloading, playback, conversion, and casting with local library management across Windows, Linux, Android, and macOS. Implements SQLite persistence with browser.db schema, desktop FFI bindings, and reactive ChangeNotifier state management.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
-      tech: ['Flutter', 'Dart', 'yt-dlp', 'SQLite'],
+      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', 'Native Plugins'],
       color: 'from-violet-500 to-purple-500',
     },
     {
       name: 'Vault The Spire',
       description:
-        'Secure messaging and data tooling project that explores privacy-minded architecture, peer networking, and maintainable systems design.',
+        'Privacy-first Flutter torrent client with local AI integration and built-in browser. Cross-platform with encrypted SQLite backend, DAO-based data access, SQLCipher encryption, and OS-protected credential storage. Torrent support on Android and Windows with Ollama local AI on Windows.',
       url: 'https://github.com/Lukas-Bohez/vault_the_spire',
-      tech: ['Rust', 'Libp2p', 'AES', 'PocketBase'],
+      tech: ['Flutter', 'Dart', 'SQLite', 'SQLCipher', 'Native Torrenting', 'Secure Storage'],
       color: 'from-emerald-500 to-teal-500',
     },
   ];

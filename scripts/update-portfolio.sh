@@ -27,8 +27,21 @@ extract_build_id() {
 
 cd "${ROOT_DIR}"
 
+# Auto-detect Apache alias if not explicitly set
 if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
-	echo "[update-portfolio] ERROR: PORTFOLIO_DEPLOY_DIR is not set."
+	# Try to extract from Apache vhost config
+	if [[ -f "/etc/apache2/sites-enabled/quizthespire.com-le-ssl.conf" ]]; then
+		DETECTED=$(grep -oP "Alias /portfolio \K.*" /etc/apache2/sites-enabled/quizthespire.com-le-ssl.conf | head -1 | xargs)
+		if [[ -n "${DETECTED}" ]]; then
+			PORTFOLIO_DEPLOY_DIR="${DETECTED}"
+			echo "[update-portfolio] Auto-detected deploy directory from Apache: ${PORTFOLIO_DEPLOY_DIR}"
+		fi
+	fi
+fi
+
+# Still require explicit setting if auto-detection failed
+if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
+	echo "[update-portfolio] ERROR: PORTFOLIO_DEPLOY_DIR is not set and could not be auto-detected."
 	echo "[update-portfolio] Refusing to run because this can look successful locally while production stays stale."
 	echo "[update-portfolio] Example: PORTFOLIO_DEPLOY_DIR=/var/www/quizthespire.com/portfolio npm run update:portfolio"
 	exit 1
