@@ -175,7 +175,7 @@ body {
 
 .skills-rail {
   display: flex;
-  gap: 0.8rem;
+  gap: 0;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -191,6 +191,13 @@ body {
 
 .skills-rail.is-dragging {
   cursor: grabbing;
+}
+
+.skills-rail-group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.8rem;
+  padding-right: 0.8rem;
 }
 
 .rail-control-btn {
@@ -218,7 +225,7 @@ body {
 
 .marquee-track {
   display: flex;
-  gap: 0.8rem;
+  gap: 0;
   width: max-content;
   animation: marqueeSlide 24s linear infinite;
   will-change: transform;
@@ -262,9 +269,16 @@ body {
 .cms-gallery-track {
   display: flex;
   width: max-content;
-  gap: 1rem;
+  gap: 0;
   animation: cmsGalleryDrift 48s linear infinite;
   will-change: transform;
+}
+
+.cms-gallery-group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 1rem;
+  padding-right: 1rem;
 }
 
 .cms-gallery-marquee--reverse .cms-gallery-track {
@@ -308,7 +322,8 @@ body {
   .gradient-sweep,
   .marquee-track,
   .cms-cloud-gallery::before,
-  .cms-gallery-track {
+  .cms-gallery-track,
+  .skills-rail {
     animation: none;
   }
 }

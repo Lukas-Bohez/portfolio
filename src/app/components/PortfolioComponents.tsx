@@ -217,28 +217,43 @@ export function RecruiterWowStrip() {
     'Self-Hosted Deployment',
   ];
   const trackRef = useRef<HTMLDivElement>(null);
+  const groupRef = useRef<HTMLDivElement>(null);
   const dragState = useRef({ active: false, startX: 0, startScrollLeft: 0 });
+  const loopWidthRef = useRef(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     const track = trackRef.current;
-    if (!track) return;
+    const group = groupRef.current;
+    if (!track || !group) return;
+
+    const syncLoopWidth = () => {
+      loopWidthRef.current = group.getBoundingClientRect().width;
+    };
+
+    syncLoopWidth();
+    const observer = new ResizeObserver(syncLoopWidth);
+    observer.observe(group);
 
     let frameId = 0;
 
     const tick = () => {
-      if (!isPaused && !isDragging) {
+      const loopWidth = loopWidthRef.current;
+      if (!isPaused && !isDragging && loopWidth > 0) {
         track.scrollLeft += 0.65;
-        if (track.scrollLeft >= track.scrollWidth / 2) {
-          track.scrollLeft = 0;
+        if (track.scrollLeft >= loopWidth) {
+          track.scrollLeft -= loopWidth;
         }
       }
       frameId = window.requestAnimationFrame(tick);
     };
 
     frameId = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frameId);
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(frameId);
+    };
   }, [isPaused, isDragging]);
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
@@ -299,11 +314,20 @@ export function RecruiterWowStrip() {
         onPointerUp={onPointerEnd}
         onPointerCancel={onPointerEnd}
       >
-        {[...skills, ...skills].map((line, index) => (
-          <span key={`${line}-${index}`} className="marquee-chip">
-            {line}
-          </span>
-        ))}
+        <div ref={groupRef} className="skills-rail-group">
+          {skills.map((line) => (
+            <span key={`skills-a-${line}`} className="marquee-chip">
+              {line}
+            </span>
+          ))}
+        </div>
+        <div className="skills-rail-group" aria-hidden="true">
+          {skills.map((line) => (
+            <span key={`skills-b-${line}`} className="marquee-chip">
+              {line}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );
