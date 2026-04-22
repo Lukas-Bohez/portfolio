@@ -130,16 +130,16 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
       </div>
       <div className="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
         <div className="max-w-2xl">
-          <p className="uppercase tracking-[0.12em] sm:tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-xs sm:text-base">Pragmatic code with scalable impact</p>
+          <p className="uppercase tracking-[0.12em] sm:tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-xs sm:text-base">Built to ship and stay usable</p>
           <h1 className="mt-2 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">Oroka Conner</h1>
           <p className="mt-4 text-base sm:text-xl text-default leading-relaxed">
-            I am a full-stack web developer building production-ready Python and TypeScript systems that are fast to ship, reliable to run, and easy to maintain.
+            I build full-stack Python and TypeScript apps that are straightforward to ship, stable to run, and easy to hand off.
           </p>
           <p className="mt-4 inline-flex rounded-full border border-blue-400 dark:border-blue-200 bg-blue-400/15 dark:bg-blue-400/20 px-3.5 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold text-contrast">
             Actively interviewing for full-stack web developer roles
           </p>
           <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
-            I focus on backend architecture, pragmatic UX, and self-hosted delivery from prototype to live product. This portfolio highlights production projects including Quiz The Spire, Convert The Spire Reborn v10.0.6, a dedicated CMS demo with Sanity + Cloudinary, and the Lofi browser extension.
+            I care about backend architecture, clear UX, and deployments that hold up in the real world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.0.6, a CMS demo with Sanity + Cloudinary, and the Lofi browser extension.
           </p>
 
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
@@ -336,25 +336,25 @@ export function RecruiterWowStrip() {
 export function Stats() {
   const metrics = [
     {
-      label: 'Production-focused engineering',
+      label: 'Built for real use',
       value: 'Live services, not demos',
     },
     {
-      label: 'Backend-first mindset',
+      label: 'Backend-first habits',
       value: 'Python APIs + durable data flows',
     },
     {
-      label: 'Product communication',
+      label: 'Clear communication',
       value: 'Clear docs, articles, and handoff notes',
     },
     {
-      label: 'Transparent delivery',
+      label: 'Open delivery',
       value: 'Code, impact, and deployment details that are easy to inspect',
     },
   ];
 
   return (
-    <Section id="what-i-do" title="What I Do" subtitle="Value, scope, and delivery shape how I work">
+    <Section id="what-i-do" title="What I Do" subtitle="I keep the work practical, readable, and easy to ship">
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
         {metrics.map((metric, index) => (
           <motion.article
@@ -377,25 +377,25 @@ export function Stats() {
 export function AboutAndSkills({ isDark }: { isDark: boolean }) {
   const principles = [
     {
-      title: 'Production-Focused Engineering',
-      copy: 'I build stable, live services that are designed for real-world reliability instead of demo-only polish.',
+      title: 'Built for real use',
+      copy: 'I build stable live services that people can actually depend on.',
     },
     {
-      title: 'Backend-First Mindset',
-      copy: 'I design durable data flows, Python APIs, and release workflows that support long-term maintainability.',
+      title: 'Backend-first habits',
+      copy: 'I like clean data flows, Python APIs, and release processes that do not fall apart later.',
     },
     {
-      title: 'Technical Communication',
-      copy: 'I write clear documentation, articles, and handoff notes that reduce support overhead and speed up adoption.',
+      title: 'Clear communication',
+      copy: 'I write documentation and handoff notes that help other people move faster.',
     },
     {
-      title: 'End-to-End Ownership',
-      copy: 'I move confidently from architecture to implementation to deployment, without losing performance or clarity.',
+      title: 'End-to-end ownership',
+      copy: 'I stay with a project from planning to deployment, and I try to keep it simple enough to maintain.',
     },
   ];
 
   return (
-    <Section id="about" title="Engineering Foundations" subtitle="The habits that keep the work shippable and easy to trust">
+    <Section id="about" title="How I Work" subtitle="The habits that keep projects moving without getting messy">
       <div className="grid gap-5 md:grid-cols-2">
         {principles.map((principle, index) => (
           <motion.article
@@ -568,10 +568,10 @@ export function MonetizationShowcase() {
 
         <p className="mt-4 text-sm text-muted leading-relaxed">
           {adState === 'ready'
-            ? 'Ad integration is active. This demonstrates live ad-enabled monetization while preserving clean UX.'
+            ? 'Ad integration is active and the layout stays clean.'
             : adState === 'blocked'
-              ? 'Ad preview is currently blocked by browser/privacy settings. Integration remains implemented and production-ready.'
-              : 'Loading ad integration preview...'}
+              ? 'Ad preview is blocked in this browser, but the integration is wired up.'
+              : 'Loading ad preview...'}
         </p>
       </div>
     </Section>
@@ -589,13 +589,13 @@ export function HumorSection() {
       copy: 'I treat runtime budgets like real currency: spend where it improves outcomes and avoid costly visual noise or premature complexity.',
     },
     {
-      title: 'No Endless Loading Theater',
-      copy: 'Every animation has intent, timing, and an off-ramp so the experience feels dynamic, controlled, and easy to trust.',
+      title: 'No endless loading',
+      copy: 'I keep motion purposeful so the page feels alive without turning into a waiting screen.',
     },
   ];
 
   return (
-    <Section id="philosophy" title="Engineering Philosophy" subtitle="Memorable engineering with playful but professional storytelling">
+    <Section id="philosophy" title="How I Think About Building" subtitle="A few rules I actually try to follow">
       <div className="grid gap-5 md:grid-cols-3">
         {stories.map((story, index) => (
           <motion.article
