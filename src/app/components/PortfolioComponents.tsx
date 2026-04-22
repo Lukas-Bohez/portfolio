@@ -438,11 +438,11 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. 1,000+ downloads across 95+ countries. GPLv3 licensed.',
-      url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
+        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. v10.0.6 improves GUI overflow handling and usability across all screens. 6 release assets are available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
+      url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/tag/v10.0.6',
       downloadUrl: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/download/v10.0.6/ConvertTheSpireReborn-windows-x64.zip',
       downloadLabel: 'Download Windows ZIP',
-      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', 'Torrenting'],
+      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', '6 release assets'],
       color: 'from-violet-500 to-purple-500',
     },
     {
