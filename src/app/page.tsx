@@ -3,6 +3,7 @@
 import { useCardReveal } from './hooks/useCardReveal'
 
 import {
+  AboutAndSkills,
   ContactSection,
   FeaturedProjects,
   Footer,
@@ -13,6 +14,7 @@ import {
   Stats,
 } from './components/PortfolioComponents';
 import { Container } from './components/Container';
+import AdUnit from './components/AdUnit';
 
 export default function Home() {
   useCardReveal();
@@ -34,10 +36,15 @@ export default function Home() {
           const elem = document.getElementById('projects');
           if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }} />
+        <AdUnit slot="6531017850" format="auto" className="ad-unit--horizontal" />
         <RecruiterWowStrip />
         <Stats />
+        <AdUnit slot="7822007431" format="auto" className="ad-unit--square" />
+        <AboutAndSkills isDark={false} />
         <FeaturedProjects isDark={false} />
+        <AdUnit slot="6382844046" format="fluid" layout="in-article" className="ad-unit--article" />
         <HumorSection />
+        <AdUnit slot="7221282993" format="autorelaxed" className="ad-unit--multiplex" label="Sponsored" />
         <ContactSection isDark={false} />
       </Container>
       <Container className="pb-4">

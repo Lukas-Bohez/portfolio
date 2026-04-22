@@ -121,6 +121,17 @@ body {
   100% { transform: translateX(-50%); }
 }
 
+@keyframes cmsGalleryDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes cmsGalleryGlow {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
 .hero-orb {
   position: absolute;
   border-radius: 9999px;
@@ -225,11 +236,117 @@ body {
   letter-spacing: 0.01em;
 }
 
+.cms-cloud-gallery {
+  position: relative;
+  overflow: hidden;
+}
+
+.cms-cloud-gallery::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 14% 14%, color-mix(in oklab, var(--accent), white 36%) 0%, transparent 44%),
+    radial-gradient(circle at 88% 86%, color-mix(in oklab, var(--accent), white 20%) 0%, transparent 42%);
+  opacity: 0.34;
+  animation: cmsGalleryGlow 8s ease-in-out infinite;
+}
+
+.cms-gallery-marquee {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.cms-gallery-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: cmsGalleryDrift 48s linear infinite;
+  will-change: transform;
+}
+
+.cms-gallery-marquee--reverse .cms-gallery-track {
+  animation-direction: reverse;
+  animation-duration: 64s;
+}
+
+.cms-gallery-card {
+  position: relative;
+  flex: 0 0 clamp(300px, 46vw, 540px);
+  overflow: hidden;
+  border-radius: 1.1rem;
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 72%);
+  background: color-mix(in oklab, var(--bg-2), transparent 8%);
+  box-shadow: 0 18px 50px color-mix(in oklab, var(--accent), transparent 84%);
+  transform: translateZ(0);
+}
+
+.cms-gallery-card--compact {
+  flex-basis: clamp(250px, 38vw, 460px);
+  opacity: 0.9;
+}
+
+.cms-gallery-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s ease;
+}
+
+.cms-gallery-card:hover .cms-gallery-image {
+  transform: scale(1.06);
+  filter: saturate(1.08) contrast(1.05);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-orb,
   .hero-grid,
   .gradient-sweep,
-  .marquee-track {
+  .marquee-track,
+  .cms-cloud-gallery::before,
+  .cms-gallery-track {
     animation: none;
   }
+}
+
+/* AdSense containers for portfolio pages */
+.ad-unit-wrapper {
+  width: 100%;
+  margin: 0.75rem auto 1rem;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px dashed color-mix(in srgb, var(--line-mid) 72%, transparent);
+  background: color-mix(in srgb, var(--bg-2) 90%, transparent);
+  overflow: hidden;
+}
+
+.ad-label {
+  font-size: 0.72rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin: 0 0 0.45rem;
+}
+
+.ad-unit--horizontal {
+  min-height: 90px;
+}
+
+.ad-unit--square {
+  max-width: 360px;
+  min-height: 280px;
+}
+
+.ad-unit--article {
+  max-width: 740px;
+  min-height: 260px;
+}
+
+.ad-unit--multiplex {
+  min-height: 280px;
 }

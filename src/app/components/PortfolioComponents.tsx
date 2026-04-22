@@ -2,11 +2,18 @@
 
 
 import Image from 'next/image';
+import Script from 'next/script';
 import { motion } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
 import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
 
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
+
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[];
+  }
+}
 
 
 
@@ -53,7 +60,7 @@ export function Navbar({
 }) {
   const navItems = [
     { label: 'Projects', id: 'projects' },
-    { label: 'What I Do', id: 'what-i-do' },
+    { label: 'What I Do', id: 'about' },
     { label: 'Contact', id: 'contact' },
   ];
 
@@ -68,13 +75,13 @@ export function Navbar({
         <span className="relative h-8 w-8 overflow-hidden rounded-full border border-surface bg-secondary shadow-sm sm:h-9 sm:w-9">
           <Image
             src={profilePhoto}
-            alt="Portrait of Lukas Bohez"
+            alt="Portrait of Oroka Conner"
             fill
             sizes="36px"
             className="object-cover object-[50%_18%] scale-[1.35]"
           />
         </span>
-        <span className="hidden sm:inline">Lukas Bohez</span>
+        <span className="hidden sm:inline">Oroka Conner</span>
       </button>
       <div className="flex items-center gap-1.5 sm:gap-3">
         {navItems.map((item) => (
@@ -89,6 +96,17 @@ export function Navbar({
             {item.label}
           </motion.button>
         ))}
+        <motion.button
+          onClick={() => {
+            window.location.href = 'cms-demo/';
+          }}
+          className="rounded-full border border-blue-400/60 px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-blue-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+          aria-label="Open CMS demo"
+          whileHover={{ y: -1, scale: 1.02 }}
+          whileTap={{ scale: 0.96 }}
+        >
+          CMS Demo
+        </motion.button>
         <ThemeToggle />
       </div>
     </nav>
@@ -113,15 +131,15 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
       <div className="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
         <div className="max-w-2xl">
           <p className="uppercase tracking-[0.12em] sm:tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-xs sm:text-base">Pragmatic code with scalable impact</p>
-          <h1 className="mt-2 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">Lukas Bohez</h1>
+          <h1 className="mt-2 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">Oroka Conner</h1>
           <p className="mt-4 text-base sm:text-xl text-default leading-relaxed">
-            I build production-ready Python and full-stack systems that are fast to ship, reliable to run, and easy to maintain.
+            I am a full-stack web developer building production-ready Python and TypeScript systems that are fast to ship, reliable to run, and easy to maintain.
           </p>
           <p className="mt-4 inline-flex rounded-full border border-blue-400 dark:border-blue-200 bg-blue-400/15 dark:bg-blue-400/20 px-3.5 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold text-contrast">
-            Actively interviewing for mid-senior roles
+            Actively interviewing for full-stack web developer roles
           </p>
           <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
-            I focus on backend architecture, pragmatic UX, and self-hosted delivery from prototype to live product. This portfolio highlights download-ready tools like Convert The Spire Reborn, Vault The Spire, and the Lofi browser extension.
+            I focus on backend architecture, pragmatic UX, and self-hosted delivery from prototype to live product. This portfolio highlights production projects including Quiz The Spire, Convert The Spire Reborn v10.0.6, a dedicated CMS demo with Sanity + Cloudinary, and the Lofi browser extension.
           </p>
 
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
@@ -140,6 +158,14 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
             >
               Get in touch
             </button>
+            <button
+              onClick={() => {
+                window.location.href = 'cms-demo/';
+              }}
+              className="rounded-full border-2 border-emerald-400/80 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-emerald-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+            >
+              Go to CMS demo
+            </button>
           </div>
         </div>
         <div className="flex justify-center lg:justify-end">
@@ -151,7 +177,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
             >
               <Image
                 src={profilePhoto}
-                alt="Portrait of Lukas Bohez"
+                alt="Portrait of Oroka Conner"
                 fill
                 priority
                 loading="eager"
@@ -370,7 +396,7 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Quiz The Spire',
       description:
-        'Online quiz platform powered by a Python backend, with article publishing and project showcases. It is the live hub where I present my tools and host my portfolio at quizthespire.com.',
+        'Full-stack live multiplayer quiz platform with real-time leaderboards, AI-generated themes via SpireAI, and community-created content. Built with vanilla JS, Apache2, and a Python backend. Serving users across 95+ countries.',
       url: 'https://quizthespire.com',
       tech: ['Python', 'FastAPI', 'Apache', 'Content Management'],
       color: 'from-cyan-500 to-blue-500',
@@ -388,22 +414,28 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Native Flutter media suite for downloading, playback, conversion, and casting with local library management across Windows, Linux, Android, and macOS. Implements SQLite persistence with browser.db schema, desktop FFI bindings, and reactive ChangeNotifier state management.',
+        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. 1,000+ downloads across 95+ countries. GPLv3 licensed.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter',
-      downloadUrl: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/latest',
-      downloadLabel: 'Download release',
-      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', 'Native Plugins'],
+      downloadUrl: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/download/v10.0.6/ConvertTheSpireReborn-windows-x64.zip',
+      downloadLabel: 'Download Windows ZIP',
+      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', 'Torrenting'],
       color: 'from-violet-500 to-purple-500',
     },
     {
-      name: 'Vault The Spire',
+      name: 'BitPlayer: Torrent & Media',
       description:
-        'Privacy-first Flutter torrent client with local AI integration and built-in browser. Cross-platform with encrypted SQLite backend, DAO-based data access, SQLCipher encryption, and OS-protected credential storage. Torrent support on Android and Windows with Ollama local AI on Windows.',
-      url: 'https://github.com/Lukas-Bohez/vault_the_spire',
-      downloadUrl: 'https://github.com/Lukas-Bohez/vault_the_spire/releases/latest',
-      downloadLabel: 'Download latest',
-      tech: ['Flutter', 'Dart', 'SQLite', 'SQLCipher', 'Native Torrenting', 'Secure Storage'],
+        'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.0.6. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
+      url: 'https://quizthespire.com/pages/vault/',
+      tech: ['Integrated into Convert v10.0.6', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
       color: 'from-emerald-500 to-teal-500',
+    },
+    {
+      name: 'CMS Demo: Sanity + Cloudinary',
+      description:
+        'Separate Next.js App Router demo that fetches editable CMS content from Sanity in Server Components, uses explicit Next.js 16 fetch revalidation strategies, and renders Cloudinary-hosted generated visuals with transformation URLs.',
+      url: 'cms-demo/',
+      tech: ['Next.js 16', 'Sanity', 'Cloudinary', 'Server Components', 'revalidate fetch'],
+      color: 'from-amber-500 to-orange-500',
     },
   ];
 
@@ -465,6 +497,63 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
   );
 }
 
+export function MonetizationShowcase() {
+  const [adState, setAdState] = useState<'loading' | 'ready' | 'blocked'>('loading');
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      try {
+        if (window.adsbygoogle) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+          setAdState('ready');
+        } else {
+          setAdState('blocked');
+        }
+      } catch {
+        setAdState('blocked');
+      }
+    }, 500);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  return (
+    <Section id="monetization" title="Monetization & Ads" subtitle="A controlled, non-obtrusive ad integration showcase from Quiz The Spire">
+      <Script
+        id="portfolio-adsense"
+        strategy="afterInteractive"
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8418485814964449"
+        crossOrigin="anonymous"
+      />
+
+      <div className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <p className="text-sm font-bold uppercase tracking-[0.14em] text-primary">Sponsored placement demo</p>
+          <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-default">Non-obtrusive</span>
+        </div>
+
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', minHeight: '90px' }}
+          data-ad-client="ca-pub-8418485814964449"
+          data-ad-slot="7822007431"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+
+        <p className="mt-4 text-sm text-muted leading-relaxed">
+          {adState === 'ready'
+            ? 'Ad integration is active. This demonstrates live ad-enabled monetization while preserving clean UX.'
+            : adState === 'blocked'
+              ? 'Ad preview is currently blocked by browser/privacy settings. Integration remains implemented and production-ready.'
+              : 'Loading ad integration preview...'}
+        </p>
+      </div>
+    </Section>
+  );
+}
+
 export function HumorSection() {
   const stories = [
     {
@@ -507,7 +596,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
     <Section
       id="contact"
       title="Let’s connect"
-      subtitle="I’m actively interviewing and available for mid-senior roles"
+      subtitle="I’m actively interviewing and available for full-stack web developer roles"
     >
       <div className="grid gap-5 sm:grid-cols-3">
         <motion.a
@@ -547,7 +636,7 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">LinkedIn</span>
-          <span className="mt-3 text-base text-default block leading-relaxed">Mid-senior roles,<br />open to opportunities.</span>
+          <span className="mt-3 text-base text-default block leading-relaxed">Full-stack web developer roles,<br />open to opportunities.</span>
         </motion.a>
       </div>
     </Section>
@@ -557,16 +646,16 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
 export function Footer() {
   return (
     <footer className="my-8 sm:my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-5 sm:p-8 text-center text-base sm:text-lg text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70">
-      <span className="relative inline-flex h-9 w-9 overflow-hidden rounded-full border border-surface bg-secondary align-middle shadow-sm" title="Portrait of Lukas Bohez">
+      <span className="relative inline-flex h-9 w-9 overflow-hidden rounded-full border border-surface bg-secondary align-middle shadow-sm" title="Portrait of Oroka Conner">
         <Image
           src={profilePhoto}
-          alt="Portrait of Lukas Bohez"
+          alt="Portrait of Oroka Conner"
           fill
           sizes="36px"
           className="object-cover object-[50%_18%] scale-[1.35]"
         />
       </span>
-      <span className="ml-2 font-bold">Lukas Bohez</span>
+      <span className="ml-2 font-bold">Oroka Conner</span>
       <div className="mt-4 flex flex-wrap justify-center gap-4">
         <a href="mailto:lukasbohez@gmail.com" className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline">Email</a>
         <span className="text-default">·</span>

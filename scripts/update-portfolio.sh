@@ -70,7 +70,7 @@ PORTFOLIO_URL="${PORTFOLIO_URL:-${PORTFOLIO_URL_DEFAULT}}"
 if [[ -n "${BUILD_ID}" ]] && command -v curl >/dev/null 2>&1; then
 	echo "[update-portfolio] Verifying live URL ${PORTFOLIO_URL} serves build ${BUILD_ID}..."
 	LIVE_HTML="$(curl -fsSL "${PORTFOLIO_URL}?v=$(cat "${STAMP_FILE}")")"
-	if grep -q "${BUILD_ID}" <<<"${LIVE_HTML}"; then
+	if grep -q -- "${BUILD_ID}" <<<"${LIVE_HTML}"; then
 		echo "[update-portfolio] Live verification passed."
 	else
 		echo "[update-portfolio] WARNING: Live page does not include build ${BUILD_ID}."

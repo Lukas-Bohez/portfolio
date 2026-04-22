@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'next-themes';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import BackToTop from './components/BackToTop';
 
@@ -15,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Lukas Bohez | Portfolio',
+  title: 'Oroka Conner | Full-Stack Developer · Flutter · Python · Next.js',
   description:
-    'Portfolio of Lukas Bohez. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn, Vault The Spire, and the Lofi browser extension with direct download links for each.',
+    'Portfolio of Oroka Conner, full-stack web developer. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn v10.0.6, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
 };
 
 export default function RootLayout({
@@ -28,7 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8418485814964449"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="spire-theme" disableTransitionOnChange>
           {children}
           <BackToTop />
         </ThemeProvider>
