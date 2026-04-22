@@ -266,11 +266,28 @@ body {
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
+.cms-gallery-marquee.is-loading .cms-gallery-track {
+  animation-play-state: paused;
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+}
+
+.cms-gallery-marquee.is-ready .cms-gallery-track {
+  animation-play-state: running;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
 .cms-gallery-track {
   display: flex;
   width: max-content;
   gap: 0;
   animation: cmsGalleryDrift 48s linear infinite;
+  animation-delay: var(--cms-gallery-delay, 0s);
+  animation-play-state: paused;
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  transition: opacity 0.45s ease, transform 0.45s ease;
   will-change: transform;
 }
 
@@ -278,12 +295,14 @@ body {
   display: flex;
   flex: 0 0 auto;
   gap: 1rem;
-  padding-right: 1rem;
 }
 
-.cms-gallery-marquee--reverse .cms-gallery-track {
-  animation-direction: reverse;
-  animation-duration: 64s;
+.cms-gallery-track--compact .cms-gallery-card {
+  flex-basis: clamp(250px, 38vw, 460px);
+}
+
+.cms-gallery-marquee--secondary .cms-gallery-track {
+  animation-delay: -24s;
 }
 
 .cms-gallery-card {

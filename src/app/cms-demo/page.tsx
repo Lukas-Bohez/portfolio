@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { CmsGalleryMarquee } from './CmsGalleryMarquee';
 
 type CmsProject = {
   _id: string;
@@ -98,6 +98,19 @@ const cloudGalleryImages: GalleryImage[] = [
     alt: 'Studio photo of three dogs',
   },
 ];
+
+const cloudGalleryPrimary = cloudGalleryImages.map((image) => ({
+  ...image,
+  src: withCloudinaryTransform(image.src, 'f_auto,q_auto,w_900,h_540,c_fill,g_auto'),
+}));
+
+const cloudGallerySecondary = cloudGalleryImages
+  .slice()
+  .reverse()
+  .map((image) => ({
+    ...image,
+    src: withCloudinaryTransform(image.src, 'f_auto,q_auto,w_900,h_540,c_fill,g_auto'),
+  }));
 
 function withCloudinaryTransform(url: string, transform: string): string {
   if (!url.includes('res.cloudinary.com') || !url.includes('/upload/')) {
@@ -301,85 +314,12 @@ export default async function CmsDemoPage() {
           High-impact sample imagery served from Cloudinary with progressive transforms, designed as a recruiter-facing showcase strip.
         </p>
 
-        <div className="cms-gallery-marquee mt-6" aria-label="Scrolling cloud image gallery">
-          <div className="cms-gallery-track">
-            <div className="cms-gallery-group">
-              {cloudGalleryImages.map((image) => {
-                const transformedUrl = withCloudinaryTransform(image.src, 'f_auto,q_auto,w_900,h_540,c_fill,g_auto');
-                return (
-                  <figure key={`gallery-row-a-a-${image.id}`} className="cms-gallery-card">
-                    <Image
-                      src={transformedUrl}
-                      alt={image.alt}
-                      width={900}
-                      height={540}
-                      sizes="(min-width: 1280px) 540px, (min-width: 640px) 46vw, 90vw"
-                      className="cms-gallery-image"
-                    />
-                  </figure>
-                );
-              })}
-            </div>
-            <div className="cms-gallery-group" aria-hidden="true">
-              {cloudGalleryImages.map((image) => {
-                const transformedUrl = withCloudinaryTransform(image.src, 'f_auto,q_auto,w_900,h_540,c_fill,g_auto');
-                return (
-                  <figure key={`gallery-row-a-b-${image.id}`} className="cms-gallery-card">
-                    <Image
-                      src={transformedUrl}
-                      alt=""
-                      width={900}
-                      height={540}
-                      sizes="(min-width: 1280px) 540px, (min-width: 640px) 46vw, 90vw"
-                      className="cms-gallery-image"
-                      aria-hidden="true"
-                    />
-                  </figure>
-                );
-              })}
-            </div>
-          </div>
+        <div className="mt-6">
+          <CmsGalleryMarquee images={cloudGalleryPrimary} ariaLabel="Scrolling cloud image gallery" />
         </div>
 
-        <div className="cms-gallery-marquee cms-gallery-marquee--reverse mt-4" aria-hidden="true">
-          <div className="cms-gallery-track">
-            <div className="cms-gallery-group">
-              {cloudGalleryImages.slice().reverse().map((image) => {
-                const transformedUrl = withCloudinaryTransform(image.src, 'f_auto,q_auto,w_900,h_540,c_fill,g_auto');
-                return (
-                  <figure key={`gallery-row-b-a-${image.id}`} className="cms-gallery-card cms-gallery-card--compact">
-                    <Image
-                      src={transformedUrl}
-                      alt=""
-                      width={900}
-                      height={540}
-                      sizes="(min-width: 1280px) 460px, (min-width: 640px) 38vw, 82vw"
-                      className="cms-gallery-image"
-                      aria-hidden="true"
-                    />
-                  </figure>
-                );
-              })}
-            </div>
-            <div className="cms-gallery-group" aria-hidden="true">
-              {cloudGalleryImages.slice().reverse().map((image) => {
-                const transformedUrl = withCloudinaryTransform(image.src, 'f_auto,q_auto,w_900,h_540,c_fill,g_auto');
-                return (
-                  <figure key={`gallery-row-b-b-${image.id}`} className="cms-gallery-card cms-gallery-card--compact">
-                    <Image
-                      src={transformedUrl}
-                      alt=""
-                      width={900}
-                      height={540}
-                      sizes="(min-width: 1280px) 460px, (min-width: 640px) 38vw, 82vw"
-                      className="cms-gallery-image"
-                      aria-hidden="true"
-                    />
-                  </figure>
-                );
-              })}
-            </div>
-          </div>
+        <div className="mt-4">
+          <CmsGalleryMarquee images={cloudGallerySecondary} compact phaseOffsetSeconds={24} ariaLabel="Secondary scrolling cloud image gallery" />
         </div>
       </section>
     </main>
