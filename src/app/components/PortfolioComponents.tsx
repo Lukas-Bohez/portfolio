@@ -139,7 +139,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
             Actively interviewing for full-stack web developer roles
           </p>
           <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
-            I care about backend architecture, clear UX, and deployments that hold up in the real world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.0.6, a CMS demo with Sanity + Cloudinary, and the Lofi browser extension.
+            I care about backend architecture, clear UX, and deployments that hold up in the real world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.1.1, a CMS demo with Sanity + Cloudinary, and the Lofi browser extension.
           </p>
 
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
@@ -438,9 +438,9 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. v10.0.6 improves GUI overflow handling and usability across all screens. 6 release assets are available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
-      url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/tag/v10.0.6',
-      downloadUrl: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/download/v10.0.6/ConvertTheSpireReborn-windows-x64.zip',
+        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. v10.1.1 delivers a major GUI overhaul with cleaner overlay controls, responsive toolbars, and improved artwork presentation. 6 release assets are available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
+      url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/tag/v10.1.1',
+      downloadUrl: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/download/v10.1.1/ConvertTheSpireReborn-windows-x64.zip',
       downloadLabel: 'Download Windows ZIP',
       tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', '6 release assets'],
       color: 'from-violet-500 to-purple-500',
@@ -448,9 +448,9 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'BitPlayer: Torrent & Media',
       description:
-        'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.0.6. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
+        'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.1.1. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
       url: 'https://quizthespire.com/pages/vault/',
-      tech: ['Integrated into Convert v10.0.6', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
+      tech: ['Integrated into Convert v10.1.1', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
       color: 'from-emerald-500 to-teal-500',
     },
     {

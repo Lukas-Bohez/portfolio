@@ -18,11 +18,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Oroka Conner | Full-Stack Developer · Flutter · Python · Next.js',
   description:
-    'Portfolio of Oroka Conner, full-stack web developer. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn v10.0.6, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
+    'Portfolio of Oroka Conner, full-stack web developer. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn v10.1.1, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
   openGraph: {
     title: 'Oroka Conner | Full-Stack Developer · Flutter · Python · Next.js',
     description:
-      'Portfolio of Oroka Conner, full-stack web developer. Projects include QuizTheSpire, Convert The Spire Reborn v10.0.6, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
+      'Portfolio of Oroka Conner, full-stack web developer. Projects include QuizTheSpire, Convert The Spire Reborn v10.1.1, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
     url: 'https://quizthespire.com/portfolio/',
     siteName: 'Quiz The Spire',
     type: 'website',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Oroka Conner | Full-Stack Developer · Flutter · Python · Next.js',
     description:
-      'Portfolio of Oroka Conner, full-stack web developer. Projects include QuizTheSpire, Convert The Spire Reborn v10.0.6, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
+      'Portfolio of Oroka Conner, full-stack web developer. Projects include QuizTheSpire, Convert The Spire Reborn v10.1.1, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
     images: ['https://quizthespire.com/images/spire-light.jpeg'],
   },
 };
