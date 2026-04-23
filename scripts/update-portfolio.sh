@@ -20,6 +20,31 @@ sync_output_dir() {
 	fi
 }
 
+atomic_sync_output_dir() {
+	local source_dir="$1"
+	local target_dir="$2"
+	local target_parent
+	local target_name
+	local tmp_dir
+	local old_dir
+
+	target_parent="$(dirname "${target_dir}")"
+	target_name="$(basename "${target_dir}")"
+	tmp_dir="${target_parent}/.${target_name}.tmp.$$"
+	old_dir="${target_parent}/.${target_name}.old.$$"
+
+	rm -rf "${tmp_dir}" "${old_dir}"
+	mkdir -p "${tmp_dir}"
+	sync_output_dir "${source_dir}" "${tmp_dir}"
+
+	if [[ -d "${target_dir}" ]]; then
+		mv "${target_dir}" "${old_dir}"
+	fi
+
+	mv "${tmp_dir}" "${target_dir}"
+	rm -rf "${old_dir}"
+}
+
 extract_build_id() {
 	local static_dir="$1"
 	find "${static_dir}" -mindepth 2 -maxdepth 2 -type f -name '_buildManifest.js' -printf '%h\n' | head -n 1 | xargs -r basename
@@ -60,9 +85,29 @@ mkdir -p "${DEPLOY_DIR}"
 
 if [[ "$(resolve_path "${ROOT_DIR}/out")" != "$(resolve_path "${DEPLOY_DIR}")" ]]; then
 	echo "[update-portfolio] Publishing out/ to ${DEPLOY_DIR}..."
-	sync_output_dir "${ROOT_DIR}/out" "${DEPLOY_DIR}"
+	atomic_sync_output_dir "${ROOT_DIR}/out" "${DEPLOY_DIR}"
 	echo "[update-portfolio] Published to ${DEPLOY_DIR}"
 fi
+
+if [[ ! -f "${ROOT_DIR}/out/index.html" || ! -f "${DEPLOY_DIR}/index.html" ]]; then
+	echo "[update-portfolio] ERROR: index.html missing in build output or deploy directory."
+	exit 3
+fi
+
+SOURCE_SUM="$(sha256sum "${ROOT_DIR}/out/index.html" | awk '{print $1}')"
+DEPLOY_SUM="$(sha256sum "${DEPLOY_DIR}/index.html" | awk '{print $1}')"
+
+echo "[update-portfolio] Source index checksum: ${SOURCE_SUM}"
+echo "[update-portfolio] Deploy index checksum: ${DEPLOY_SUM}"
+
+if [[ "${SOURCE_SUM}" != "${DEPLOY_SUM}" ]]; then
+	echo "[update-portfolio] ERROR: deploy checksum mismatch after copy."
+	exit 4
+fi
+
+DEPLOY_REV="$(git -C "${ROOT_DIR}" rev-parse HEAD)"
+printf "%s | %s\n" "$(date -u '+%Y-%m-%d %H:%M:%SZ')" "${DEPLOY_REV}" > "${DEPLOY_DIR}/last-deployed.txt"
+echo "[update-portfolio] Wrote ${DEPLOY_DIR}/last-deployed.txt"
 
 BUILD_ID="$(extract_build_id "${ROOT_DIR}/out/_next/static")"
 PORTFOLIO_URL="${PORTFOLIO_URL:-${PORTFOLIO_URL_DEFAULT}}"
