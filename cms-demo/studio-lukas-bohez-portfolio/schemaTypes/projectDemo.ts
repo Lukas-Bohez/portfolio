@@ -19,6 +19,12 @@ export const projectDemoType = defineType({
       validation: (rule) => rule.required().min(20),
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: [{ type: 'profileDemo' }],
+    }),
+    defineField({
       name: 'stack',
       title: 'Tech Stack',
       type: 'array',

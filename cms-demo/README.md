@@ -5,15 +5,16 @@ Route in de app: `/cms-demo/`.
 
 ## Fase 1 - Vooronderzoek
 
-| CMS | Type | Gratis tier | Next.js integratie | Pluspunten | Minpunten | Geschikt voor portfolio? |
-| --- | --- | --- | --- | --- | --- | --- |
-| Sanity | Headless SaaS | Ja | Zeer sterk (`@sanity/client`, GROQ, goede docs) | Flexibel schema, snel op te zetten, sterke developer experience | Querytaal (GROQ) is nieuw voor beginners | Ja, zeer geschikt voor projecten/blog/about |
-| Contentful | Headless SaaS | Ja (limieten) | Sterk (REST/GraphQL, officiële guides) | Gebruiksvriendelijke UI, volwassen platform | Gratis tier kan sneller limiteren | Ja, goed voor stabiele contentmodellen |
-| Strapi | Headless self-hosted (ook cloud) | Ja (self-hosted) | Goed (REST/GraphQL) | Volledige controle, eigen hosting, uitbreidbaar | Meer beheerwerk (hosting, updates, security) | Ja, vooral als je alles zelf wil beheren |
+| CMS        | Type                             | Gratis tier      | Next.js integratie                              | Pluspunten                                                      | Minpunten                                    | Geschikt voor portfolio?                    |
+| ---------- | -------------------------------- | ---------------- | ----------------------------------------------- | --------------------------------------------------------------- | -------------------------------------------- | ------------------------------------------- |
+| Sanity     | Headless SaaS                    | Ja               | Zeer sterk (`@sanity/client`, GROQ, goede docs) | Flexibel schema, snel op te zetten, sterke developer experience | Querytaal (GROQ) is nieuw voor beginners     | Ja, zeer geschikt voor projecten/blog/about |
+| Contentful | Headless SaaS                    | Ja (limieten)    | Sterk (REST/GraphQL, officiële guides)          | Gebruiksvriendelijke UI, volwassen platform                     | Gratis tier kan sneller limiteren            | Ja, goed voor stabiele contentmodellen      |
+| Strapi     | Headless self-hosted (ook cloud) | Ja (self-hosted) | Goed (REST/GraphQL)                             | Volledige controle, eigen hosting, uitbreidbaar                 | Meer beheerwerk (hosting, updates, security) | Ja, vooral als je alles zelf wil beheren    |
 
 ### Gekozen CMS: Sanity
 
 Waarom:
+
 - Beste balans tussen snelheid van opstart en flexibiliteit.
 - Erg goede match met Next.js App Router en Server Components.
 - Gratis tier is ruim genoeg voor een portfolio.
@@ -21,6 +22,7 @@ Waarom:
 ## Fase 2 - Proof of Concept
 
 Wat werkt in deze PoC:
+
 - Minstens 1 pagina haalt content op uit CMS: `/cms-demo/`.
 - Content kan in Sanity aangepast worden zonder codewijziging.
 - App draait lokaal met `npm run dev`.
@@ -82,11 +84,13 @@ npm run dev
 ```
 
 Daarna in browser:
+
 - `http://localhost:3333`
 
 ## Voorbeeld contentmodel (Sanity)
 
 Gebruik bv. `projectDemo` met velden:
+
 - `title` (string)
 - `summary` (text)
 - `stack` (array van strings)
@@ -94,18 +98,21 @@ Gebruik bv. `projectDemo` met velden:
 - `demoUrl` (url)
 
 En een `profileDemo` document met:
+
 - `title` (string)
 - `bio` (text)
 
 ## Screenshots / previews
 
 Deze repo bevat gegenereerde preview-afbeeldingen:
+
 - `public/cms-demo/cms-pipeline-preview.svg`
 - `public/cms-demo/sanity-dashboard-preview.svg`
 - `public/cms-demo/ai-workspace-preview.svg`
 - `public/cms-demo/ai-roadmap-preview.svg`
 
 Cloudinary-hosted varianten zijn geupload naar:
+
 - `https://res.cloudinary.com/dmefzpaea/image/upload/v1776524472/portfolio/cms-demo/ai-workspace-preview.svg`
 - `https://res.cloudinary.com/dmefzpaea/image/upload/v1776524475/portfolio/cms-demo/ai-roadmap-preview.svg`
 

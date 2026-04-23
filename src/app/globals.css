@@ -1,29 +1,26 @@
 @import 'tailwindcss';
 
-
-
-
 :root {
-  --bg:       #f5f5f3;
-  --bg-2:     #ffffff;
-  --bg-3:     #ebebea;
-  --line:     rgba(0,0,0,0.07);
-  --line-mid: rgba(0,0,0,0.14);
-  --accent:   #009957;
-  --text:     #1a1c1e;
-  --text-2:   #5a6068;
-  --text-3:   #9da3a9;
+  --bg: #f5f5f3;
+  --bg-2: #ffffff;
+  --bg-3: #ebebea;
+  --line: rgba(0, 0, 0, 0.07);
+  --line-mid: rgba(0, 0, 0, 0.14);
+  --accent: #009957;
+  --text: #1a1c1e;
+  --text-2: #5a6068;
+  --text-3: #9da3a9;
 }
 .dark {
-  --bg:       #0d0f10;
-  --bg-2:     #141618;
-  --bg-3:     #1c1f22;
-  --line:     rgba(255,255,255,0.07);
-  --line-mid: rgba(255,255,255,0.14);
-  --accent:   #2563eb;
-  --text:     #e8eaec;
-  --text-2:   #8d9399;
-  --text-3:   #565d63;
+  --bg: #0d0f10;
+  --bg-2: #141618;
+  --bg-3: #1c1f22;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-mid: rgba(255, 255, 255, 0.14);
+  --accent: #2563eb;
+  --text: #e8eaec;
+  --text-2: #8d9399;
+  --text-3: #565d63;
 }
 
 @theme inline {
@@ -41,25 +38,59 @@ body {
 
 /* Shared palette utility classes */
 
-.text-primary { color: var(--accent); }
-.text-secondary { color: var(--text-2); }
-.text-muted { color: var(--text-2); }
-.text-default { color: var(--text); }
-.text-contrast { color: var(--text); }
+.text-primary {
+  color: var(--accent);
+}
+.text-secondary {
+  color: var(--text-2);
+}
+.text-muted {
+  color: var(--text-2);
+}
+.text-default {
+  color: var(--text);
+}
+.text-contrast {
+  color: var(--text);
+}
 
-.bg-primary { background-color: var(--accent); }
-.bg-primary-2 { background-color: var(--bg-2); }
-.bg-secondary { background-color: var(--bg-3); }
-.bg-surface { background-color: var(--bg-2); }
-.bg-body { background-color: var(--bg); }
+.bg-primary {
+  background-color: var(--accent);
+}
+.bg-primary-2 {
+  background-color: var(--bg-2);
+}
+.bg-secondary {
+  background-color: var(--bg-3);
+}
+.bg-surface {
+  background-color: var(--bg-2);
+}
+.bg-body {
+  background-color: var(--bg);
+}
 
-.border-surface { border-color: var(--line); }
-.border-accent { border-color: var(--accent); }
+.border-surface {
+  border-color: var(--line);
+}
+.border-accent {
+  border-color: var(--accent);
+}
 
-.btn-primary { background-color: var(--accent); color: #fff; }
-.btn-primary:hover { background-color: #1d4ed8; }
-.btn-secondary { background-color: var(--bg-3); color: var(--text); }
-.btn-secondary:hover { background-color: #f59e0b; }
+.btn-primary {
+  background-color: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+.btn-secondary {
+  background-color: var(--bg-3);
+  color: var(--text);
+}
+.btn-secondary:hover {
+  background-color: #f59e0b;
+}
 
 html {
   scroll-behavior: smooth;
@@ -99,37 +130,72 @@ body {
 }
 
 @keyframes floatOrb {
-  0% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(0, -18px, 0) scale(1.08); }
-  100% { transform: translate3d(0, 0, 0) scale(1); }
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 @keyframes gridPulse {
-  0% { opacity: 0.14; transform: translateY(0); }
-  50% { opacity: 0.28; transform: translateY(-4px); }
-  100% { opacity: 0.14; transform: translateY(0); }
+  0% {
+    opacity: 0.14;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.28;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 0.14;
+    transform: translateY(0);
+  }
 }
 
 @keyframes gradientSweep {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes marqueeSlide {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes cmsGalleryDrift {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes cmsGalleryGlow {
-  0% { opacity: 0.3; }
-  50% { opacity: 0.6; }
-  100% { opacity: 0.3; }
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.3;
+  }
 }
 
 .hero-orb {
@@ -208,7 +274,10 @@ body {
   padding: 0.32rem 0.82rem;
   font-size: 0.85rem;
   font-weight: 700;
-  transition: transform 0.14s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.14s ease, border-color 0.14s ease;
+  transition:
+    transform 0.14s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.14s ease,
+    border-color 0.14s ease;
 }
 
 .rail-control-btn:hover {
@@ -246,7 +315,9 @@ body {
 [data-reveal] {
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.14s ease-out, transform 0.16s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 0.14s ease-out,
+    transform 0.16s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -269,8 +340,16 @@ body {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 14% 14%, color-mix(in oklab, var(--accent), white 36%) 0%, transparent 44%),
-    radial-gradient(circle at 88% 86%, color-mix(in oklab, var(--accent), white 20%) 0%, transparent 42%);
+    radial-gradient(
+      circle at 14% 14%,
+      color-mix(in oklab, var(--accent), white 36%) 0%,
+      transparent 44%
+    ),
+    radial-gradient(
+      circle at 88% 86%,
+      color-mix(in oklab, var(--accent), white 20%) 0%,
+      transparent 42%
+    );
   opacity: 0.34;
   animation: cmsGalleryGlow 8s ease-in-out infinite;
 }
@@ -302,7 +381,9 @@ body {
   animation-play-state: paused;
   opacity: 0;
   transform: translate3d(0, 12px, 0);
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
   will-change: transform;
 }
 
@@ -342,7 +423,9 @@ body {
   aspect-ratio: 5 / 3;
   object-fit: cover;
   transform: scale(1.01);
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s ease;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s ease;
 }
 
 .cms-gallery-card:hover .cms-gallery-image {

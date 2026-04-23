@@ -1,6 +1,5 @@
 'use client';
 
-
 import Image from 'next/image';
 import Script from 'next/script';
 import { motion } from 'framer-motion';
@@ -15,13 +14,6 @@ declare global {
   }
 }
 
-
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 },
-};
-
 type SectionProps = {
   id?: string;
   title: string;
@@ -31,37 +23,28 @@ type SectionProps = {
 
 function Section({ id, title, subtitle, children }: SectionProps) {
   return (
-    <motion.section
+    <section
       id={id}
       className="mb-10 scroll-mt-24 sm:mb-12 sm:scroll-mt-28 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.03 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
-      variants={sectionVariants}
     >
       <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight">{title}</h2>
-        {subtitle && <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted leading-relaxed">{subtitle}</p>}
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight">
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted leading-relaxed">{subtitle}</p>
+        )}
       </div>
       {children}
-    </motion.section>
+    </section>
   );
 }
 
-export function Navbar({
-  onThemeToggle,
-  isDark,
-  onScrollTo,
-}: {
-  onThemeToggle: () => void;
-  isDark: boolean;
-  onScrollTo: (id: string) => void;
-}) {
+export function Navbar() {
   const navItems = [
-    { label: 'Projects', id: 'projects' },
-    { label: 'What I Do', id: 'about' },
-    { label: 'Contact', id: 'contact' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'What I Do', href: '#about' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -70,58 +53,54 @@ export function Navbar({
         type="button"
         className="flex min-w-0 items-center gap-2 text-base sm:text-xl font-black tracking-tight transition duration-200 hover:opacity-85"
         title="N = Nexus logo (focused systems engineering identity)"
-        onClick={() => onScrollTo('hero')}
+        onClick={() => {
+          const element = document.getElementById('hero');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }}
       >
         <span className="relative h-8 w-8 overflow-hidden rounded-full border border-surface bg-secondary shadow-sm sm:h-9 sm:w-9">
           <Image
             src={profilePhoto}
-            alt="Portrait of Oroka Conner"
+            alt="Portrait of Lukas Bohez"
             fill
             sizes="36px"
             className="object-cover object-[50%_18%] scale-[1.35]"
           />
         </span>
-        <span className="hidden sm:inline">Oroka Conner</span>
+        <span className="hidden sm:inline">Lukas Bohez</span>
       </button>
       <div className="flex items-center gap-1.5 sm:gap-3">
         {navItems.map((item) => (
-          <motion.button
-            key={item.id}
-            onClick={() => onScrollTo(item.id)}
+          <a
+            key={item.label}
+            href={item.href}
             className="rounded-full px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             aria-label={`Scroll to ${item.label}`}
-            whileHover={{ y: -1, scale: 1.02 }}
-            whileTap={{ scale: 0.96 }}
           >
             {item.label}
-          </motion.button>
+          </a>
         ))}
-        <motion.button
-          onClick={() => {
-            window.location.href = 'cms-demo/';
-          }}
+        <a
+          href="cms-demo/"
           className="rounded-full border border-blue-400/60 px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-blue-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
           aria-label="Open CMS demo"
-          whileHover={{ y: -1, scale: 1.02 }}
-          whileTap={{ scale: 0.96 }}
         >
           CMS Demo
-        </motion.button>
+        </a>
         <ThemeToggle />
       </div>
     </nav>
   );
 }
 
-export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () => void; isDark: boolean }) {
+export function Hero() {
   return (
-    <motion.section
+    <section
       id="hero"
       data-hero=""
       className="relative mb-8 sm:mb-10 overflow-hidden rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-12 shadow-xl backdrop-blur text-default"
-      initial={{ opacity: 0, y: -16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.38, ease: 'easeOut' }}
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="hero-orb hero-orb-one" />
@@ -130,42 +109,44 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
       </div>
       <div className="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
         <div className="max-w-2xl">
-          <p className="uppercase tracking-[0.12em] sm:tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-xs sm:text-base">Built to ship and stay usable</p>
-          <h1 className="mt-2 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">Oroka Conner</h1>
+          <p className="uppercase tracking-[0.12em] sm:tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-xs sm:text-base">
+            Built to ship and stay usable
+          </p>
+          <h1 className="mt-2 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">
+            Lukas Bohez
+          </h1>
           <p className="mt-4 text-base sm:text-xl text-default leading-relaxed">
-            I build full-stack Python and TypeScript apps that are straightforward to ship, stable to run, and easy to hand off.
+            I build full-stack Python and TypeScript apps that are straightforward to ship, stable
+            to run, and easy to hand off.
           </p>
           <p className="mt-4 inline-flex rounded-full border border-blue-400 dark:border-blue-200 bg-blue-400/15 dark:bg-blue-400/20 px-3.5 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold text-contrast">
             Actively interviewing for full-stack web developer roles
           </p>
           <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
-            I care about backend architecture, clear UX, and deployments that hold up in the real world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.1.1, a CMS demo with Sanity + Cloudinary, and the Lofi browser extension.
+            I care about backend architecture, clear UX, and deployments that hold up in the real
+            world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.2.3, a CMS
+            demo with Sanity + Cloudinary, and the Lofi browser extension.
           </p>
 
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
-            <button
-              onClick={onScrollToProjects}
+            <a
+              href="#projects"
               className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               View featured work
-            </button>
-            <button
-              onClick={() => {
-                const elem = document.getElementById('contact');
-                if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }}
+            </a>
+            <a
+              href="#contact"
               className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               Get in touch
-            </button>
-            <button
-              onClick={() => {
-                window.location.href = 'cms-demo/';
-              }}
+            </a>
+            <a
+              href="cms-demo/"
               className="rounded-full border-2 border-emerald-400/80 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-emerald-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               Go to CMS demo
-            </button>
+            </a>
           </div>
         </div>
         <div className="flex justify-center lg:justify-end">
@@ -177,7 +158,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
             >
               <Image
                 src={profilePhoto}
-                alt="Portrait of Oroka Conner"
+                alt="Portrait of Lukas Bohez"
                 fill
                 priority
                 loading="eager"
@@ -194,7 +175,7 @@ export function Hero({ onScrollToProjects, isDark }: { onScrollToProjects: () =>
           )}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
 
@@ -294,15 +275,40 @@ export function RecruiterWowStrip() {
   };
 
   return (
-    <section className="mb-10 sm:mb-12 overflow-hidden rounded-3xl border border-surface bg-surface p-4 sm:p-6 shadow-lg" data-reveal="" data-reveal-order={0}>
+    <section
+      className="mb-10 sm:mb-12 overflow-hidden rounded-3xl border border-surface bg-surface p-4 sm:p-6 shadow-lg"
+      data-reveal=""
+      data-reveal-order={0}
+    >
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
-        <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-primary">Technical Arsenal</p>
+        <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-primary">
+          Technical Arsenal
+        </p>
         <div className="flex items-center gap-2">
-          <button type="button" className="rail-control-btn" onClick={() => stepBy('prev')} aria-label="Scroll skills left">◀</button>
-          <button type="button" className="rail-control-btn" onClick={() => setIsPaused((prev) => !prev)} aria-label={isPaused ? 'Resume auto scrolling' : 'Pause auto scrolling'}>
+          <button
+            type="button"
+            className="rail-control-btn"
+            onClick={() => stepBy('prev')}
+            aria-label="Scroll skills left"
+          >
+            ◀
+          </button>
+          <button
+            type="button"
+            className="rail-control-btn"
+            onClick={() => setIsPaused((prev) => !prev)}
+            aria-label={isPaused ? 'Resume auto scrolling' : 'Pause auto scrolling'}
+          >
             {isPaused ? 'Play' : 'Pause'}
           </button>
-          <button type="button" className="rail-control-btn" onClick={() => stepBy('next')} aria-label="Scroll skills right">▶</button>
+          <button
+            type="button"
+            className="rail-control-btn"
+            onClick={() => stepBy('next')}
+            aria-label="Scroll skills right"
+          >
+            ▶
+          </button>
         </div>
       </div>
       <div
@@ -354,7 +360,11 @@ export function Stats() {
   ];
 
   return (
-    <Section id="what-i-do" title="What I Do" subtitle="I keep the work practical, readable, and easy to ship">
+    <Section
+      id="what-i-do"
+      title="What I Do"
+      subtitle="I keep the work practical, readable, and easy to ship"
+    >
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
         {metrics.map((metric, index) => (
           <motion.article
@@ -365,8 +375,12 @@ export function Stats() {
             whileHover={{ y: -2, scale: 1.003 }}
             transition={{ duration: 0.16, ease: 'easeOut' }}
           >
-            <p className="text-sm sm:text-base font-semibold text-primary uppercase tracking-[0.12em]">{metric.label}</p>
-            <p className="mt-2.5 sm:mt-3 text-base sm:text-lg text-default leading-relaxed">{metric.value}</p>
+            <p className="text-sm sm:text-base font-semibold text-primary uppercase tracking-[0.12em]">
+              {metric.label}
+            </p>
+            <p className="mt-2.5 sm:mt-3 text-base sm:text-lg text-default leading-relaxed">
+              {metric.value}
+            </p>
           </motion.article>
         ))}
       </div>
@@ -374,7 +388,7 @@ export function Stats() {
   );
 }
 
-export function AboutAndSkills({ isDark }: { isDark: boolean }) {
+export function AboutAndSkills() {
   const principles = [
     {
       title: 'Built for real use',
@@ -395,7 +409,11 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
   ];
 
   return (
-    <Section id="about" title="How I Work" subtitle="The habits that keep projects moving without getting messy">
+    <Section
+      id="about"
+      title="How I Work"
+      subtitle="The habits that keep projects moving without getting messy"
+    >
       <div className="grid gap-5 md:grid-cols-2">
         {principles.map((principle, index) => (
           <motion.article
@@ -415,7 +433,7 @@ export function AboutAndSkills({ isDark }: { isDark: boolean }) {
   );
 }
 
-export function FeaturedProjects({ isDark }: { isDark: boolean }) {
+export function FeaturedProjects() {
   const projects = [
     {
       name: 'Quiz The Spire',
@@ -438,19 +456,20 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. v10.1.1 delivers a major GUI overhaul with cleaner overlay controls, responsive toolbars, and improved artwork presentation. 6 release assets are available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
-      url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/tag/v10.1.1',
-      downloadUrl: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/download/v10.1.1/ConvertTheSpireReborn-windows-x64.zip',
+        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. v10.2.3 improves crash resilience for long-running sessions while keeping BitPlayer integrated. 8 release assets are available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
+      url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/tag/v10.2.3',
+      downloadUrl:
+        'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/download/v10.2.3/ConvertTheSpireReborn-windows-x64.zip',
       downloadLabel: 'Download Windows ZIP',
-      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', '6 release assets'],
+      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', '8 release assets'],
       color: 'from-violet-500 to-purple-500',
     },
     {
       name: 'BitPlayer: Torrent & Media',
       description:
-        'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.1.1. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
+        'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.2.3. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
       url: 'https://quizthespire.com/pages/vault/',
-      tech: ['Integrated into Convert v10.1.1', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
+      tech: ['Integrated into Convert v10.2.3', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
       color: 'from-emerald-500 to-teal-500',
     },
     {
@@ -480,16 +499,23 @@ export function FeaturedProjects({ isDark }: { isDark: boolean }) {
             style={{ transformStyle: 'preserve-3d' }}
           >
             <div className="mb-4 flex items-center gap-3">
-              <div className={`h-3 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-90 transition hover:opacity-100 gradient-sweep`} />
+              <div
+                className={`h-3 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-90 transition hover:opacity-100 gradient-sweep`}
+              />
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-surface bg-surface text-xs font-black text-primary shadow-sm">
                 {project.name.replace(/[^A-Z]/g, '').slice(0, 1) || project.name.charAt(0)}
               </span>
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-primary">{project.name}</h3>
-            <p className="mt-3 text-base sm:text-lg text-default leading-relaxed">{project.description}</p>
+            <p className="mt-3 text-base sm:text-lg text-default leading-relaxed">
+              {project.description}
+            </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {project.tech.map((item) => (
-                <span key={`${project.name}-${item}`} className="rounded-full border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-150 md:hover:shadow-sm">
+                <span
+                  key={`${project.name}-${item}`}
+                  className="rounded-full border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-150 md:hover:shadow-sm"
+                >
                   {item}
                 </span>
               ))}
@@ -542,7 +568,11 @@ export function MonetizationShowcase() {
   }, []);
 
   return (
-    <Section id="monetization" title="Monetization & Ads" subtitle="A controlled, non-obtrusive ad integration showcase from Quiz The Spire">
+    <Section
+      id="monetization"
+      title="Monetization & Ads"
+      subtitle="A controlled, non-obtrusive ad integration showcase from Quiz The Spire"
+    >
       <Script
         id="portfolio-adsense"
         strategy="afterInteractive"
@@ -553,8 +583,12 @@ export function MonetizationShowcase() {
 
       <div className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md">
         <div className="mb-4 flex items-center justify-between gap-3">
-          <p className="text-sm font-bold uppercase tracking-[0.14em] text-primary">Sponsored placement demo</p>
-          <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-default">Non-obtrusive</span>
+          <p className="text-sm font-bold uppercase tracking-[0.14em] text-primary">
+            Sponsored placement demo
+          </p>
+          <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-default">
+            Non-obtrusive
+          </span>
         </div>
 
         <ins
@@ -595,7 +629,11 @@ export function HumorSection() {
   ];
 
   return (
-    <Section id="philosophy" title="How I Think About Building" subtitle="A few rules I actually try to follow">
+    <Section
+      id="philosophy"
+      title="How I Think About Building"
+      subtitle="A few rules I actually try to follow"
+    >
       <div className="grid gap-5 md:grid-cols-3">
         {stories.map((story, index) => (
           <motion.article
@@ -615,7 +653,7 @@ export function HumorSection() {
   );
 }
 
-export function ContactSection({ isDark }: { isDark: boolean }) {
+export function ContactSection() {
   return (
     <Section
       id="contact"
@@ -634,7 +672,9 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">Email</span>
-          <span className="mt-3 text-base text-default block leading-relaxed">Reach out for contract and full-time opportunities.</span>
+          <span className="mt-3 text-base text-default block leading-relaxed">
+            Reach out for contract and full-time opportunities.
+          </span>
         </motion.a>
         <motion.a
           href="https://github.com/Lukas-Bohez"
@@ -647,7 +687,9 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">GitHub</span>
-          <span className="mt-3 text-base text-default block leading-relaxed">Open source work and active contributions.</span>
+          <span className="mt-3 text-base text-default block leading-relaxed">
+            Open source work and active contributions.
+          </span>
         </motion.a>
         <motion.a
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
@@ -660,7 +702,11 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
           transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">LinkedIn</span>
-          <span className="mt-3 text-base text-default block leading-relaxed">Full-stack web developer roles,<br />open to opportunities.</span>
+          <span className="mt-3 text-base text-default block leading-relaxed">
+            Full-stack web developer roles,
+            <br />
+            open to opportunities.
+          </span>
         </motion.a>
       </div>
     </Section>
@@ -670,22 +716,44 @@ export function ContactSection({ isDark }: { isDark: boolean }) {
 export function Footer() {
   return (
     <footer className="my-8 sm:my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-5 sm:p-8 text-center text-base sm:text-lg text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70">
-      <span className="relative inline-flex h-9 w-9 overflow-hidden rounded-full border border-surface bg-secondary align-middle shadow-sm" title="Portrait of Oroka Conner">
+      <span
+        className="relative inline-flex h-9 w-9 overflow-hidden rounded-full border border-surface bg-secondary align-middle shadow-sm"
+        title="Portrait of Lukas Bohez"
+      >
         <Image
           src={profilePhoto}
-          alt="Portrait of Oroka Conner"
+          alt="Portrait of Lukas Bohez"
           fill
           sizes="36px"
           className="object-cover object-[50%_18%] scale-[1.35]"
         />
       </span>
-      <span className="ml-2 font-bold">Oroka Conner</span>
+      <span className="ml-2 font-bold">Lukas Bohez</span>
       <div className="mt-4 flex flex-wrap justify-center gap-4">
-        <a href="mailto:lukasbohez@gmail.com" className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline">Email</a>
+        <a
+          href="mailto:lukasbohez@gmail.com"
+          className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline"
+        >
+          Email
+        </a>
         <span className="text-default">·</span>
-        <a href="https://github.com/Lukas-Bohez" target="_blank" rel="noopener noreferrer" className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline">GitHub</a>
+        <a
+          href="https://github.com/Lukas-Bohez"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline"
+        >
+          GitHub
+        </a>
         <span className="text-default">·</span>
-        <a href="https://www.linkedin.com/in/lukas-bohez-3ba566271/" target="_blank" rel="noopener noreferrer" className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline">LinkedIn</a>
+        <a
+          href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline"
+        >
+          LinkedIn
+        </a>
       </div>
     </footer>
   );
