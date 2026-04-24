@@ -37,7 +37,7 @@ export function StatsStatic() {
             key={metric.label}
             className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-5 sm:p-7 shadow-md backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70 md:hover:-translate-y-0.5"
           >
-            <p className="text-sm sm:text-base font-semibold text-primary uppercase tracking-[0.12em]">
+            <p className="text-sm sm:text-base font-semibold text-primary dark:text-contrast uppercase tracking-[0.12em]">
               {metric.label}
             </p>
             <p className="mt-2.5 sm:mt-3 text-base sm:text-lg text-default leading-relaxed">
