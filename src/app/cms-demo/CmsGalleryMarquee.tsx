@@ -23,7 +23,7 @@ export function CmsGalleryMarquee({
   ariaLabel,
   phaseOffsetSeconds = 0,
 }: CmsGalleryMarqueeProps) {
-  const duplicatedImages = images;
+  const duplicatedImages = [...images];
 
   return (
     <div
@@ -33,6 +33,7 @@ export function CmsGalleryMarquee({
       <div
         className={`cms-gallery-track ${compact ? 'cms-gallery-track--compact' : ''}`}
         style={{
+          ['--cms-gallery-duration' as never]: compact ? '58s' : '68s',
           ['--cms-gallery-delay' as never]: `${-phaseOffsetSeconds}s`,
         }}
       >

@@ -96,6 +96,18 @@ export function TopHero() {
             </a>
           </div>
         </div>
+        <div className="hidden lg:flex lg:items-center lg:justify-center">
+          <div className="relative h-52 w-52 xl:h-64 xl:w-64 shrink-0 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl">
+            <Image
+              src={profilePhoto}
+              alt="Lukas Bohez"
+              fill
+              priority
+              sizes="(max-width: 1024px) 0px, 256px"
+              className="object-cover object-[50%_20%]"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

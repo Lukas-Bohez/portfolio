@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 
 export default function BackToTop() {
@@ -8,73 +9,54 @@ export default function BackToTop() {
   useEffect(() => {
     const onScroll = () => {
       const scrollY = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const percent = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
-      setProgress(percent);
-      setVisible(percent > 0.12);
+      const maxScroll =
+        document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
+      setProgress(pct);
+      setVisible(scrollY > 100);
     };
+
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const circumference = 2 * Math.PI * 18;
-  const offset = circumference * (1 - progress);
-
   return (
     <button
+      id="back-to-top"
+      type="button"
       aria-label="Back to top"
       onClick={handleClick}
+      className="back-to-top"
       style={{
-        pointerEvents: visible ? 'auto' : 'none',
         opacity: visible ? 1 : 0,
-        transform: visible ? 'scale(1)' : 'translateY(8px) scale(0.92)',
-        transition: 'opacity 0.16s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1)',
-        position: 'fixed',
-        bottom: 'max(14px, env(safe-area-inset-bottom))',
-        right: 'max(12px, env(safe-area-inset-right))',
-        zIndex: 50,
-        background: 'var(--bg-2)',
-        border: 'none',
-        borderRadius: '50%',
-        width: 'clamp(46px, 11vw, 56px)',
-        height: 'clamp(46px, 11vw, 56px)',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.12)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        pointerEvents: visible ? 'auto' : 'none',
+        transform: visible ? 'translateY(0) scale(1)' : 'translateY(12px) scale(0.96)',
       }}
     >
-      <svg width="44" height="44" viewBox="0 0 44 44">
-        <circle cx="22" cy="22" r="18" fill="none" stroke="var(--line)" strokeWidth="4" />
+      <svg className="back-to-top__ring" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+        <circle className="back-to-top__ring-base" cx="18" cy="18" r="16" />
         <circle
-          cx="22"
-          cy="22"
-          r="18"
-          fill="none"
-          stroke="var(--accent)"
-          strokeWidth="4"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          style={{ transition: 'stroke-dashoffset 0.2s linear' }}
+          className="back-to-top__ring-progress"
+          cx="18"
+          cy="18"
+          r="16"
+          strokeDasharray="100"
+          strokeDashoffset={100 - progress * 100}
+          style={{ transition: 'stroke-dashoffset 0.18s linear' }}
         />
-        <polyline
-          points="22,13 22,27"
-          stroke="var(--accent)"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <polyline
-          points="17,18 22,13 27,18"
-          stroke="var(--accent)"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-        />
+      </svg>
+      <svg className="back-to-top__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
       </svg>
     </button>
   );

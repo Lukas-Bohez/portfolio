@@ -412,7 +412,7 @@ function renderCmsDemoPage(projects: CmsProject[], profile: CmsProfile, banner?:
           <CmsGalleryMarquee
             images={cloudGallerySecondary}
             compact
-            phaseOffsetSeconds={24}
+            phaseOffsetSeconds={29}
             ariaLabel="Secondary scrolling cloud image gallery"
           />
         </div>

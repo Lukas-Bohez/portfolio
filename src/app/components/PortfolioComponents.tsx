@@ -152,7 +152,7 @@ export function Hero() {
         <div className="flex justify-center lg:justify-end">
           {profilePhoto ? (
             <motion.div
-              className="relative h-48 w-48 sm:h-64 sm:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] border border-surface bg-secondary shadow-xl"
+              className="relative h-48 w-48 sm:h-64 sm:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl"
               animate={{ y: [0, -6, 0], rotate: [0, 0.6, 0] }}
               transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
             >
