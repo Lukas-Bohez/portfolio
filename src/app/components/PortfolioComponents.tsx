@@ -415,18 +415,14 @@ export function AboutAndSkills() {
       subtitle="The habits that keep projects moving without getting messy"
     >
       <div className="grid gap-5 md:grid-cols-2">
-        {principles.map((principle, index) => (
-          <motion.article
+        {principles.map((principle) => (
+          <article
             key={principle.title}
             className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
-            data-reveal=""
-            data-reveal-order={index}
-            whileHover={{ y: -2, scale: 1.003 }}
-            transition={{ duration: 0.16, ease: 'easeOut' }}
           >
             <h3 className="text-lg sm:text-xl font-bold text-primary">{principle.title}</h3>
             <p className="mt-3 text-base leading-relaxed text-default">{principle.copy}</p>
-          </motion.article>
+          </article>
         ))}
       </div>
     </Section>

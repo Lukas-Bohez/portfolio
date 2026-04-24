@@ -1,12 +1,5 @@
-import {
-  AboutAndSkills,
-  ContactSection,
-  FeaturedProjects,
-  Footer,
-  HumorSection,
-  RecruiterWowStrip,
-} from './components/PortfolioComponents';
 import { Container } from './components/Container';
+import { DeferredHomepageSections } from './components/DeferredHomepageSections';
 import { TopHero, TopNavbar } from './components/TopShell';
 import { StatsStatic } from './components/StatsStatic';
 
@@ -18,15 +11,8 @@ export default function Home() {
       </Container>
       <Container className="space-y-12 py-4">
         <TopHero />
-        <RecruiterWowStrip />
         <StatsStatic />
-        <AboutAndSkills />
-        <FeaturedProjects />
-        <HumorSection />
-        <ContactSection />
-      </Container>
-      <Container className="pb-4">
-        <Footer />
+        <DeferredHomepageSections />
       </Container>
     </main>
   );
