@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
+import { ThemeToggle } from './ThemeToggle';
 
 export function TopNavbar() {
   const navItems = [
@@ -37,13 +39,21 @@ export function TopNavbar() {
             {item.label}
           </a>
         ))}
-        <a
-          href="cms-demo/"
+        <Link
+          href="/cms-demo/"
           className="rounded-full border border-blue-400/60 px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-blue-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
-          aria-label="Open CMS demo"
+          aria-label="Open CMS demo page"
         >
           CMS Demo
+        </Link>
+        <a
+          href="https://quizthespire.com/"
+          className="rounded-full border border-emerald-400/60 px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-emerald-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+          aria-label="Go back to Quiz The Spire"
+        >
+          Quiz The Spire
         </a>
+        <ThemeToggle />
       </div>
     </nav>
   );
@@ -88,12 +98,12 @@ export function TopHero() {
             >
               Get in touch
             </a>
-            <a
-              href="cms-demo/"
+            <Link
+              href="/cms-demo/"
               className="rounded-full border-2 border-emerald-400/80 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-emerald-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               Go to CMS demo
-            </a>
+            </Link>
           </div>
         </div>
         <div className="hidden lg:flex lg:items-center lg:justify-center">

@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 STAMP_FILE="${ROOT_DIR}/out/.last-update.txt"
-PORTFOLIO_URL_DEFAULT="https://quizthespire.com/portfolio/"
+PORTFOLIO_URL_DEFAULT="https://quizthespire.com/LukasBohez/"
 
 resolve_path() {
 	cd "$1" && pwd -P
@@ -56,7 +56,10 @@ cd "${ROOT_DIR}"
 if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
 	# Try to extract from Apache vhost config
 	if [[ -f "/etc/apache2/sites-enabled/quizthespire.com-le-ssl.conf" ]]; then
-		DETECTED=$(grep -oP "Alias /portfolio \K.*" /etc/apache2/sites-enabled/quizthespire.com-le-ssl.conf | head -1 | xargs)
+		DETECTED=$(grep -oP "Alias /LukasBohez/? \K.*" /etc/apache2/sites-enabled/quizthespire.com-le-ssl.conf | head -1 | xargs)
+		if [[ -z "${DETECTED}" ]]; then
+			DETECTED=$(grep -oP "Alias /portfolio/? \K.*" /etc/apache2/sites-enabled/quizthespire.com-le-ssl.conf | head -1 | xargs)
+		fi
 		if [[ -n "${DETECTED}" ]]; then
 			PORTFOLIO_DEPLOY_DIR="${DETECTED}"
 			echo "[update-portfolio] Auto-detected deploy directory from Apache: ${PORTFOLIO_DEPLOY_DIR}"
@@ -68,12 +71,12 @@ fi
 if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
 	echo "[update-portfolio] ERROR: PORTFOLIO_DEPLOY_DIR is not set and could not be auto-detected."
 	echo "[update-portfolio] Refusing to run because this can look successful locally while production stays stale."
-	echo "[update-portfolio] Example: PORTFOLIO_DEPLOY_DIR=/var/www/quizthespire.com/portfolio npm run update:portfolio"
+	echo "[update-portfolio] Example: PORTFOLIO_DEPLOY_DIR=/var/www/quizthespire.com/LukasBohez npm run update:portfolio"
 	exit 1
 fi
 
 echo "[update-portfolio] Building static export..."
-NEXT_BASE_PATH="${NEXT_BASE_PATH:-/portfolio}" npm run build
+NEXT_BASE_PATH="${NEXT_BASE_PATH:-/LukasBohez}" npm run build
 
 mkdir -p "${ROOT_DIR}/out"
 date -u +"%Y-%m-%dT%H:%M:%SZ" > "${STAMP_FILE}"
@@ -119,7 +122,7 @@ if [[ -n "${BUILD_ID}" ]] && command -v curl >/dev/null 2>&1; then
 		echo "[update-portfolio] Live verification passed."
 	else
 		echo "[update-portfolio] WARNING: Live page does not include build ${BUILD_ID}."
-		echo "[update-portfolio] Check Apache mapping for /portfolio and any CDN/reverse-proxy cache."
+		echo "[update-portfolio] Check Apache mapping for /LukasBohez and any CDN/reverse-proxy cache."
 		exit 2
 	fi
 fi

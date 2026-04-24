@@ -1,4 +1,6 @@
 import { CmsGalleryMarquee } from './CmsGalleryMarquee';
+import Link from 'next/link';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 type CmsAuthor = {
   name: string;
@@ -217,6 +219,27 @@ async function getCmsProfile(): Promise<CmsProfile> {
 function renderCmsDemoPage(projects: CmsProject[], profile: CmsProfile, banner?: CmsDemoBanner) {
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+      <nav className="sticky top-0 z-40 mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-surface bg-surface/95 p-3 shadow-lg backdrop-blur">
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">CMS Demo</p>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            href="/"
+            className="rounded-full border border-blue-400/60 px-3 py-1.5 text-sm font-semibold text-default transition hover:bg-blue-400/10"
+            aria-label="Go back to portfolio home"
+          >
+            Back to Portfolio
+          </Link>
+          <a
+            href="https://quizthespire.com/"
+            className="rounded-full border border-emerald-400/60 px-3 py-1.5 text-sm font-semibold text-default transition hover:bg-emerald-400/10"
+            aria-label="Go back to Quiz The Spire"
+          >
+            Back to Quiz The Spire
+          </a>
+          <ThemeToggle />
+        </div>
+      </nav>
+
       {banner ? (
         <section
           className="mb-8 rounded-3xl border border-amber-400/40 bg-amber-400/10 p-5 shadow-md"

@@ -1,12 +1,12 @@
 # Deployment
 
-This portfolio is built as a static export and published behind Apache at `https://quizthespire.com/portfolio/`.
+This portfolio is built as a static export and published behind Apache at `https://quizthespire.com/LukasBohez/`.
 
 ## Source Of Truth
 
 - App source: `/home/student/Project/Portfolio`
 - Export and publish workflow: `/home/student/Project/project-one`
-- Live serving path: `/var/www/quizthespire.com/portfolio`
+- Live serving path: `/var/www/quizthespire.com/LukasBohez`
 
 ## Publish Flow
 
