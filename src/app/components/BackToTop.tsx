@@ -1,10 +1,26 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
+  const hasFontAwesome = useMemo(() => {
+    if (typeof document === 'undefined') {
+      return false;
+    }
+
+    return Array.from(document.styleSheets).some((sheet) => {
+      try {
+        return (
+          (sheet.href || '').includes('font-awesome') || (sheet.href || '').includes('fontawesome')
+        );
+      } catch {
+        return false;
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -55,9 +71,18 @@ export default function BackToTop() {
           style={{ transition: 'stroke-dashoffset 0.18s linear' }}
         />
       </svg>
-      <svg className="back-to-top__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
-      </svg>
+      {hasFontAwesome ? (
+        <i className="fa-solid fa-chevron-up back-to-top__arrow" aria-hidden="true" />
+      ) : (
+        <svg
+          className="back-to-top__arrow"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+        </svg>
+      )}
     </button>
   );
 }
