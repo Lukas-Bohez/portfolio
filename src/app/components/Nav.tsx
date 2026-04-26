@@ -13,19 +13,19 @@ const navItems = [
 const baseLinkClass =
   'inline-flex items-center justify-center rounded-full text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-surface/50 md:hover:text-primary';
 
-const plainLinkClass = `${baseLinkClass} px-2 py-1.5 text-[10px] sm:px-3 sm:py-2 sm:text-sm`;
+const plainLinkClass = `${baseLinkClass} px-1.5 py-1 text-[11px] sm:px-3 sm:py-2 sm:text-sm md:text-base`;
 
 const cmsLinkClass =
-  'inline-flex items-center justify-center rounded-full border border-blue-400/60 px-1.5 py-1 text-[10px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm';
+  'inline-flex items-center justify-center rounded-full border border-blue-400/60 px-2 py-1 text-[11px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm md:text-base';
 
 const qtsLinkClass =
-  'inline-flex items-center justify-center rounded-full border border-emerald-400/60 px-1.5 py-1 text-[10px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm';
+  'inline-flex items-center justify-center rounded-full border border-emerald-400/60 px-2 py-1 text-[11px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm md:text-base';
 
 function BrandLink() {
   return (
     <a
       href="#hero"
-      className="flex min-w-0 items-center gap-2 text-base font-black tracking-tight transition duration-200 hover:opacity-85 sm:text-xl"
+      className="flex min-w-0 items-center gap-2 text-base font-black tracking-tight transition duration-200 hover:opacity-85 sm:text-lg md:text-xl"
       title="Back to top"
       aria-label="Back to top"
     >
@@ -53,7 +53,7 @@ export function Nav() {
         <ThemeToggle />
       </div>
 
-      <div className="mt-2 grid min-h-[44px] grid-cols-5 items-center gap-1 sm:hidden">
+      <div className="mt-2 grid min-h-[44px] w-full grid-cols-5 items-center justify-around gap-0.5 sm:hidden">
         {navItems.map((item) => (
           <a
             key={item.label}
@@ -85,7 +85,7 @@ export function Nav() {
             <a
               key={item.label}
               href={item.href}
-              className={`${baseLinkClass} min-h-11 px-3 py-2`}
+              className={`${baseLinkClass} min-h-11 px-3 py-2 text-[11px] sm:text-sm md:text-base`}
               aria-label={`Scroll to ${item.label}`}
             >
               {item.label}
@@ -93,14 +93,14 @@ export function Nav() {
           ))}
           <Link
             href="/cms-demo/"
-            className="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-400/60 px-3 py-2 text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-400/60 px-3 py-2 text-base text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary"
             aria-label="Open CMS demo page"
           >
             CMS Demo
           </Link>
           <a
             href="https://quizthespire.com/"
-            className="inline-flex min-h-11 items-center justify-center rounded-full border border-emerald-400/60 px-3 py-2 text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-emerald-400/60 px-3 py-2 text-base text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary"
             aria-label="Go back to Quiz The Spire"
           >
             Quiz The Spire

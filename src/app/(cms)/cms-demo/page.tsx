@@ -6,6 +6,7 @@ import { Badge } from '@/app/components/ui/Badge';
 import { Button } from '@/app/components/ui/Button';
 import { Card } from '@/app/components/ui/Card';
 import { Gallery, GalleryItem } from '@/app/components/ui/Gallery';
+import { ScreenshotLightbox } from '@/app/components/ui/ScreenshotLightbox';
 import { Section } from '@/app/components/ui/Section';
 import { SkeletonCard } from '@/app/components/ui/SkeletonCard';
 import { cloudinaryOptimized } from '@/lib/cloudinary';
@@ -344,22 +345,14 @@ function CmsGallerySection() {
       </div>
 
       <div className="mt-6">
-        <Gallery columns={3}>
-          {appGalleryImages.map((image) => (
-            <GalleryItem key={`cms-gallery-grid-${image.id}`} caption={image.alt}>
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-secondary">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </GalleryItem>
-          ))}
-        </Gallery>
+        <ScreenshotLightbox
+          images={appGalleryImages.map((image) => ({
+            id: image.id,
+            src: image.src,
+            alt: image.alt,
+            caption: image.alt,
+          }))}
+        />
       </div>
     </Card>
   );

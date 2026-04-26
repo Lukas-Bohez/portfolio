@@ -44,7 +44,7 @@ export function CmsGalleryMarquee({
               width={320}
               height={200}
               className="marquee-img"
-              loading={idx === 0 ? 'eager' : 'lazy'}
+              loading={idx < 3 ? 'eager' : 'lazy'}
               unoptimized
             />
           </div>
