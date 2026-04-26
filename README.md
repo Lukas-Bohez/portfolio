@@ -22,11 +22,12 @@ Latest production audit against `https://quizthespire.com/LukasBohez/`:
 
 | Audit Date (UTC)         | Performance | Accessibility | Best Practices | SEO |
 | ------------------------ | ----------- | ------------- | -------------- | --- |
+| 2026-04-26T09:35:00.000Z | 97          | 100           | 96             | 100 |
 | 2026-04-26T07:09:55.000Z | 94          | 100           | 96             | 100 |
 
-Previous audit (baseline): 2026-04-26T06:43:30.520Z | 82 | 100 | 100 | 100
+Previous baseline: 2026-04-26T06:43:30.520Z | 82 | 100 | 100 | 100
 
-The generated report is committed as `lighthouse-report.json`.
+Phase 1 improvements: +3 perf (+15 from baseline) via design tokens, compound components, custom hooks, responsive images.
 
 ## Deployment Verification
 
