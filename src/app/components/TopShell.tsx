@@ -38,7 +38,7 @@ export function TopNavbar() {
           <a
             key={item.label}
             href={item.href}
-            className="rounded-full px-3 py-2 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
+            className="inline-flex items-center justify-center rounded-full px-3 py-2 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
             aria-label={`Scroll to ${item.label}`}
           >
             {item.label}
@@ -46,14 +46,14 @@ export function TopNavbar() {
         ))}
         <Link
           href="/cms-demo/"
-          className="rounded-full border border-blue-400/60 px-3 py-2 text-default transition duration-200 md:hover:bg-blue-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
+          className="inline-flex items-center justify-center rounded-full border border-blue-400/60 px-3 py-2 text-default transition duration-200 md:hover:bg-blue-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
           aria-label="Open CMS demo page"
         >
           CMS Demo
         </Link>
         <a
           href="https://quizthespire.com/"
-          className="rounded-full border border-emerald-400/60 px-3 py-2 text-default transition duration-200 md:hover:bg-emerald-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
+          className="inline-flex items-center justify-center rounded-full border border-emerald-400/60 px-3 py-2 text-default transition duration-200 md:hover:bg-emerald-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
           aria-label="Go back to Quiz The Spire"
         >
           Quiz The Spire
