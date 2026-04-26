@@ -1,0 +1,112 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { ThemeToggle } from './ThemeToggle';
+import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
+
+const navItems = [
+  { label: 'Projects', href: '#projects' },
+  { label: 'What I Do', href: '#about' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const baseLinkClass =
+  'inline-flex items-center justify-center rounded-full text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-surface/50 md:hover:text-primary';
+
+const plainLinkClass = `${baseLinkClass} px-2 py-1.5 text-[10px] sm:px-3 sm:py-2 sm:text-sm`;
+
+const cmsLinkClass =
+  'inline-flex items-center justify-center rounded-full border border-blue-400/60 px-2 py-1.5 text-[10px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm';
+
+const qtsLinkClass =
+  'inline-flex items-center justify-center rounded-full border border-emerald-400/60 px-2 py-1.5 text-[10px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm';
+
+function BrandLink() {
+  return (
+    <a
+      href="#hero"
+      className="flex min-w-0 items-center gap-2 text-base font-black tracking-tight transition duration-200 hover:opacity-85 sm:text-xl"
+      title="Back to top"
+      aria-label="Back to top"
+    >
+      <span className="relative h-8 w-8 overflow-hidden rounded-full border border-surface bg-secondary shadow-sm sm:h-9 sm:w-9">
+        <Image
+          src={profilePhoto}
+          alt="Portrait of Lukas Bohez"
+          fill
+          sizes="36px"
+          priority
+          className="object-cover object-[50%_18%] scale-[1.35]"
+        />
+      </span>
+      <span className="text-sm font-bold sm:hidden">Lukas B.</span>
+      <span className="hidden sm:inline">Lukas Bohez</span>
+    </a>
+  );
+}
+
+export function Nav() {
+  return (
+    <nav className="sticky top-0 z-40 mb-6 w-full rounded-2xl border border-surface bg-surface/98 p-3.5 text-[11px] font-medium shadow-lg transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] sm:mb-8 sm:rounded-3xl sm:p-5 dark:bg-surface/95 md:hover:border-blue-400/50 md:hover:shadow-xl dark:md:hover:border-blue-300/50">
+      <div className="flex items-center justify-between gap-2 sm:hidden">
+        <BrandLink />
+        <ThemeToggle />
+      </div>
+
+      <div className="mt-2 grid min-h-[44px] grid-cols-5 items-center gap-1 sm:hidden">
+        {navItems.map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            className={plainLinkClass}
+            aria-label={`Scroll to ${item.label}`}
+          >
+            {item.label}
+          </a>
+        ))}
+        <Link href="/cms-demo/" className={cmsLinkClass} aria-label="Open CMS demo page">
+          CMS Demo
+        </Link>
+        <a
+          href="https://quizthespire.com/"
+          className={qtsLinkClass}
+          aria-label="Go back to Quiz The Spire"
+        >
+          <span className="sm:hidden">QTS</span>
+          <span className="hidden sm:inline">Quiz The Spire</span>
+        </a>
+      </div>
+
+      <div className="hidden items-center justify-between gap-4 sm:flex">
+        <BrandLink />
+        <div className="flex items-center gap-3">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className={`${baseLinkClass} min-h-11 px-3 py-2`}
+              aria-label={`Scroll to ${item.label}`}
+            >
+              {item.label}
+            </a>
+          ))}
+          <Link
+            href="/cms-demo/"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-400/60 px-3 py-2 text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary"
+            aria-label="Open CMS demo page"
+          >
+            CMS Demo
+          </Link>
+          <a
+            href="https://quizthespire.com/"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-emerald-400/60 px-3 py-2 text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary"
+            aria-label="Go back to Quiz The Spire"
+          >
+            Quiz The Spire
+          </a>
+          <ThemeToggle />
+        </div>
+      </div>
+    </nav>
+  );
+}
