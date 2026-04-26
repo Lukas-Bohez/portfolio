@@ -65,37 +65,37 @@ const fallbackSettings: CmsSettings = {
 const appGalleryImages: GalleryImage[] = [
   {
     id: 'gallery-search',
-    src: '/screenshots/fullSearchFunctionality.png',
+    src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/fullSearchFunctionality.png',
     alt: 'Search view with live results and queue actions',
   },
   {
     id: 'gallery-playlists',
-    src: '/screenshots/DownloadFullPlaylists.png',
+    src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/DownloadFullPlaylists.png',
     alt: 'Playlist download workflow for full sets of songs',
   },
   {
     id: 'gallery-quick-downloads',
-    src: '/screenshots/downloadNewSongsEassily.png',
+    src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/downloadNewSongsEassily.png',
     alt: 'Quick new-song downloads with active progress',
   },
   {
     id: 'gallery-settings',
-    src: '/screenshots/LotsOfSettingsForCustomization.png',
+    src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/LotsOfSettingsForCustomization.png',
     alt: 'Settings panel with extensive customization options',
   },
   {
     id: 'gallery-guide',
-    src: '/screenshots/fullGuideWithInfo.png',
+    src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/fullGuideWithInfo.png',
     alt: 'Built-in guide and product usage information',
   },
   {
     id: 'gallery-player',
-    src: '/screenshots/mediaPlayer.png',
+    src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/mediaPlayer.png',
     alt: 'Integrated media player with queue and controls',
   },
   {
     id: 'gallery-torrent',
-    src: '/screenshots/fullTorrentingFunctionality.png',
+    src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/fullTorrentingFunctionality.png',
     alt: 'Torrent workflow screen with legal use guidance',
   },
 ];
