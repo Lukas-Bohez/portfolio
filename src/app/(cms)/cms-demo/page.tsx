@@ -8,7 +8,7 @@ import { Card } from '@/app/components/ui/Card';
 import { Gallery, GalleryItem } from '@/app/components/ui/Gallery';
 import { Section } from '@/app/components/ui/Section';
 import { SkeletonCard } from '@/app/components/ui/SkeletonCard';
-import { cloudinaryOptimized, withCloudinaryTransform } from '@/lib/cloudinary';
+import { cloudinaryOptimized } from '@/lib/cloudinary';
 import { env } from '@/lib/env';
 import { sanityFetch } from '@/lib/sanity';
 
@@ -59,44 +59,50 @@ const fallbackProfile: CmsProfile = {
 
 const fallbackSettings: CmsSettings = {
   siteTitle: 'CMS Demo',
-  footerText: 'Powered by Next.js + Sanity + Cloudinary',
+  footerText: 'Powered by Next.js + Sanity',
 };
 
-const cloudGalleryImages: GalleryImage[] = [
+const appGalleryImages: GalleryImage[] = [
   {
-    id: 'gallery-1',
-    src: 'https://res.cloudinary.com/demo/image/upload/v1693596382/samples/landscapes/girl-urban-view.jpg',
-    alt: 'Cloud city skyline at dusk',
+    id: 'gallery-search',
+    src: '/screenshots/fullSearchFunctionality.png',
+    alt: 'Search view with live results and queue actions',
   },
   {
-    id: 'gallery-2',
-    src: 'https://res.cloudinary.com/demo/image/upload/v1693596382/samples/landscapes/architecture-signs.jpg',
-    alt: 'Colorful urban architecture signage',
+    id: 'gallery-playlists',
+    src: '/screenshots/DownloadFullPlaylists.png',
+    alt: 'Playlist download workflow for full sets of songs',
   },
   {
-    id: 'gallery-3',
-    src: 'https://res.cloudinary.com/demo/image/upload/v1693596382/samples/ecommerce/car-interior-design.jpg',
-    alt: 'Modern automotive interior closeup',
+    id: 'gallery-quick-downloads',
+    src: '/screenshots/downloadNewSongsEassily.png',
+    alt: 'Quick new-song downloads with active progress',
   },
   {
-    id: 'gallery-4',
-    src: 'https://res.cloudinary.com/demo/image/upload/v1693596382/samples/people/smiling-man.jpg',
-    alt: 'Portrait with cinematic lighting',
+    id: 'gallery-settings',
+    src: '/screenshots/LotsOfSettingsForCustomization.png',
+    alt: 'Settings panel with extensive customization options',
+  },
+  {
+    id: 'gallery-guide',
+    src: '/screenshots/fullGuideWithInfo.png',
+    alt: 'Built-in guide and product usage information',
+  },
+  {
+    id: 'gallery-player',
+    src: '/screenshots/mediaPlayer.png',
+    alt: 'Integrated media player with queue and controls',
+  },
+  {
+    id: 'gallery-torrent',
+    src: '/screenshots/fullTorrentingFunctionality.png',
+    alt: 'Torrent workflow screen with legal use guidance',
   },
 ];
 
-const cloudGalleryPrimary = cloudGalleryImages.map((image) => ({
-  ...image,
-  src: withCloudinaryTransform(image.src, 'f_auto,q_auto,w_900,h_540,c_fill,g_auto'),
-}));
+const appGalleryPrimary = appGalleryImages;
 
-const cloudGallerySecondary = cloudGalleryImages
-  .slice()
-  .reverse()
-  .map((image) => ({
-    ...image,
-    src: withCloudinaryTransform(image.src, 'f_auto,q_auto,w_900,h_540,c_fill,g_auto'),
-  }));
+const appGallerySecondary = appGalleryImages.slice().reverse();
 
 async function getSettings(): Promise<CmsSettings> {
   const query = `*[_type == "settings"][0]{
@@ -313,23 +319,49 @@ function CmsGallerySection() {
   return (
     <Card className="cms-cloud-gallery rounded-3xl sm:p-8">
       <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
-        Cloudinary Gallery
+        Product Screenshot Gallery
       </p>
       <h2 className="mt-3 text-2xl font-bold text-primary sm:text-3xl">
-        Cloud-loaded visual examples
+        Real screenshots from Convert The Spire Reborn
       </h2>
+      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-default">
+        The same production screenshots shown on the main product site, mirrored here for CMS and
+        content testing.
+      </p>
 
       <div className="mt-6">
-        <CmsGalleryMarquee images={cloudGalleryPrimary} ariaLabel="Scrolling cloud image gallery" />
+        <CmsGalleryMarquee
+          images={appGalleryPrimary}
+          ariaLabel="Primary scrolling product screenshot gallery"
+        />
       </div>
 
       <div className="mt-4">
         <CmsGalleryMarquee
-          images={cloudGallerySecondary}
+          images={appGallerySecondary}
           compact
           phaseOffsetSeconds={29}
-          ariaLabel="Secondary scrolling cloud image gallery"
+          ariaLabel="Secondary scrolling product screenshot gallery"
         />
+      </div>
+
+      <div className="mt-6">
+        <Gallery columns={3}>
+          {appGalleryImages.map((image) => (
+            <GalleryItem key={`cms-gallery-grid-${image.id}`} caption={image.alt}>
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-secondary">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </GalleryItem>
+          ))}
+        </Gallery>
       </div>
     </Card>
   );

@@ -57,7 +57,7 @@ export function CmsGalleryMarquee({
                   }
                   className="cms-gallery-image"
                   priority={isPriority}
-                  loading={isPriority ? 'eager' : 'eager'}
+                  loading={isPriority ? 'eager' : 'lazy'}
                 />
               </figure>
             );
