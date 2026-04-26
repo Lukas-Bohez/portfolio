@@ -4,6 +4,12 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 STAMP_FILE="${ROOT_DIR}/out/.last-update.txt"
 PORTFOLIO_URL_DEFAULT="https://quizthespire.com/LukasBohez/"
+APP_API_DIR="${ROOT_DIR}/src/app/api"
+APP_API_TMP_DIR="${ROOT_DIR}/.api-export-hidden"
+CMS_PROJECTS_DYNAMIC_DIR="${ROOT_DIR}/src/app/(cms)/cms-demo/projects/[slug]"
+CMS_PROJECTS_DYNAMIC_TMP_DIR="${ROOT_DIR}/.cms-projects-slug-hidden"
+CMS_MODAL_INTERCEPT_DIR="${ROOT_DIR}/src/app/(cms)/cms-demo/@modal/(..)cms-demo/projects/[slug]"
+CMS_MODAL_INTERCEPT_TMP_DIR="${ROOT_DIR}/.cms-modal-intercept-hidden"
 
 resolve_path() {
 	cd "$1" && pwd -P
@@ -52,6 +58,20 @@ extract_build_id() {
 
 cd "${ROOT_DIR}"
 
+restore_api_dir() {
+	if [[ -d "${APP_API_TMP_DIR}" ]]; then
+		mv "${APP_API_TMP_DIR}" "${APP_API_DIR}"
+	fi
+	if [[ -d "${CMS_PROJECTS_DYNAMIC_TMP_DIR}" ]]; then
+		mv "${CMS_PROJECTS_DYNAMIC_TMP_DIR}" "${CMS_PROJECTS_DYNAMIC_DIR}"
+	fi
+	if [[ -d "${CMS_MODAL_INTERCEPT_TMP_DIR}" ]]; then
+		mv "${CMS_MODAL_INTERCEPT_TMP_DIR}" "${CMS_MODAL_INTERCEPT_DIR}"
+	fi
+}
+
+trap restore_api_dir EXIT
+
 # Auto-detect Apache alias if not explicitly set
 if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
 	# Try to extract from Apache vhost config
@@ -76,7 +96,22 @@ if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
 fi
 
 echo "[update-portfolio] Building static export..."
-NEXT_BASE_PATH="${NEXT_BASE_PATH:-/LukasBohez}" npm run build
+if [[ -d "${APP_API_DIR}" ]]; then
+	echo "[update-portfolio] Temporarily hiding src/app/api for static export compatibility..."
+	mv "${APP_API_DIR}" "${APP_API_TMP_DIR}"
+fi
+
+if [[ -d "${CMS_PROJECTS_DYNAMIC_DIR}" ]]; then
+	echo "[update-portfolio] Temporarily hiding dynamic CMS slug route for static export compatibility..."
+	mv "${CMS_PROJECTS_DYNAMIC_DIR}" "${CMS_PROJECTS_DYNAMIC_TMP_DIR}"
+fi
+
+if [[ -d "${CMS_MODAL_INTERCEPT_DIR}" ]]; then
+	echo "[update-portfolio] Temporarily hiding modal intercept route for static export compatibility..."
+	mv "${CMS_MODAL_INTERCEPT_DIR}" "${CMS_MODAL_INTERCEPT_TMP_DIR}"
+fi
+
+NEXT_BASE_PATH="${NEXT_BASE_PATH:-/LukasBohez}" NEXT_STATIC_EXPORT=true npm run build
 
 mkdir -p "${ROOT_DIR}/out"
 date -u +"%Y-%m-%dT%H:%M:%SZ" > "${STAMP_FILE}"

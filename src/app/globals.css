@@ -7,6 +7,9 @@
   --line: rgba(0, 0, 0, 0.07);
   --line-mid: rgba(0, 0, 0, 0.14);
   --accent: #009957;
+  --btn-primary-bg: #1d4ed8;
+  --btn-primary-bg-hover: #1e40af;
+  --btn-primary-fg: #ffffff;
   --text: #1a1c1e;
   --text-2: #5a6068;
   --text-3: #9da3a9;
@@ -18,6 +21,9 @@
   --line: rgba(255, 255, 255, 0.07);
   --line-mid: rgba(255, 255, 255, 0.14);
   --accent: #60a5fa;
+  --btn-primary-bg: #2563eb;
+  --btn-primary-bg-hover: #1d4ed8;
+  --btn-primary-fg: #ffffff;
   --text: #e8eaec;
   --text-2: #8d9399;
   --text-3: #565d63;
@@ -78,11 +84,11 @@ body {
 }
 
 .btn-primary {
-  background-color: var(--accent);
-  color: #0f172a;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
 }
 .btn-primary:hover {
-  background-color: #1d4ed8;
+  background-color: var(--btn-primary-bg-hover);
 }
 .btn-secondary {
   background-color: var(--bg-3);
@@ -107,6 +113,207 @@ body {
   overflow-x: hidden;
   font-size: 1rem;
   line-height: 1.55;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+p,
+li,
+span,
+label {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+small,
+.caption {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+section {
+  padding-block: 4rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+.btn-ui {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+  outline: none;
+}
+
+.btn-ui:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+.btn-primary-ui {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border: 1px solid transparent;
+}
+
+.btn-primary-ui:hover {
+  background-color: var(--btn-primary-bg-hover);
+}
+
+.btn-secondary-ui {
+  border: 1px solid rgba(59, 130, 246, 0.6);
+  background-color: rgba(59, 130, 246, 0.12);
+  color: var(--text);
+}
+
+.btn-secondary-ui:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.btn-ghost-ui {
+  border: 1px solid var(--line-mid);
+  background-color: transparent;
+  color: var(--text);
+}
+
+.btn-ghost-ui:hover {
+  background-color: rgba(125, 125, 125, 0.1);
+}
+
+.card-ui {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--bg-2);
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.badge-ui {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-ui-tech {
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.badge-ui-tag {
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.badge-ui-status {
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.section-ui {
+  padding-block: 4rem;
+}
+
+.skeleton-card {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--bg-2);
+  padding: 1rem;
+}
+
+.skeleton-line {
+  height: 0.875rem;
+  margin-top: 0.625rem;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.14),
+    rgba(148, 163, 184, 0.3),
+    rgba(148, 163, 184, 0.14)
+  );
+  background-size: 200% 100%;
+  animation: gradientSweep 1.4s ease infinite;
+}
+
+.skeleton-line-sm {
+  width: 32%;
+}
+
+.skeleton-line-md {
+  width: 60%;
+}
+
+.skeleton-line-lg {
+  width: 84%;
+}
+
+.theme-toggle-btn {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid var(--line-mid);
+  background: var(--bg-3);
+  color: var(--text-2);
+  transition: color 0.15s ease;
+}
+
+.theme-toggle-btn:hover {
+  color: var(--text);
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
 }
 
 @media (max-width: 640px) {

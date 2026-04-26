@@ -1,13 +1,13 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
-import Script from 'next/script';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import Script from 'next/script';
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
+
 import { ThemeToggle } from './ThemeToggle';
 import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
-
-import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 
 declare global {
   interface Window {

@@ -1,7 +1,12 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
+import Link from 'next/link';
+
 import { ThemeToggle } from './ThemeToggle';
+import { Button } from './ui/Button';
+import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
+
+const heroBlurDataURL =
+  'https://res.cloudinary.com/dmefzpaea/image/upload/f_blur:2000,e_grayscale,q_1,w_20/v1776524472/portfolio/profile/lukas-portrait';
 
 export function TopNavbar() {
   const navItems = [
@@ -33,7 +38,7 @@ export function TopNavbar() {
           <a
             key={item.label}
             href={item.href}
-            className="rounded-full px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+            className="rounded-full px-3 py-2 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
             aria-label={`Scroll to ${item.label}`}
           >
             {item.label}
@@ -41,14 +46,14 @@ export function TopNavbar() {
         ))}
         <Link
           href="/cms-demo/"
-          className="rounded-full border border-blue-400/60 px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-blue-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+          className="rounded-full border border-blue-400/60 px-3 py-2 text-default transition duration-200 md:hover:bg-blue-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
           aria-label="Open CMS demo page"
         >
           CMS Demo
         </Link>
         <a
           href="https://quizthespire.com/"
-          className="rounded-full border border-emerald-400/60 px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-emerald-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+          className="rounded-full border border-emerald-400/60 px-3 py-2 text-default transition duration-200 md:hover:bg-emerald-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] min-h-11"
           aria-label="Go back to Quiz The Spire"
         >
           Quiz The Spire
@@ -86,35 +91,40 @@ export function TopHero() {
           </p>
 
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
-            <a
-              href="#projects"
-              className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
-            >
+            <Button href="#projects" variant="primary">
               View featured work
-            </a>
-            <a
-              href="#contact"
-              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
-            >
+            </Button>
+            <Button href="#contact" variant="secondary">
               Get in touch
-            </a>
-            <Link
-              href="/cms-demo/"
-              className="rounded-full border-2 border-emerald-400/80 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-emerald-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
-            >
+            </Button>
+            <Button href="/cms-demo/" variant="ghost">
               Go to CMS demo
-            </Link>
+            </Button>
           </div>
         </div>
         <div className="hidden lg:flex lg:items-center lg:justify-center">
-          <div className="relative h-52 w-52 xl:h-64 xl:w-64 shrink-0 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl">
+          <div className="relative hidden h-52 w-52 shrink-0 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl md:flex xl:h-64 xl:w-64">
             <Image
               src={profilePhoto}
-              alt="Lukas Bohez"
+              alt="Professional portrait of Lukas Bohez"
               fill
               priority
-              sizes="(max-width: 1024px) 0px, 256px"
+              placeholder="blur"
+              blurDataURL={heroBlurDataURL}
+              sizes="(max-width: 640px) 0px, (max-width: 1024px) 0px, (max-width: 1280px) 208px, 256px"
               className="object-cover object-[50%_20%]"
+            />
+          </div>
+          <div className="relative flex h-44 w-44 shrink-0 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl md:hidden">
+            <Image
+              src={profilePhoto}
+              alt="Professional portrait of Lukas Bohez"
+              fill
+              priority
+              placeholder="blur"
+              blurDataURL={heroBlurDataURL}
+              sizes="176px"
+              className="object-cover object-[50%_14%]"
             />
           </div>
         </div>

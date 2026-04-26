@@ -19,6 +19,22 @@ export const projectDemoType = defineType({
       validation: (rule) => rule.required().min(20),
     }),
     defineField({
+      name: 'body',
+      title: 'Body',
+      type: 'array',
+      of: [{ type: 'block' }, { type: 'image', options: { hotspot: true } }],
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
@@ -32,6 +48,17 @@ export const projectDemoType = defineType({
       options: {
         layout: 'tags',
       },
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tagDemo' }],
+        },
+      ],
     }),
     defineField({
       name: 'imageUrl',

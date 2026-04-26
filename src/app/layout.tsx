@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+
 import BackToTop from './components/BackToTop';
 import { ThemeProviderBridge } from './components/ThemeProviderBridge';
 import './globals.css';
@@ -47,7 +48,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only fixed left-4 top-4 z-50 rounded-full border border-blue-400/80 bg-surface px-4 py-2 text-sm font-semibold text-default"
+        >
+          Skip to content
+        </a>
         <ThemeProviderBridge>{children}</ThemeProviderBridge>
         <BackToTop />
       </body>
