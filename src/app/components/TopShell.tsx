@@ -2,11 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { ThemeToggle } from './ThemeToggle';
+import { HeroPortrait } from './TopShell/HeroPortrait';
 import { Button } from './ui/Button';
 import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
-
-const heroBlurDataURL =
-  'https://res.cloudinary.com/dmefzpaea/image/upload/f_blur:2000,e_grayscale,q_1,w_20/v1776524472/portfolio/profile/lukas-portrait';
 
 export function TopNavbar() {
   const navItems = [
@@ -103,30 +101,7 @@ export function TopHero() {
           </div>
         </div>
         <div className="hidden lg:flex lg:items-center lg:justify-center">
-          <div className="relative hidden h-52 w-52 shrink-0 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl md:flex xl:h-64 xl:w-64">
-            <Image
-              src={profilePhoto}
-              alt="Professional portrait of Lukas Bohez"
-              fill
-              priority
-              placeholder="blur"
-              blurDataURL={heroBlurDataURL}
-              sizes="(max-width: 640px) 0px, (max-width: 1024px) 0px, (max-width: 1280px) 208px, 256px"
-              className="object-cover object-[50%_20%]"
-            />
-          </div>
-          <div className="relative flex h-44 w-44 shrink-0 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl md:hidden">
-            <Image
-              src={profilePhoto}
-              alt="Professional portrait of Lukas Bohez"
-              fill
-              priority
-              placeholder="blur"
-              blurDataURL={heroBlurDataURL}
-              sizes="176px"
-              className="object-cover object-[50%_14%]"
-            />
-          </div>
+          <HeroPortrait />
         </div>
       </div>
     </section>

@@ -10,6 +10,8 @@
   --btn-primary-bg: #1d4ed8;
   --btn-primary-bg-hover: #1e40af;
   --btn-primary-fg: #ffffff;
+  --btn-secondary-bg: #efefef;
+  --btn-secondary-hover: #e0e0e0;
   --text: #1a1c1e;
   --text-2: #5a6068;
   --text-3: #9da3a9;
@@ -24,6 +26,8 @@
   --btn-primary-bg: #2563eb;
   --btn-primary-bg-hover: #1d4ed8;
   --btn-primary-fg: #ffffff;
+  --btn-secondary-bg: #2a2a2a;
+  --btn-secondary-hover: #3a3a3a;
   --text: #e8eaec;
   --text-2: #8d9399;
   --text-3: #565d63;
@@ -91,11 +95,11 @@ body {
   background-color: var(--btn-primary-bg-hover);
 }
 .btn-secondary {
-  background-color: var(--bg-3);
+  background-color: var(--btn-secondary-bg);
   color: var(--text);
 }
 .btn-secondary:hover {
-  background-color: #f59e0b;
+  background-color: var(--btn-secondary-hover);
 }
 
 html {
