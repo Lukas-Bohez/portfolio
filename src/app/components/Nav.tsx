@@ -16,10 +16,10 @@ const baseLinkClass =
 const plainLinkClass = `${baseLinkClass} px-2 py-1.5 text-[10px] sm:px-3 sm:py-2 sm:text-sm`;
 
 const cmsLinkClass =
-  'inline-flex items-center justify-center rounded-full border border-blue-400/60 px-2 py-1.5 text-[10px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm';
+  'inline-flex items-center justify-center rounded-full border border-blue-400/60 px-1.5 py-1 text-[10px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm';
 
 const qtsLinkClass =
-  'inline-flex items-center justify-center rounded-full border border-emerald-400/60 px-2 py-1.5 text-[10px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm';
+  'inline-flex items-center justify-center rounded-full border border-emerald-400/60 px-1.5 py-1 text-[10px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm';
 
 function BrandLink() {
   return (
@@ -65,7 +65,8 @@ export function Nav() {
           </a>
         ))}
         <Link href="/cms-demo/" className={cmsLinkClass} aria-label="Open CMS demo page">
-          CMS Demo
+          <span className="sm:hidden">CMS</span>
+          <span className="hidden sm:inline">CMS Demo</span>
         </Link>
         <a
           href="https://quizthespire.com/"

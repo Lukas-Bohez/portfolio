@@ -100,10 +100,6 @@ const appGalleryImages: GalleryImage[] = [
   },
 ];
 
-const appGalleryPrimary = appGalleryImages;
-
-const appGallerySecondary = appGalleryImages.slice().reverse();
-
 async function getSettings(): Promise<CmsSettings> {
   const query = `*[_type == "settings"][0]{
     "siteTitle": coalesce(siteTitle, "CMS Demo"),
@@ -331,17 +327,19 @@ function CmsGallerySection() {
 
       <div className="mt-6">
         <CmsGalleryMarquee
-          images={appGalleryPrimary}
-          ariaLabel="Primary scrolling product screenshot gallery"
+          images={appGalleryImages}
+          direction="left"
+          speed={30}
+          ariaLabel="App screenshots scrolling left"
         />
       </div>
 
       <div className="mt-4">
         <CmsGalleryMarquee
-          images={appGallerySecondary}
-          compact
-          phaseOffsetSeconds={29}
-          ariaLabel="Secondary scrolling product screenshot gallery"
+          images={appGalleryImages}
+          direction="right"
+          speed={36}
+          ariaLabel="App screenshots scrolling right"
         />
       </div>
 
