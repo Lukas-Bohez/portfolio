@@ -8,7 +8,7 @@ import { Card } from '@/app/components/ui/Card';
 import { ScreenshotLightbox } from '@/app/components/ui/ScreenshotLightbox';
 import { Section } from '@/app/components/ui/Section';
 import { SkeletonCard } from '@/app/components/ui/SkeletonCard';
-import { env } from '@/lib/env';
+import { withBasePath } from '@/lib/basePath';
 import { sanityFetch } from '@/lib/sanity';
 
 import { CmsGalleryMarquee } from './CmsGalleryMarquee';
@@ -52,6 +52,8 @@ type GalleryImage = {
   src: string;
   alt: string;
 };
+
+const sanityStudioHref = withBasePath('/sanity/');
 
 const appGalleryImages: GalleryImage[] = [
   {
@@ -173,7 +175,7 @@ async function CmsTopNavSection() {
           Back to Portfolio
         </Button>
         <a
-          href={env.NEXT_PUBLIC_SANITY_STUDIO_URL}
+          href={sanityStudioHref}
           target="_blank"
           rel="noreferrer noopener"
           className="btn-ui btn-secondary-ui text-sm"
@@ -232,7 +234,7 @@ function CmsIntroSection() {
           View source on GitHub -&gt;
         </a>
         <a
-          href={env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'https://studio.sanity.io'}
+          href={sanityStudioHref}
           target="_blank"
           rel="noreferrer"
           className="font-semibold text-emerald-500 hover:text-emerald-600"
