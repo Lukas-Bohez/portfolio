@@ -12,6 +12,8 @@ export const fallbackSettings = {
   siteTitle: 'Lukas Bohez - Portfolio CMS Demo',
   footerText:
     'Built with Next.js 15 App Router - Sanity CMS - Cloudinary - Deployed on Apache via static export.',
+  spotlightText:
+    'This spotlight is controlled by Sanity. Edit the Settings document in the studio and the live CMS demo updates here.',
 };
 
 export const fallbackProjects = [

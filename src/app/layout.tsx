@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: 'Lukas Bohez | Full-Stack Developer · Flutter · Python · Next.js',
   description:
     'Portfolio of Lukas Bohez, full-stack web developer. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn v10.2.3, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
+  icons: {
+    icon: '/iceball.svg',
+    apple: '/iceball.svg',
+  },
   openGraph: {
     title: 'Lukas Bohez | Full-Stack Developer · Flutter · Python · Next.js',
     description:

@@ -45,6 +45,7 @@ type CmsProfile = {
 type CmsSettings = {
   siteTitle: string;
   footerText?: string;
+  spotlightText?: string;
 };
 
 type GalleryImage = {
@@ -98,6 +99,7 @@ async function getSettings(): Promise<CmsSettings> {
     const result = await sanityFetch<CmsSettings | null>({
       query: `*[_type == "settings"][0]{
       "siteTitle": coalesce(siteTitle, "CMS Demo"),
+      spotlightText,
       footerText
     }`,
       tags: ['settings'],
@@ -246,6 +248,25 @@ function CmsIntroSection() {
   );
 }
 
+async function CmsSpotlightSection() {
+  const settings = await getSettings();
+
+  if (!settings.spotlightText) {
+    return null;
+  }
+
+  return (
+    <Card className="rounded-3xl border border-amber-400/30 bg-amber-400/10 p-6 sm:p-8">
+      <p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-600">
+        Sanity-controlled spotlight
+      </p>
+      <p className="mt-3 max-w-3xl text-base leading-relaxed text-default">
+        {settings.spotlightText}
+      </p>
+    </Card>
+  );
+}
+
 async function CmsProfileSection() {
   const profile = await getCmsProfile();
 
@@ -354,6 +375,10 @@ export default function CmsDemoPage() {
 
       <Section className="space-y-8 py-0">
         <CmsIntroSection />
+
+        <Suspense fallback={<SuspenseCardFallback />}>
+          <CmsSpotlightSection />
+        </Suspense>
 
         <Suspense fallback={<SuspenseCardFallback />}>
           <CmsProfileSection />

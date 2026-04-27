@@ -17,6 +17,12 @@ export const settingsType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'spotlightText',
+      title: 'Homepage Spotlight Text',
+      type: 'text',
+      rows: 4,
+    }),
+    defineField({
       name: 'navLinks',
       title: 'Navigation Links',
       type: 'array',

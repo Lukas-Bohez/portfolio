@@ -4,6 +4,10 @@ export const metadata: Metadata = {
   title: 'CMS Demo | Lukas Bohez',
   description:
     'Sanity + Cloudinary powered CMS demo route for Lukas Bohez portfolio with draft preview and cache revalidation support.',
+  icons: {
+    icon: '/iceball.svg',
+    apple: '/iceball.svg',
+  },
   openGraph: {
     title: 'CMS Demo | Lukas Bohez',
     description:
