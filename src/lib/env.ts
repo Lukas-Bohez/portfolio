@@ -19,6 +19,6 @@ export const env = envSchema.parse({
   SANITY_WEBHOOK_SECRET: process.env.SANITY_WEBHOOK_SECRET ?? 'dev-webhook-secret',
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? 'dmefzpaea',
   NEXT_PUBLIC_SANITY_STUDIO_URL:
-    process.env.NEXT_PUBLIC_SANITY_STUDIO_URL ?? 'https://lukas-bohez.sanity.studio',
+    process.env.NEXT_PUBLIC_SANITY_STUDIO_URL ?? 'https://studio.sanity.io/p/3a5uodlw',
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
 });
