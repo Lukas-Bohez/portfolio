@@ -7,7 +7,6 @@ PORTFOLIO_URL_DEFAULT="https://quizthespire.com/LukasBohez/"
 APP_API_DIR="${ROOT_DIR}/src/app/api"
 APP_API_TMP_DIR="${ROOT_DIR}/.api-export-hidden"
 CMS_PROJECTS_DYNAMIC_DIR="${ROOT_DIR}/src/app/(cms)/cms-demo/projects/[slug]"
-CMS_PROJECTS_DYNAMIC_TMP_DIR="${ROOT_DIR}/.cms-projects-slug-hidden"
 CMS_MODAL_INTERCEPT_DIR="${ROOT_DIR}/src/app/(cms)/cms-demo/@modal/(..)cms-demo/projects/[slug]"
 CMS_MODAL_INTERCEPT_TMP_DIR="${ROOT_DIR}/.cms-modal-intercept-hidden"
 
@@ -62,9 +61,6 @@ restore_api_dir() {
 	if [[ -d "${APP_API_TMP_DIR}" ]]; then
 		mv "${APP_API_TMP_DIR}" "${APP_API_DIR}"
 	fi
-	if [[ -d "${CMS_PROJECTS_DYNAMIC_TMP_DIR}" ]]; then
-		mv "${CMS_PROJECTS_DYNAMIC_TMP_DIR}" "${CMS_PROJECTS_DYNAMIC_DIR}"
-	fi
 	if [[ -d "${CMS_MODAL_INTERCEPT_TMP_DIR}" ]]; then
 		mv "${CMS_MODAL_INTERCEPT_TMP_DIR}" "${CMS_MODAL_INTERCEPT_DIR}"
 	fi
@@ -99,11 +95,6 @@ echo "[update-portfolio] Building static export..."
 if [[ -d "${APP_API_DIR}" ]]; then
 	echo "[update-portfolio] Temporarily hiding src/app/api for static export compatibility..."
 	mv "${APP_API_DIR}" "${APP_API_TMP_DIR}"
-fi
-
-if [[ -d "${CMS_PROJECTS_DYNAMIC_DIR}" ]]; then
-	echo "[update-portfolio] Temporarily hiding dynamic CMS slug route for static export compatibility..."
-	mv "${CMS_PROJECTS_DYNAMIC_DIR}" "${CMS_PROJECTS_DYNAMIC_TMP_DIR}"
 fi
 
 if [[ -d "${CMS_MODAL_INTERCEPT_DIR}" ]]; then

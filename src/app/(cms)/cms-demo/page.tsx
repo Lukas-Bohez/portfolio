@@ -14,6 +14,7 @@ import { env } from '@/lib/env';
 import { sanityFetch } from '@/lib/sanity';
 
 import { CmsGalleryMarquee } from './CmsGalleryMarquee';
+import { fallbackProfile, fallbackProjects, fallbackSettings } from './constants/fallbackContent';
 import { ThemeToggle } from '../../components/ThemeToggle';
 
 type CmsAuthor = {
@@ -51,16 +52,6 @@ type GalleryImage = {
   id: string;
   src: string;
   alt: string;
-};
-
-const fallbackProfile: CmsProfile = {
-  title: 'About This CMS Demo',
-  bio: 'Sanity content is temporarily unavailable. Please retry in a moment.',
-};
-
-const fallbackSettings: CmsSettings = {
-  siteTitle: 'CMS Demo',
-  footerText: 'Powered by Next.js + Sanity',
 };
 
 const appGalleryImages: GalleryImage[] = [
@@ -102,62 +93,72 @@ const appGalleryImages: GalleryImage[] = [
 ];
 
 async function getSettings(): Promise<CmsSettings> {
-  const query = `*[_type == "settings"][0]{
-    "siteTitle": coalesce(siteTitle, "CMS Demo"),
-    footerText
-  }`;
+  try {
+    const result = await sanityFetch<CmsSettings | null>({
+      query: `*[_type == "settings"][0]{
+      "siteTitle": coalesce(siteTitle, "CMS Demo"),
+      footerText
+    }`,
+      tags: ['settings'],
+      revalidate: 3600,
+    });
 
-  const result = await sanityFetch<CmsSettings | null>({
-    query,
-    tags: ['settings'],
-    revalidate: 3600,
-  });
-
-  return result ?? fallbackSettings;
+    return result ?? fallbackSettings;
+  } catch {
+    return fallbackSettings;
+  }
 }
 
 async function getCmsProfile(): Promise<CmsProfile> {
-  const query = `*[_type in ["profileDemo", "author"]][0]{
-    "title": coalesce(title, name, "About This CMS Demo"),
-    "bio": coalesce(bio, about, description, "")
-  }`;
+  try {
+    const result = await sanityFetch<Partial<CmsProfile> | null>({
+      query: `*[_type in ["profileDemo", "author"]][0]{
+      "title": coalesce(title, name, "About Lukas Bohez"),
+      "bio": coalesce(bio, about, description, "")
+    }`,
+      tags: ['profile'],
+      revalidate: 300,
+    });
 
-  const result = await sanityFetch<Partial<CmsProfile> | null>({
-    query,
-    tags: ['profile'],
-    revalidate: 300,
-  });
+    if (!result?.bio) {
+      return fallbackProfile;
+    }
 
-  if (!result || !result.bio) {
+    return {
+      title: result.title || fallbackProfile.title,
+      bio: result.bio,
+    };
+  } catch {
     return fallbackProfile;
   }
-
-  return {
-    title: result.title || fallbackProfile.title,
-    bio: result.bio,
-  };
 }
 
 async function getCmsProjects(): Promise<CmsProject[]> {
-  const query = `*[_type in ["projectDemo", "project"]] | order(coalesce(order, _createdAt) asc) {
-    _id,
-    title,
-    "slug": slug.current,
-    "summary": coalesce(summary, description, excerpt, "No summary yet."),
-    "stack": coalesce(stack, techStack, technologies, []),
-    "imageUrl": coalesce(imageUrl, mainImage.asset->url, image.asset->url, ""),
-    "demoUrl": coalesce(demoUrl, url, link),
-    author->{"name": coalesce(name, title, "Unknown author"), "bio": coalesce(bio, about, description, "")},
-    "tags": tags[]->{title}
-  }`;
+  try {
+    const projects = await sanityFetch<CmsProject[]>({
+      query: `*[_type in ["projectDemo", "project"]] | order(_createdAt asc) {
+      _id,
+      title,
+      "slug": slug.current,
+      "summary": coalesce(summary, description, excerpt, ""),
+      "stack": coalesce(stack, techStack, technologies, []),
+      "imageUrl": coalesce(imageUrl, mainImage.asset->url, image.asset->url, ""),
+      "demoUrl": coalesce(demoUrl, url, link),
+      author->{"name": coalesce(name, title, "Unknown author"), "bio": coalesce(bio, about, description, "")},
+      "tags": tags[]->{title}
+    }`,
+      tags: ['projects'],
+      revalidate: 3600,
+    });
 
-  const projects = await sanityFetch<CmsProject[]>({
-    query,
-    tags: ['projects'],
-    revalidate: 3600,
-  });
+    if (!projects || projects.length === 0) {
+      return fallbackProjects as unknown as CmsProject[];
+    }
 
-  return projects ?? [];
+    return projects;
+  } catch {
+    return fallbackProjects as unknown as CmsProject[];
+  }
 }
 
 async function CmsTopNavSection() {
@@ -188,16 +189,58 @@ async function CmsTopNavSection() {
 }
 
 function CmsIntroSection() {
+  const badges = [
+    'Server Components',
+    'ISR + Webhooks',
+    'Draft Preview',
+    'Portable Text',
+    'Compound Components',
+    'Zod Env Validation',
+    'TypeScript',
+  ];
+
   return (
-    <Card className="rounded-3xl sm:p-8">
-      <Badge label="Separate CMS Demo" variant="status" />
-      <h1 className="mt-3 text-3xl font-extrabold text-primary sm:text-4xl">
-        Next.js + Sanity + Cloudinary
-      </h1>
-      <p className="mt-3 max-w-3xl text-base text-default sm:text-lg">
-        This route uses server-side Sanity fetching with cache tags, draft-aware perspective
-        support, and webhook revalidation.
+    <Card className="mb-8 rounded-3xl sm:p-8">
+      <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-primary">
+        Technical Demo
       </p>
+      <h1 className="text-3xl font-extrabold text-primary sm:text-4xl">
+        Next.js 15 + Sanity CMS + Cloudinary
+      </h1>
+      <p className="mt-3 max-w-2xl text-base leading-relaxed text-default">
+        This page demonstrates a production-grade headless CMS integration. Content is fetched
+        server-side using React Server Components with tagged cache invalidation, on-demand
+        revalidation via Sanity webhook, and draft preview mode. Images are optimized through
+        Cloudinary with AVIF delivery.
+      </p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {badges.map((badge) => (
+          <span
+            key={badge}
+            className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-xs font-medium text-default"
+          >
+            {badge}
+          </span>
+        ))}
+      </div>
+      <div className="mt-4 flex flex-wrap gap-4 text-sm">
+        <a
+          href="https://github.com/Lukas-Bohez/portfolio"
+          target="_blank"
+          rel="noreferrer"
+          className="font-semibold text-blue-500 hover:text-blue-600"
+        >
+          View source on GitHub -&gt;
+        </a>
+        <a
+          href={env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'https://lukas-bohez.sanity.studio'}
+          target="_blank"
+          rel="noreferrer"
+          className="font-semibold text-emerald-500 hover:text-emerald-600"
+        >
+          Open Sanity Studio -&gt;
+        </a>
+      </div>
     </Card>
   );
 }
@@ -215,17 +258,6 @@ async function CmsProfileSection() {
 
 async function CmsProjectsSection() {
   const projects = await getCmsProjects();
-
-  if (projects.length === 0) {
-    return (
-      <Card className="rounded-3xl sm:p-8">
-        <h2 className="text-2xl font-bold text-primary">CMS Projects</h2>
-        <p className="mt-3 text-base text-default">
-          No projects are published yet. Add a project in Sanity Studio to populate this section.
-        </p>
-      </Card>
-    );
-  }
 
   return (
     <Card className="rounded-3xl sm:p-8">

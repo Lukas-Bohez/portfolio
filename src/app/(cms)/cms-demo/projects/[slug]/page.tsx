@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation';
 import { cloudinaryOptimized } from '@/lib/cloudinary';
 import { sanityFetch } from '@/lib/sanity';
 
+import { fallbackProjects } from '../../constants/fallbackContent';
+
 type ProjectDetail = {
   _id: string;
   title: string;
@@ -27,28 +29,32 @@ type Params = {
 };
 
 export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
-  const rows = await sanityFetch<Array<{ slug?: string }>>({
-    query: `*[_type in ["projectDemo", "project"] && defined(slug.current)]{ "slug": slug.current }`,
-    tags: ['projects'],
-    revalidate: 3600,
-    useDraftMode: false,
-  });
+  try {
+    const rows = await sanityFetch<Array<{ slug?: string }>>({
+      query: `*[_type in ["projectDemo", "project"] && defined(slug.current)]{ "slug": slug.current }`,
+      tags: ['projects'],
+      revalidate: 3600,
+      useDraftMode: false,
+    });
 
-  return rows
-    .filter((row): row is { slug: string } => Boolean(row.slug))
-    .map((row) => ({ slug: row.slug }));
+    const sanityParams = rows
+      .filter((row): row is { slug: string } => Boolean(row.slug))
+      .map((row) => ({ slug: row.slug }));
+    const fallbackParams = fallbackProjects.map((project) => ({ slug: project.slug }));
+    const merged = [...sanityParams, ...fallbackParams];
+
+    return merged.filter((value, index, array) => {
+      return array.findIndex((item) => item.slug === value.slug) === index;
+    });
+  } catch {
+    return fallbackProjects.map((project) => ({ slug: project.slug }));
+  }
 }
 
-/**
- * Hybrid strategy:
- * - statically generated from CMS slugs
- * - refreshed with cache tags + webhook revalidation
- */
-export default async function ProjectDetailPage({ params }: Params) {
-  const { slug } = await params;
-
-  const row = await sanityFetch<ProjectDetail | null>({
-    query: `*[_type in ["projectDemo", "project"] && slug.current == $slug][0]{
+async function getCmsProject(slug: string): Promise<ProjectDetail | null> {
+  try {
+    const result = await sanityFetch<ProjectDetail | null>({
+      query: `*[_type in ["projectDemo", "project"] && slug.current == $slug][0]{
       _id,
       title,
       "summary": coalesce(summary, description, excerpt, "No summary yet."),
@@ -63,10 +69,74 @@ export default async function ProjectDetailPage({ params }: Params) {
         }
       }
     }`,
-    params: { slug },
-    tags: ['projects'],
-    revalidate: 3600,
-  });
+      params: { slug },
+      tags: [`project-${slug}`],
+      revalidate: 3600,
+    });
+
+    if (result) {
+      return result;
+    }
+
+    const fallback = fallbackProjects.find((project) => project.slug === slug);
+    return fallback
+      ? {
+          _id: fallback._id,
+          title: fallback.title,
+          summary: fallback.summary,
+          imageUrl: fallback.imageUrl,
+          slug: fallback.slug,
+          body: [
+            {
+              _type: 'block',
+              _key: `${fallback._id}-body`,
+              style: 'normal',
+              children: [
+                {
+                  _type: 'span',
+                  text: fallback.summary,
+                },
+              ],
+            },
+          ],
+        }
+      : null;
+  } catch {
+    const fallback = fallbackProjects.find((project) => project.slug === slug);
+    return fallback
+      ? {
+          _id: fallback._id,
+          title: fallback.title,
+          summary: fallback.summary,
+          imageUrl: fallback.imageUrl,
+          slug: fallback.slug,
+          body: [
+            {
+              _type: 'block',
+              _key: `${fallback._id}-body`,
+              style: 'normal',
+              children: [
+                {
+                  _type: 'span',
+                  text: fallback.summary,
+                },
+              ],
+            },
+          ],
+        }
+      : null;
+  }
+}
+
+/**
+ * Hybrid strategy:
+ * - statically generated from CMS slugs
+ * - refreshed with cache tags + webhook revalidation
+ */
+export default async function ProjectDetailPage({ params }: Params) {
+  const { slug } = await params;
+
+  const row = await getCmsProject(slug);
 
   if (!row) {
     notFound();
