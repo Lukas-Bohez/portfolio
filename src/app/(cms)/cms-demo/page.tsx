@@ -232,7 +232,7 @@ function CmsIntroSection() {
           View source on GitHub -&gt;
         </a>
         <a
-          href={env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'https://lukas-bohez.sanity.studio'}
+          href={env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'https://studio.sanity.io'}
           target="_blank"
           rel="noreferrer"
           className="font-semibold text-emerald-500 hover:text-emerald-600"
