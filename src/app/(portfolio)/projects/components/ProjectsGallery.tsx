@@ -16,7 +16,7 @@ type ProjectTag = {
   title: string;
 };
 
-type Project = {
+export type Project = {
   _id: string;
   title: string;
   slug?: string;

@@ -6,7 +6,7 @@ import { ScreenshotLightbox } from '@/app/components/ui/ScreenshotLightbox';
 import { Section } from '@/app/components/ui/Section';
 import { SkeletonCard } from '@/app/components/ui/SkeletonCard';
 
-import { ProjectsGallery } from './components/ProjectsGallery';
+import { ProjectsGallery, type Project } from './components/ProjectsGallery';
 import { fallbackProfile, fallbackProjects, fallbackSettings } from './constants/fallbackContent';
 import { GalleryMarquee } from './GalleryMarquee';
 import { ThemeToggle } from '../../components/ThemeToggle';
@@ -62,7 +62,7 @@ function ProjectsTopNavSection() {
         {fallbackSettings.siteTitle}
       </p>
       <div className="flex flex-wrap items-center gap-2">
-        <Link href="/" className="btn-ui btn-ghost-ui text-sm">
+        <Link href="/LukasBohez/" className="btn-ui btn-ghost-ui text-sm">
           Back to Portfolio
         </Link>
         <ThemeToggle />
@@ -135,7 +135,7 @@ function ProjectsSection() {
       <p className="mt-2 text-sm text-muted">Click on any project to view details.</p>
 
       <div className="mt-6">
-        <ProjectsGallery projects={fallbackProjects} />
+        <ProjectsGallery projects={fallbackProjects as unknown as Project[]} />
       </div>
     </Card>
   );
