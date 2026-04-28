@@ -4,13 +4,6 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 STAMP_FILE="${ROOT_DIR}/out/.last-update.txt"
 PORTFOLIO_URL_DEFAULT="https://quizthespire.com/LukasBohez/"
-APP_API_DIR="${ROOT_DIR}/src/app/api"
-APP_API_TMP_DIR="${ROOT_DIR}/.api-export-hidden"
-CMS_PROJECTS_DYNAMIC_DIR="${ROOT_DIR}/src/app/(cms)/cms-demo/projects/[slug]"
-CMS_MODAL_INTERCEPT_DIR="${ROOT_DIR}/src/app/(cms)/cms-demo/@modal/(..)cms-demo/projects/[slug]"
-CMS_MODAL_INTERCEPT_TMP_DIR="${ROOT_DIR}/.cms-modal-intercept-hidden"
-SANITY_STUDIO_DIR="${ROOT_DIR}/cms-demo/studio-lukas-bohez-portfolio"
-SANITY_STUDIO_PUBLIC_DIR="${ROOT_DIR}/public/sanity"
 
 resolve_path() {
 	cd "$1" && pwd -P
@@ -57,40 +50,7 @@ extract_build_id() {
 	find "${static_dir}" -mindepth 2 -maxdepth 2 -type f -name '_buildManifest.js' -printf '%h\n' | head -n 1 | xargs -r basename
 }
 
-stage_sanity_studio() {
-	local base_path="$1"
-
-	if [[ ! -d "${SANITY_STUDIO_DIR}" ]]; then
-		echo "[update-portfolio] WARNING: Sanity Studio source directory missing, skipping /sanity export."
-		return 0
-	fi
-
-	echo "[update-portfolio] Building embedded Sanity Studio..."
-	(cd "${SANITY_STUDIO_DIR}" && npm run build)
-
-	rm -rf "${SANITY_STUDIO_PUBLIC_DIR}"
-	mkdir -p "${SANITY_STUDIO_PUBLIC_DIR}"
-	cp -a "${SANITY_STUDIO_DIR}/dist/." "${SANITY_STUDIO_PUBLIC_DIR}/"
-
-	local sanity_prefix="${base_path}/sanity"
-	echo "[update-portfolio] Rewriting Sanity Studio asset paths for ${sanity_prefix}/..."
-	find "${SANITY_STUDIO_PUBLIC_DIR}" -type f \( -name '*.html' -o -name '*.js' -o -name '*.json' -o -name '*.svg' -o -name '*.webmanifest' -o -name '*.txt' \) -exec perl -0pi -e "s{/static/}{${sanity_prefix}/static/}g" {} +
-}
-
 cd "${ROOT_DIR}"
-
-restore_api_dir() {
-	if [[ -d "${APP_API_TMP_DIR}" ]]; then
-		mv "${APP_API_TMP_DIR}" "${APP_API_DIR}"
-	fi
-	if [[ -d "${CMS_MODAL_INTERCEPT_TMP_DIR}" ]]; then
-		mv "${CMS_MODAL_INTERCEPT_TMP_DIR}" "${CMS_MODAL_INTERCEPT_DIR}"
-	fi
-	rm -rf "${SANITY_STUDIO_PUBLIC_DIR}"
-	rm -rf "${SANITY_STUDIO_DIR}/dist"
-}
-
-trap restore_api_dir EXIT
 
 # Auto-detect Apache alias if not explicitly set
 if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
@@ -116,18 +76,6 @@ if [[ -z "${PORTFOLIO_DEPLOY_DIR:-}" ]]; then
 fi
 
 echo "[update-portfolio] Building static export..."
-if [[ -d "${APP_API_DIR}" ]]; then
-	echo "[update-portfolio] Temporarily hiding src/app/api for static export compatibility..."
-	mv "${APP_API_DIR}" "${APP_API_TMP_DIR}"
-fi
-
-if [[ -d "${CMS_MODAL_INTERCEPT_DIR}" ]]; then
-	echo "[update-portfolio] Temporarily hiding modal intercept route for static export compatibility..."
-	mv "${CMS_MODAL_INTERCEPT_DIR}" "${CMS_MODAL_INTERCEPT_TMP_DIR}"
-fi
-
-stage_sanity_studio "${NEXT_BASE_PATH:-/LukasBohez}"
-
 NEXT_BASE_PATH="${NEXT_BASE_PATH:-/LukasBohez}" NEXT_STATIC_EXPORT=true npm run build
 
 mkdir -p "${ROOT_DIR}/out"

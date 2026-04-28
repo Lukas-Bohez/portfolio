@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import Script from 'next/script';
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 
@@ -83,13 +82,6 @@ export function Navbar() {
             {item.label}
           </a>
         ))}
-        <a
-          href="/cms-demo/"
-          className="rounded-full border border-blue-400/60 px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-blue-400/10 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
-          aria-label="Open CMS demo"
-        >
-          CMS Demo
-        </a>
         <ThemeToggle />
       </div>
     </nav>
@@ -125,8 +117,8 @@ export function Hero() {
           </p>
           <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
             I care about backend architecture, clear UX, and deployments that hold up in the real
-            world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.2.3, a CMS
-            demo with Sanity + Cloudinary, and the Lofi browser extension.
+            world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.2.3, and
+            the Lofi browser extension.
           </p>
 
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
@@ -141,12 +133,6 @@ export function Hero() {
               className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               Get in touch
-            </a>
-            <a
-              href="/cms-demo/"
-              className="rounded-full border-2 border-emerald-400/80 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-emerald-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
-            >
-              Go to CMS demo
             </a>
           </div>
         </div>
@@ -469,14 +455,6 @@ export function FeaturedProjects() {
       tech: ['Integrated into Convert v10.2.3', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
       color: 'from-emerald-500 to-teal-500',
     },
-    {
-      name: 'CMS Demo: Sanity + Cloudinary',
-      description:
-        'Separate Next.js App Router demo that fetches editable CMS content from Sanity in Server Components, uses explicit Next.js 16 fetch revalidation strategies, and renders Cloudinary-hosted generated visuals with transformation URLs.',
-      url: '/cms-demo/',
-      tech: ['Next.js 16', 'Sanity', 'Cloudinary', 'Server Components', 'revalidate fetch'],
-      color: 'from-amber-500 to-orange-500',
-    },
   ];
 
   return (
@@ -518,23 +496,14 @@ export function FeaturedProjects() {
               ))}
             </div>
             <div className="mt-5 flex flex-wrap gap-3">
-              {project.url === '/cms-demo/' ? (
-                <Link
-                  href={project.url}
-                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
-                >
-                  Explore ↗
-                </Link>
-              ) : (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
-                >
-                  Explore ↗
-                </a>
-              )}
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
+              >
+                Explore ↗
+              </a>
               {project.downloadUrl ? (
                 <a
                   href={project.downloadUrl}

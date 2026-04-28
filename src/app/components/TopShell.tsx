@@ -34,9 +34,6 @@ export function TopHero() {
             <Button href="#contact" variant="secondary">
               Get in touch
             </Button>
-            <Button href="/cms-demo/" variant="ghost">
-              Go to CMS demo
-            </Button>
           </div>
         </div>
         <div className="hidden lg:flex lg:items-center lg:justify-center">

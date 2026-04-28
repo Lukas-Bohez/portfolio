@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Lukas Bohez | Full-Stack Developer · Flutter · Python · Next.js',
   description:
-    'Portfolio of Lukas Bohez, full-stack web developer. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn v10.2.3, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
+    'Portfolio of Lukas Bohez, full-stack web developer. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn v10.2.3, and the Lofi browser extension.',
   icons: {
     icon: '/iceball.svg',
     apple: '/iceball.svg',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Lukas Bohez | Full-Stack Developer · Flutter · Python · Next.js',
     description:
-      'Portfolio of Lukas Bohez, full-stack web developer. Projects include QuizTheSpire, Convert The Spire Reborn v10.2.3, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
+      'Portfolio of Lukas Bohez, full-stack web developer. Projects include QuizTheSpire, Convert The Spire Reborn v10.2.3, and the Lofi browser extension.',
     url: 'https://quizthespire.com/LukasBohez/',
     siteName: 'Quiz The Spire',
     type: 'website',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Lukas Bohez | Full-Stack Developer · Flutter · Python · Next.js',
     description:
-      'Portfolio of Lukas Bohez, full-stack web developer. Projects include QuizTheSpire, Convert The Spire Reborn v10.2.3, CMS demo research with Sanity + Cloudinary, and the Lofi browser extension.',
+      'Portfolio of Lukas Bohez, full-stack web developer. Projects include QuizTheSpire, Convert The Spire Reborn v10.2.3, and the Lofi browser extension.',
     images: ['https://quizthespire.com/images/spire-light.jpeg'],
   },
 };
@@ -56,7 +56,6 @@ export default function RootLayout({
     >
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <link
           rel="preload"
           as="image"

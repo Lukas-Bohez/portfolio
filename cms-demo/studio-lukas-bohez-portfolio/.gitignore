@@ -1,6 +1,0 @@
-node_modules
-.sanity
-.dist
-dist
-.env
-.env.local

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { ThemeToggle } from './ThemeToggle';
 import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
@@ -14,9 +13,6 @@ const baseLinkClass =
   'inline-flex items-center justify-center rounded-full text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-surface/50 md:hover:text-primary';
 
 const plainLinkClass = `${baseLinkClass} px-1.5 py-1 text-[11px] sm:px-3 sm:py-2 sm:text-sm md:text-base`;
-
-const cmsLinkClass =
-  'inline-flex items-center justify-center rounded-full border border-blue-400/60 px-2 py-1 text-[11px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm md:text-base';
 
 const qtsLinkClass =
   'inline-flex items-center justify-center rounded-full border border-emerald-400/60 px-2 py-1 text-[11px] text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary sm:px-3 sm:py-2 sm:text-sm md:text-base';
@@ -53,7 +49,7 @@ export function Nav() {
         <ThemeToggle />
       </div>
 
-      <div className="mt-2 grid min-h-[44px] w-full grid-cols-5 items-center justify-around gap-0.5 sm:hidden">
+      <div className="mt-2 grid min-h-[44px] w-full grid-cols-4 items-center justify-around gap-0.5 sm:hidden">
         {navItems.map((item) => (
           <a
             key={item.label}
@@ -64,10 +60,6 @@ export function Nav() {
             {item.label}
           </a>
         ))}
-        <Link href="/cms-demo/" className={cmsLinkClass} aria-label="Open CMS demo page">
-          <span className="sm:hidden">CMS</span>
-          <span className="hidden sm:inline">CMS Demo</span>
-        </Link>
         <a
           href="https://quizthespire.com/"
           className={qtsLinkClass}
@@ -91,13 +83,6 @@ export function Nav() {
               {item.label}
             </a>
           ))}
-          <Link
-            href="/cms-demo/"
-            className="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-400/60 px-3 py-2 text-base text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-blue-400/10 md:hover:text-primary"
-            aria-label="Open CMS demo page"
-          >
-            CMS Demo
-          </Link>
           <a
             href="https://quizthespire.com/"
             className="inline-flex min-h-11 items-center justify-center rounded-full border border-emerald-400/60 px-3 py-2 text-base text-default transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)] md:hover:bg-emerald-400/10 md:hover:text-primary"
