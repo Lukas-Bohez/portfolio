@@ -455,6 +455,14 @@ export function FeaturedProjects() {
       tech: ['Integrated into Convert v10.2.3', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
       color: 'from-emerald-500 to-teal-500',
     },
+    {
+      name: 'Projects Showcase',
+      description:
+        'Browse the rebranded projects showcase with full project pages for SpireAI, Convert The Spire Reborn, SENTLE, and Industrial Empire.',
+      url: '/LukasBohez/projects/',
+      tech: ['Projects', 'Portfolio', 'Lukas Bohez'],
+      color: 'from-amber-500 to-orange-500',
+    },
   ];
 
   return (
@@ -498,8 +506,8 @@ export function FeaturedProjects() {
             <div className="mt-5 flex flex-wrap gap-3">
               <a
                 href={project.url}
-                target="_blank"
-                rel="noreferrer noopener"
+                target={project.url.startsWith('http') ? '_blank' : undefined}
+                rel={project.url.startsWith('http') ? 'noreferrer noopener' : undefined}
                 className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
               >
                 Explore ↗
