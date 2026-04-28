@@ -62,7 +62,7 @@ function ProjectsTopNavSection() {
         {fallbackSettings.siteTitle}
       </p>
       <div className="flex flex-wrap items-center gap-2">
-        <Link href="/LukasBohez/" className="btn-ui btn-ghost-ui text-sm">
+        <Link href="/" className="btn-ui btn-ghost-ui text-sm">
           Back to Portfolio
         </Link>
         <ThemeToggle />
@@ -72,7 +72,7 @@ function ProjectsTopNavSection() {
 }
 
 function ProjectsIntroSection() {
-  const badges = ['TypeScript', 'Next.js 15', 'Apache'];
+  const badges = ['TypeScript', 'Next.js 16.2', 'Apache'];
 
   return (
     <Card className="mb-8 rounded-3xl sm:p-8">
@@ -80,7 +80,7 @@ function ProjectsIntroSection() {
       <h1 className="text-3xl font-extrabold text-primary sm:text-4xl">Projects by Lukas Bohez</h1>
       <p className="mt-3 max-w-2xl text-base leading-relaxed text-default">
         All of my projects, from AI-powered quiz platforms to cross-platform desktop apps and
-        browser games. Built with Next.js 15, deployed on Apache.
+        browser games. Built with Next.js 16.2, deployed on Apache.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {badges.map((badge) => (

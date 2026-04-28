@@ -31,6 +31,9 @@ export function TopHero() {
             <Button href="#projects" variant="primary">
               View featured work
             </Button>
+            <Button href="/projects/" variant="secondary">
+              View all projects →
+            </Button>
             <Button href="#contact" variant="secondary">
               Get in touch
             </Button>

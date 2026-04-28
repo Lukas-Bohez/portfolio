@@ -7,6 +7,7 @@ const navItems = [
   { label: 'Projects', href: '#projects' },
   { label: 'What I Do', href: '#about' },
   { label: 'Contact', href: '#contact' },
+  { label: 'All Projects', href: '/projects/', isExternal: true },
 ];
 
 const baseLinkClass =
@@ -55,7 +56,7 @@ export function Nav() {
             key={item.label}
             href={item.href}
             className={plainLinkClass}
-            aria-label={`Scroll to ${item.label}`}
+            aria-label={item.isExternal ? `Go to ${item.label}` : `Scroll to ${item.label}`}
           >
             {item.label}
           </a>
@@ -78,7 +79,7 @@ export function Nav() {
               key={item.label}
               href={item.href}
               className={`${baseLinkClass} min-h-11 px-3 py-2 text-[11px] sm:text-sm md:text-base`}
-              aria-label={`Scroll to ${item.label}`}
+              aria-label={item.isExternal ? `Go to ${item.label}` : `Scroll to ${item.label}`}
             >
               {item.label}
             </a>

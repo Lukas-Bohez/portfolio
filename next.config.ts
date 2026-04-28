@@ -13,15 +13,19 @@ const nextConfig: NextConfig = {
     : {}),
   ...(isStaticExport ? { output: 'export' } : {}),
   trailingSlash: true,
-  async redirects() {
-    return [
-      {
-        source: '/LukasBohez/cms-demo/:path*',
-        destination: '/LukasBohez/projects/:path*',
-        permanent: true,
-      },
-    ];
-  },
+  ...(!isStaticExport
+    ? {
+        async redirects() {
+          return [
+            {
+              source: '/cms-demo/:path*',
+              destination: '/projects/:path*',
+              permanent: true,
+            },
+          ];
+        },
+      }
+    : {}),
   images: {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],

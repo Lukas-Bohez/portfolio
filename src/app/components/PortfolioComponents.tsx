@@ -459,7 +459,7 @@ export function FeaturedProjects() {
       name: 'Projects Showcase',
       description:
         'Browse the rebranded projects showcase with full project pages for SpireAI, Convert The Spire Reborn, SENTLE, and Industrial Empire.',
-      url: '/LukasBohez/projects/',
+      url: '/projects/',
       tech: ['Projects', 'Portfolio', 'Lukas Bohez'],
       color: 'from-amber-500 to-orange-500',
     },
