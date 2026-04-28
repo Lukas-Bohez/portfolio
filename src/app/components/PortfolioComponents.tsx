@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import Script from 'next/script';
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 
@@ -504,14 +505,23 @@ export function FeaturedProjects() {
               ))}
             </div>
             <div className="mt-5 flex flex-wrap gap-3">
-              <a
-                href={project.url}
-                target={project.url.startsWith('http') ? '_blank' : undefined}
-                rel={project.url.startsWith('http') ? 'noreferrer noopener' : undefined}
-                className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
-              >
-                Explore ↗
-              </a>
+              {project.url.startsWith('http') ? (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
+                >
+                  Explore ↗
+                </a>
+              ) : (
+                <Link
+                  href={project.url}
+                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
+                >
+                  Explore ↗
+                </Link>
+              )}
               {project.downloadUrl ? (
                 <a
                   href={project.downloadUrl}
