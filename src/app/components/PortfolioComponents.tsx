@@ -426,7 +426,7 @@ export function FeaturedProjects() {
       url: 'https://quizthespire.com',
       tech: ['Python', 'FastAPI', 'Apache', 'Content Management'],
       color: 'from-cyan-500 to-blue-500',
-      imageUrl: '/images/projects/quizthespire.png',
+      imageUrl: '/LukasBohez/images/projects/quizthespire.png',
     },
     {
       name: 'Lofi Extension',
@@ -437,7 +437,7 @@ export function FeaturedProjects() {
       downloadLabel: 'Download extension',
       tech: ['JavaScript', 'Browser Extension', 'Audio Player', 'UX'],
       color: 'from-pink-500 to-orange-500',
-      imageUrl: '/images/projects/LofiExtension.png',
+      imageUrl: '/LukasBohez/images/projects/LofiExtension.png',
     },
     {
       name: 'Convert the Spire Reborn',
@@ -449,16 +449,18 @@ export function FeaturedProjects() {
       downloadLabel: 'Download Windows ZIP',
       tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', '8 release assets'],
       color: 'from-violet-500 to-purple-500',
-      imageUrl: '/images/projects/convertthespirereborn.png',
+      imageUrl: '/LukasBohez/images/projects/convertthespirereborn.png',
     },
     {
       name: 'BitPlayer: Torrent & Media',
       description:
         'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.2.3. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
-      url: 'https://quizthespire.com/pages/vault/',
-      tech: ['Integrated into Convert v10.2.3', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
+      url: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai.bitplayer',
+      downloadUrl: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai.bitplayer',
+      downloadLabel: 'Get on Google Play',
+      tech: ['Integrated into Convert v10.2.3', 'Flutter', 'Dart', 'Torrenting', 'Android'],
       color: 'from-emerald-500 to-teal-500',
-      imageUrl: '/images/projects/bitplayer.png',
+      imageUrl: '/LukasBohez/images/projects/bitplayer.png',
     },
     {
       name: 'Projects Showcase',
@@ -467,7 +469,7 @@ export function FeaturedProjects() {
       url: '/projects/',
       tech: ['Projects', 'Portfolio', 'Lukas Bohez'],
       color: 'from-amber-500 to-orange-500',
-      imageUrl: '/images/projects/projectShowcase.png',
+      imageUrl: '/LukasBohez/images/projects/projectShowcase.png',
     },
   ];
 

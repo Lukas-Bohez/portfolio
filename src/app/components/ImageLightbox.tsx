@@ -231,16 +231,28 @@ export default function ImageLightbox({
       setIsFullscreen(!!document.fullscreenElement);
     };
 
+    const handleWheelEvent = (e: WheelEvent) => {
+      e.preventDefault();
+      const newZoom = Math.max(1, Math.min(4, zoom - e.deltaY * 0.001));
+      setZoom(newZoom);
+      if (newZoom === 1) {
+        setPanX(0);
+        setPanY(0);
+      }
+    };
+
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('fullscreenchange', handleFullscreenChange);
+    containerRef.current?.addEventListener('wheel', handleWheelEvent, { passive: false });
     document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      containerRef.current?.removeEventListener('wheel', handleWheelEvent);
       document.body.style.overflow = '';
     };
-  }, [isOpen, isFullscreen, zoom]);
+  }, [isOpen, isFullscreen, zoom, panX, panY]);
 
   return (
     <>
@@ -291,8 +303,9 @@ export default function ImageLightbox({
         <div
           ref={containerRef}
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-4"
-          onClick={() => setIsOpen(false)}
-          onWheel={handleWheel}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsOpen(false);
+          }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -314,7 +327,7 @@ export default function ImageLightbox({
                 isDragging ? 'cursor-grabbing' : 'cursor-grab'
               }`}
               style={{
-                transform: `scale(${zoom}) translate(${panX}px, ${panY}px)`,
+                transform: `scale(${zoom}) translate(${panX / zoom}px, ${panY / zoom}px)`,
                 transformOrigin: 'center center',
               }}
               onDoubleClick={handleDoubleClick}
@@ -323,10 +336,13 @@ export default function ImageLightbox({
           </div>
 
           {/* Controls bar */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-lg bg-black/60 px-4 py-3">
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-2 rounded-xl bg-black/80 px-4 py-2 backdrop-blur-sm">
             <button
               type="button"
-              onClick={handleZoomOut}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomOut();
+              }}
               className="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20"
               aria-label="Zoom out"
             >
@@ -340,7 +356,10 @@ export default function ImageLightbox({
 
             <button
               type="button"
-              onClick={handleZoomIn}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomIn();
+              }}
               className="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20"
               aria-label="Zoom in"
             >
@@ -350,7 +369,10 @@ export default function ImageLightbox({
 
             <button
               type="button"
-              onClick={handleResetZoom}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleResetZoom();
+              }}
               className="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20"
               aria-label="Reset zoom"
             >
@@ -360,7 +382,10 @@ export default function ImageLightbox({
 
             <button
               type="button"
-              onClick={handleFullscreen}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFullscreen();
+              }}
               className="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20"
               aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
@@ -369,7 +394,10 @@ export default function ImageLightbox({
 
             <button
               type="button"
-              onClick={handleCloseLightbox}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCloseLightbox();
+              }}
               className="flex items-center gap-1 rounded-lg bg-red-600/40 px-3 py-2 text-white transition hover:bg-red-600/60"
               aria-label="Close lightbox"
             >
