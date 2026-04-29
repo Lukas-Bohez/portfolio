@@ -104,7 +104,7 @@ function ProjectsIntroSection() {
         <Link
           href="https://github.com/Lukas-Bohez/portfolio"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="font-semibold text-blue-500 hover:text-blue-600"
         >
           View source on GitHub -&gt;

@@ -1,7 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import type { CSSProperties } from 'react';
+
+import ImageLightbox from '@/app/components/ImageLightbox';
 
 type GalleryImage = {
   id: string;
@@ -38,14 +39,12 @@ export function GalleryMarquee({
       >
         {doubled.map((img, idx) => (
           <div key={`${img.id}-${idx}`} className="marquee-item" aria-hidden={idx >= images.length}>
-            <Image
+            <ImageLightbox
               src={img.src}
               alt={idx < images.length ? img.alt : ''}
+              imgClassName="marquee-img"
               width={320}
               height={200}
-              className="marquee-img"
-              loading={idx < 3 ? 'eager' : 'lazy'}
-              unoptimized
             />
           </div>
         ))}

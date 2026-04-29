@@ -1,6 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+import ImageLightbox from '@/app/components/ImageLightbox';
 
 import { fallbackProjects } from '../constants/fallbackContent';
 
@@ -30,12 +31,11 @@ export default async function ProjectDetailPage({ params }: Params) {
     <main id="main-content" className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
       <article className="overflow-hidden rounded-3xl border border-surface bg-surface shadow-lg">
         <div className="relative aspect-[16/9] w-full bg-secondary">
-          <Image
+          <ImageLightbox
             src={project.imageUrl}
             alt={`Cover image for ${project.title}`}
+            className="h-full w-full"
             fill
-            sizes="(max-width: 768px) 100vw, 900px"
-            className="object-cover"
           />
         </div>
         <div className="p-6 sm:p-8">
