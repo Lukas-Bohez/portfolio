@@ -22,8 +22,13 @@ export const metadata: Metadata = {
   description:
     'Portfolio of Lukas Bohez, full-stack web developer. Full-stack work in Python/FastAPI, TypeScript, Flutter and cross-platform development. Projects include QuizTheSpire, Convert The Spire Reborn v10.2.3, and the Lofi browser extension.',
   icons: {
-    icon: '/iceball.svg',
-    apple: '/iceball.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: '/favicon-192x192.png',
   },
   openGraph: {
     title: 'Lukas Bohez | Full-Stack Developer · Flutter · Python · Next.js',

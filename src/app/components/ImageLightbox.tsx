@@ -259,7 +259,7 @@ export default function ImageLightbox({
       <div className={`relative inline-block ${className}`}>
         <button
           type="button"
-          className="group relative block w-full cursor-zoom-in overflow-hidden rounded-lg"
+          className={`group relative block w-full cursor-zoom-in overflow-hidden rounded-lg ${fill ? 'h-full' : ''}`}
           onClick={() => setIsOpen(true)}
           aria-label={`Zoom in on ${alt}`}
           title="Click to zoom"
@@ -268,7 +268,7 @@ export default function ImageLightbox({
             <img
               src={src}
               alt={alt}
-              className={`w-full h-full object-cover ${imgClassName}`}
+              className={`w-full h-full object-contain bg-gray-100 ${imgClassName}`}
               loading="lazy"
               decoding="async"
             />
@@ -278,7 +278,7 @@ export default function ImageLightbox({
               alt={alt}
               width={width}
               height={height}
-              className={`w-full object-cover ${imgClassName}`}
+              className={`w-full object-contain bg-gray-100 ${imgClassName}`}
             />
           )}
           <div className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100">

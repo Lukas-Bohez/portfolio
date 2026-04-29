@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 
+import ImageLightbox from './ImageLightbox';
 import { ThemeToggle } from './ThemeToggle';
 import profilePhoto from '../../../WIN_20260329_16_44_00_Pro.jpg';
 
@@ -164,6 +165,47 @@ export function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+export function ProofSpotlightSection() {
+  return (
+    <Section
+      id="proof-spotlight"
+      title="100+ Video Proof"
+      subtitle="A direct screenshot showing the app handling large playlist downloads in one place"
+    >
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center">
+        <div className="space-y-4">
+          <p className="text-base sm:text-lg leading-relaxed text-default">
+            This is the proof image I want front and center, because the app does support 100+ video
+            playlists, and the gallery should make that obvious without cropping the image into
+            something misleading.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {['100+ videos', 'Full playlists', 'Zoomable proof', 'Fullscreen view'].map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1.5 text-sm font-medium text-default"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+          <p className="text-sm text-muted leading-relaxed">
+            Click the image to open the shared zoom + fullscreen viewer.
+          </p>
+        </div>
+
+        <ImageLightbox
+          src="/imagesPortfolio/additionalProof100+videos.png"
+          alt="Proof screenshot showing 100+ video downloads supported"
+          fill
+          className="w-full h-[200px] overflow-hidden rounded-t-xl bg-gray-100 shadow-md"
+          imgClassName="rounded-t-xl"
+        />
+      </div>
+    </Section>
   );
 }
 
@@ -455,8 +497,8 @@ export function FeaturedProjects() {
       name: 'BitPlayer: Torrent & Media',
       description:
         'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.2.3. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
-      url: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai.bitplayer',
-      downloadUrl: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai.bitplayer',
+      url: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai',
+      downloadUrl: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai',
       downloadLabel: 'Get on Google Play',
       tech: ['Integrated into Convert v10.2.3', 'Flutter', 'Dart', 'Torrenting', 'Android'],
       color: 'from-emerald-500 to-teal-500',
@@ -491,12 +533,15 @@ export function FeaturedProjects() {
           >
             <div className="mb-4">
               {project.imageUrl ? (
-                <img
-                  src={project.imageUrl}
-                  alt={project.name}
-                  className="w-full h-32 object-cover rounded-lg mb-3"
-                  loading="lazy"
-                />
+                <div className="mb-3 h-[200px] w-full overflow-hidden rounded-t-xl bg-gray-100">
+                  <ImageLightbox
+                    src={project.imageUrl}
+                    alt={project.name}
+                    fill
+                    className="h-full w-full"
+                    imgClassName="rounded-t-xl"
+                  />
+                </div>
               ) : (
                 <div
                   className={`h-3 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-90 transition hover:opacity-100 gradient-sweep mb-3`}

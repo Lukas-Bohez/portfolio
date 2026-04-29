@@ -12,6 +12,11 @@ const FeaturedProjects = dynamic(
   { ssr: false }
 );
 
+const ProofSpotlightSection = dynamic(
+  () => import('./PortfolioComponents').then((module) => module.ProofSpotlightSection),
+  { ssr: false }
+);
+
 const HumorSection = dynamic(
   () => import('./PortfolioComponents').then((module) => module.HumorSection),
   { ssr: false }
@@ -48,6 +53,7 @@ export function DeferredHomepageSections() {
   return (
     <>
       <RecruiterWowStrip />
+      <ProofSpotlightSection />
       <FeaturedProjects />
       <HumorSection />
       <AboutAndSkills />

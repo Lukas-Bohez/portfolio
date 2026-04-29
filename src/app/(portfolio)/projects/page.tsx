@@ -9,6 +9,7 @@ import { SkeletonCard } from '@/app/components/ui/SkeletonCard';
 import { ProjectsGallery, type Project } from './components/ProjectsGallery';
 import { fallbackProfile, fallbackProjects, fallbackSettings } from './constants/fallbackContent';
 import { GalleryMarquee } from './GalleryMarquee';
+import { ProofSpotlightSection } from '../../components/PortfolioComponents';
 import { ThemeToggle } from '../../components/ThemeToggle';
 
 type GalleryImage = {
@@ -224,6 +225,10 @@ export default function ProjectsPage() {
 
         <Suspense fallback={<SuspenseCardFallback />}>
           <ProjectsProfileSection />
+        </Suspense>
+
+        <Suspense fallback={<SuspenseCardFallback />}>
+          <ProofSpotlightSection />
         </Suspense>
 
         <Suspense fallback={<SuspenseCardFallback />}>
