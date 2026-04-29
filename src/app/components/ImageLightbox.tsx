@@ -253,12 +253,12 @@ export default function ImageLightbox({
           title="Click to zoom"
         >
           {fill ? (
-            <Image
+            <img
               src={src}
               alt={alt}
-              fill
-              className={`object-cover ${imgClassName}`}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className={`w-full h-full object-cover ${imgClassName}`}
+              loading="lazy"
+              decoding="async"
             />
           ) : (
             <Image
