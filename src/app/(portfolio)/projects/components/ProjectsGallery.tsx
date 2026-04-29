@@ -140,7 +140,7 @@ export function ProjectsGallery({ projects }: Props) {
                         d="M10 6H6v12h12v-6m0-6h6M4 20h16"
                       />
                     </svg>
-                    View details
+                    View screenshots →
                   </button>
                 </div>
               </div>
@@ -178,14 +178,14 @@ export function ProjectsGallery({ projects }: Props) {
                       href={`/projects/${project.slug}`}
                       className="text-sm font-semibold text-blue-500 hover:text-blue-600"
                     >
-                      Open details ↗
+                      View screenshots →
                     </Link>
                   ) : null}
                   {project.demoUrl ? (
                     <a
                       href={project.demoUrl}
                       target="_blank"
-                      rel="noreferrer noopener"
+                      rel="noopener noreferrer"
                       className="text-sm font-semibold text-emerald-500 hover:text-emerald-600"
                     >
                       External demo ↗

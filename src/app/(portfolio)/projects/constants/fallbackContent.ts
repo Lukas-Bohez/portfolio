@@ -19,8 +19,7 @@ export const fallbackProjects = [
     summary:
       'Real-time multiplayer quiz platform with AI-generated themes and live leaderboards. Teachers host sessions, students join with a room code and compete simultaneously.',
     stack: ['Next.js', 'TypeScript', 'WebSockets'],
-    imageUrl:
-      'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images/spireAi.png',
+    imageUrl: '/images/projects/quizthespire.png',
     demoUrl: 'https://quizthespire.com/pages/spire-ai/',
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },
     tags: [{ title: 'EdTech' }, { title: 'AI' }, { title: 'Real-time' }],
@@ -32,7 +31,7 @@ export const fallbackProjects = [
     summary:
       'Cross-platform desktop app for downloading media in 4K/8K from 1,800+ sites. Built with Flutter/Dart, integrates yt-dlp, includes a full integrated media player and torrent client. 950+ downloads worldwide.',
     stack: ['Flutter', 'Dart', 'yt-dlp', 'Windows', 'Android', 'Linux'],
-    imageUrl: withBasePath('/screenshots/mediaPlayer.png'),
+    imageUrl: '/images/projects/convertthespirereborn.png',
     demoUrl: 'https://quizthespire.com/',
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },
     tags: [{ title: 'Desktop App' }, { title: 'Open Source' }, { title: 'GPLv3' }],

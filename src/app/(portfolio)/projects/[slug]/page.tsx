@@ -12,6 +12,12 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   return fallbackProjects.map((project) => ({ slug: project.slug }));
 }
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const project = fallbackProjects.find((entry) => entry.slug === params.slug);
+  if (!project) return { title: 'Project | Lukas Bohez' };
+  return { title: `${project.title} Screenshots | Lukas Bohez` };
+}
+
 export default async function ProjectDetailPage({ params }: Params) {
   const { slug } = await params;
   const project = fallbackProjects.find((entry) => entry.slug === slug);
@@ -36,14 +42,14 @@ export default async function ProjectDetailPage({ params }: Params) {
           <h1 className="text-3xl font-bold text-primary">{project.title}</h1>
           <p className="mt-4 text-base leading-relaxed text-default">{project.summary}</p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link href="/projects" className="btn-ui btn-ghost-ui">
-              Back to projects
+            <Link href="/LukasBohez/projects/" className="btn-ui btn-ghost-ui">
+              ← Back to all screenshots
             </Link>
             {project.demoUrl ? (
               <a
                 href={project.demoUrl}
                 target="_blank"
-                rel="noreferrer noopener"
+                rel="noopener noreferrer"
                 className="btn-ui btn-primary-ui"
               >
                 Open project

@@ -55,6 +55,12 @@ const appGalleryImages: GalleryImage[] = [
   },
 ];
 
+export const metadata = {
+  title: 'Project Screenshots | Lukas Bohez',
+  description:
+    'Screenshots and visuals from SpireAI, Convert The Spire Reborn, SENTLE, and Industrial Empire.',
+};
+
 function ProjectsTopNavSection() {
   return (
     <nav className="sticky top-0 z-40 mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-surface bg-surface/95 p-3 shadow-lg backdrop-blur">
@@ -76,11 +82,13 @@ function ProjectsIntroSection() {
 
   return (
     <Card className="mb-8 rounded-3xl sm:p-8">
-      <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-primary">PROJECTS</p>
-      <h1 className="text-3xl font-extrabold text-primary sm:text-4xl">Projects by Lukas Bohez</h1>
+      <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-primary">SHOWCASE</p>
+      <h1 className="text-3xl font-extrabold text-primary sm:text-4xl">
+        Project Screenshots &amp; Visuals
+      </h1>
       <p className="mt-3 max-w-2xl text-base leading-relaxed text-default">
-        All of my projects, from AI-powered quiz platforms to cross-platform desktop apps and
-        browser games. Built with Next.js 16.2, deployed on Apache.
+        A visual showcase of my work — real screenshots from SpireAI, Convert The Spire Reborn,
+        SENTLE, and Industrial Empire. Built with Next.js 15.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {badges.map((badge) => (
@@ -131,8 +139,10 @@ function ProjectsProfileSection() {
 function ProjectsSection() {
   return (
     <Card className="rounded-3xl sm:p-8">
-      <h2 className="text-2xl font-bold text-primary">All Projects</h2>
-      <p className="mt-2 text-sm text-muted">Click on any project to view details.</p>
+      <h2 className="text-2xl font-bold text-primary">Example Project Pictures</h2>
+      <p className="mt-2 text-sm text-muted">
+        Screenshots and visuals from my projects. Click any image to view fullscreen.
+      </p>
 
       <div className="mt-6">
         <ProjectsGallery projects={fallbackProjects as unknown as Project[]} />

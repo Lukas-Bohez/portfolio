@@ -32,7 +32,7 @@ export function TopHero() {
               View featured work
             </Button>
             <Button href="/projects/" variant="secondary">
-              View all projects →
+              View example project pictures →
             </Button>
             <Button href="#contact" variant="secondary">
               Get in touch
