@@ -426,6 +426,7 @@ export function FeaturedProjects() {
       url: 'https://quizthespire.com',
       tech: ['Python', 'FastAPI', 'Apache', 'Content Management'],
       color: 'from-cyan-500 to-blue-500',
+      imageUrl: '/images/projects/quizthespire.png',
     },
     {
       name: 'Lofi Extension',
@@ -436,6 +437,7 @@ export function FeaturedProjects() {
       downloadLabel: 'Download extension',
       tech: ['JavaScript', 'Browser Extension', 'Audio Player', 'UX'],
       color: 'from-pink-500 to-orange-500',
+      imageUrl: '/images/projects/LofiExtension.png',
     },
     {
       name: 'Convert the Spire Reborn',
@@ -447,6 +449,7 @@ export function FeaturedProjects() {
       downloadLabel: 'Download Windows ZIP',
       tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', '8 release assets'],
       color: 'from-violet-500 to-purple-500',
+      imageUrl: '/images/projects/convertthespirereborn.png',
     },
     {
       name: 'BitPlayer: Torrent & Media',
@@ -455,6 +458,7 @@ export function FeaturedProjects() {
       url: 'https://quizthespire.com/pages/vault/',
       tech: ['Integrated into Convert v10.2.3', 'Flutter', 'Dart', 'Torrenting', 'Testing Group'],
       color: 'from-emerald-500 to-teal-500',
+      imageUrl: '/images/projects/bitplayer.png',
     },
     {
       name: 'Projects Showcase',
@@ -463,6 +467,7 @@ export function FeaturedProjects() {
       url: '/projects/',
       tech: ['Projects', 'Portfolio', 'Lukas Bohez'],
       color: 'from-amber-500 to-orange-500',
+      imageUrl: '/images/projects/projectShowcase.png',
     },
   ];
 
@@ -482,13 +487,27 @@ export function FeaturedProjects() {
             data-reveal-order={index}
             style={{ transformStyle: 'preserve-3d' }}
           >
-            <div className="mb-4 flex items-center gap-3">
-              <div
-                className={`h-3 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-90 transition hover:opacity-100 gradient-sweep`}
-              />
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-surface bg-surface text-xs font-black text-primary shadow-sm">
-                {project.name.replace(/[^A-Z]/g, '').slice(0, 1) || project.name.charAt(0)}
-              </span>
+            <div className="mb-4">
+              {project.imageUrl ? (
+                <img
+                  src={project.imageUrl}
+                  alt={project.name}
+                  className="w-full h-32 object-cover rounded-lg mb-3"
+                  loading="lazy"
+                />
+              ) : (
+                <div
+                  className={`h-3 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-90 transition hover:opacity-100 gradient-sweep mb-3`}
+                />
+              )}
+              <div className="flex items-center gap-3">
+                <div
+                  className={`h-2 flex-1 rounded-full bg-gradient-to-r ${project.color} opacity-60 transition hover:opacity-80`}
+                />
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-surface bg-surface text-xs font-black text-primary shadow-sm">
+                  {project.name.replace(/[^A-Z]/g, '').slice(0, 1) || project.name.charAt(0)}
+                </span>
+              </div>
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-primary">{project.name}</h3>
             <p className="mt-3 text-base sm:text-lg text-default leading-relaxed">
