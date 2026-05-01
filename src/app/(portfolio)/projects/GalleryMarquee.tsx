@@ -45,6 +45,7 @@ export function GalleryMarquee({
               imgClassName="marquee-img"
               width={320}
               height={200}
+              disableZoom={true}
             />
           </div>
         ))}

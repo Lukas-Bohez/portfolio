@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface ImageLightboxProps {
   src: string;
@@ -11,6 +12,7 @@ interface ImageLightboxProps {
   width?: number;
   height?: number;
   fill?: boolean;
+  disableZoom?: boolean;
 }
 
 export default function ImageLightbox({
@@ -21,6 +23,7 @@ export default function ImageLightbox({
   width,
   height,
   fill = false,
+  disableZoom = false,
 }: ImageLightboxProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [zoom, setZoom] = useState(1);
@@ -51,19 +54,7 @@ export default function ImageLightbox({
     };
   };
 
-  const handleWheel = (e: React.WheelEvent) => {
-    if (!isOpen) return;
-    e.preventDefault();
-
-    const newZoom = Math.max(1, Math.min(4, zoom - e.deltaY * 0.001));
-    setZoom(newZoom);
-
-    // If zooming back to 1, reset pan
-    if (newZoom === 1) {
-      setPanX(0);
-      setPanY(0);
-    }
-  };
+  // Note: wheel zoom is handled via handleWheelEvent listener in useEffect
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (zoom <= 1) return;
@@ -243,170 +234,199 @@ export default function ImageLightbox({
 
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('fullscreenchange', handleFullscreenChange);
-    containerRef.current?.addEventListener('wheel', handleWheelEvent, { passive: false });
+    const container = containerRef.current;
+    container?.addEventListener('wheel', handleWheelEvent, { passive: false });
     document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      containerRef.current?.removeEventListener('wheel', handleWheelEvent);
+      container?.removeEventListener('wheel', handleWheelEvent);
       document.body.style.overflow = '';
     };
-  }, [isOpen, isFullscreen, zoom, panX, panY]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   return (
     <>
       <div className={`relative inline-block ${className}`}>
-        <button
-          type="button"
-          className={`group relative block w-full cursor-zoom-in overflow-hidden rounded-lg ${fill ? 'h-full' : ''}`}
-          onClick={() => setIsOpen(true)}
-          aria-label={`Zoom in on ${alt}`}
-          title="Click to zoom"
-        >
-          {fill ? (
-            <img
-              src={src}
-              alt={alt}
-              className={`w-full h-full object-contain bg-gray-100 ${imgClassName}`}
-              loading="lazy"
-              decoding="async"
-            />
-          ) : (
-            <Image
-              src={src}
-              alt={alt}
-              width={width}
-              height={height}
-              className={`w-full object-contain bg-gray-100 ${imgClassName}`}
-            />
-          )}
-          <div className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-            <svg
-              className="h-5 w-5 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"
+        {disableZoom ? (
+          <>
+            {fill ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={src}
+                alt={alt}
+                className={`w-full h-full object-cover ${imgClassName}`}
+                loading="lazy"
+                decoding="async"
               />
-            </svg>
-          </div>
-        </button>
+            ) : (
+              <Image
+                src={src}
+                alt={alt}
+                width={width}
+                height={height}
+                className={`w-full object-cover ${imgClassName}`}
+              />
+            )}
+          </>
+        ) : (
+          <button
+            type="button"
+            className={`group relative block w-full cursor-zoom-in overflow-hidden rounded-lg ${fill ? 'h-full' : ''}`}
+            onClick={() => setIsOpen(true)}
+            aria-label={`Zoom in on ${alt}`}
+            title="Click to zoom"
+          >
+            {fill ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={src}
+                alt={alt}
+                className={`w-full h-full object-cover ${imgClassName}`}
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <Image
+                src={src}
+                alt={alt}
+                width={width}
+                height={height}
+                className={`w-full object-cover ${imgClassName}`}
+              />
+            )}
+            <div className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <svg
+                className="h-5 w-5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"
+                />
+              </svg>
+            </div>
+          </button>
+        )}
       </div>
 
-      {isOpen && (
-        <div
-          ref={containerRef}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-4"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setIsOpen(false);
-          }}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          {/* Main image container */}
-          <div
-            className="relative flex flex-1 items-center justify-center overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              ref={imageRef}
-              src={src}
-              alt={alt}
-              className={`max-h-[calc(100%-100px)] max-w-[90vw] object-contain transition-transform duration-75 ${
-                isDragging ? 'cursor-grabbing' : 'cursor-grab'
-              }`}
-              style={{
-                transform: `scale(${zoom}) translate(${panX / zoom}px, ${panY / zoom}px)`,
-                transformOrigin: 'center center',
-              }}
-              onDoubleClick={handleDoubleClick}
-              draggable={false}
-            />
-          </div>
-
-          {/* Controls bar */}
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-2 rounded-xl bg-black/80 px-4 py-2 backdrop-blur-sm">
-            <button
-              type="button"
+      {isOpen && typeof document !== 'undefined'
+        ? createPortal(
+            <div
+              ref={containerRef}
+              className="fixed inset-0 z-50 flex flex-col bg-black/90"
               onClick={(e) => {
-                e.stopPropagation();
-                handleZoomOut();
+                if (e.target === e.currentTarget) setIsOpen(false);
               }}
-              className="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20"
-              aria-label="Zoom out"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
-              <span className="text-lg">−</span>
-              <span className="text-sm">Out</span>
-            </button>
+              {/* Main image container - fills available space */}
+              <div
+                className="relative flex flex-1 items-center justify-center overflow-hidden w-full"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  ref={imageRef}
+                  src={src}
+                  alt={alt}
+                  className={`w-full h-full object-contain transition-transform duration-75 ${
+                    isDragging ? 'cursor-grabbing' : 'cursor-grab'
+                  }`}
+                  style={{
+                    transform: `scale(${zoom}) translate(${panX / zoom}px, ${panY / zoom}px)`,
+                    transformOrigin: 'center center',
+                  }}
+                  onDoubleClick={handleDoubleClick}
+                  draggable={false}
+                />
+              </div>
 
-            <div className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2">
-              <span className="font-mono text-sm font-semibold text-white">{zoom.toFixed(1)}×</span>
-            </div>
+              {/* Controls bar */}
+              <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-2 rounded-xl bg-black/85 px-4 py-3 backdrop-blur-sm border border-white/10 shadow-lg">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleZoomOut();
+                  }}
+                  className="flex items-center gap-1 rounded-lg bg-white/10 hover:bg-white/20 px-3 py-2 text-white transition"
+                  aria-label="Zoom out"
+                >
+                  <span className="text-lg font-semibold">−</span>
+                  <span className="text-xs font-medium">Out</span>
+                </button>
 
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleZoomIn();
-              }}
-              className="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20"
-              aria-label="Zoom in"
-            >
-              <span className="text-lg">+</span>
-              <span className="text-sm">In</span>
-            </button>
+                <div className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 border border-white/5">
+                  <span className="font-mono text-sm font-bold text-white">{zoom.toFixed(1)}×</span>
+                </div>
 
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleResetZoom();
-              }}
-              className="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20"
-              aria-label="Reset zoom"
-            >
-              <span className="text-sm">↺</span>
-              <span className="text-sm">Reset</span>
-            </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleZoomIn();
+                  }}
+                  className="flex items-center gap-1 rounded-lg bg-white/10 hover:bg-white/20 px-3 py-2 text-white transition"
+                  aria-label="Zoom in"
+                >
+                  <span className="text-lg font-semibold">+</span>
+                  <span className="text-xs font-medium">In</span>
+                </button>
 
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleFullscreen();
-              }}
-              className="flex items-center gap-1 rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20"
-              aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-            >
-              <span className="text-lg">{isFullscreen ? '⤢' : '⛶'}</span>
-            </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleResetZoom();
+                  }}
+                  className="flex items-center gap-1 rounded-lg bg-white/10 hover:bg-white/20 px-3 py-2 text-white transition"
+                  aria-label="Reset zoom"
+                >
+                  <span className="text-lg">↺</span>
+                </button>
 
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCloseLightbox();
-              }}
-              className="flex items-center gap-1 rounded-lg bg-red-600/40 px-3 py-2 text-white transition hover:bg-red-600/60"
-              aria-label="Close lightbox"
-            >
-              <span className="text-lg">✕</span>
-              <span className="text-sm">Close</span>
-            </button>
-          </div>
-        </div>
-      )}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleFullscreen();
+                  }}
+                  className="flex items-center gap-1 rounded-lg bg-white/10 hover:bg-white/20 px-3 py-2 text-white transition"
+                  aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+                >
+                  <span className="text-lg">{isFullscreen ? '⤢' : '⛶'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCloseLightbox();
+                  }}
+                  className="flex items-center gap-1 rounded-lg bg-red-600/40 hover:bg-red-600/60 px-3 py-2 text-white transition font-semibold ml-1"
+                  aria-label="Close lightbox"
+                >
+                  <span className="text-lg">✕</span>
+                  <span className="text-xs font-medium">Close</span>
+                </button>
+              </div>
+            </div>,
+            document.body
+          )
+        : null}
     </>
   );
 }

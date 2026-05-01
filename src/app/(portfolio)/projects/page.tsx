@@ -5,6 +5,7 @@ import { Card } from '@/app/components/ui/Card';
 import { ScreenshotLightbox } from '@/app/components/ui/ScreenshotLightbox';
 import { Section } from '@/app/components/ui/Section';
 import { SkeletonCard } from '@/app/components/ui/SkeletonCard';
+import { withBasePath } from '@/lib/basePath';
 
 import { ProjectsGallery, type Project } from './components/ProjectsGallery';
 import { fallbackProfile, fallbackProjects, fallbackSettings } from './constants/fallbackContent';
@@ -19,6 +20,11 @@ type GalleryImage = {
 };
 
 const appGalleryImages: GalleryImage[] = [
+  {
+    id: 'gallery-proof-100-plus',
+    src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/imagesPortfolio/additionalProof100%2Bvideos.png',
+    alt: 'Proof screenshot showing 100+ playlist downloads supported',
+  },
   {
     id: 'gallery-search',
     src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/fullSearchFunctionality.png',
@@ -53,6 +59,11 @@ const appGalleryImages: GalleryImage[] = [
     id: 'gallery-torrent',
     src: 'https://raw.githubusercontent.com/Lukas-Bohez/project-one/main/frontend/images-app/fullTorrentingFunctionality.png',
     alt: 'Torrent workflow screen with legal use guidance',
+  },
+  {
+    id: 'gallery-stats',
+    src: withBasePath('/images-app/stats.png'),
+    alt: 'Stats view showing 100+ converted playlists and usage totals',
   },
 ];
 

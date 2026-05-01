@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { Container } from '../components/Container';
 import { DeferredHomepageSections } from '../components/DeferredHomepageSections';
 import { Nav } from '../components/Nav';
@@ -13,7 +15,9 @@ export default function Home() {
       <Container className="space-y-12 py-4">
         <TopHero />
         <StatsStatic />
-        <DeferredHomepageSections />
+        <Suspense fallback={null}>
+          <DeferredHomepageSections />
+        </Suspense>
       </Container>
     </main>
   );

@@ -1,17 +1,59 @@
+import { z } from 'zod';
+
 import { withBasePath } from '@/lib/basePath';
 
-export const fallbackProfile = {
+// Schema definitions for type-safe data
+const TagSchema = z.object({
+  title: z.string(),
+});
+
+const AuthorSchema = z.object({
+  name: z.string(),
+  bio: z.string().optional(),
+});
+
+const ProjectSchema = z.object({
+  _id: z.string(),
+  title: z.string(),
+  slug: z.string(),
+  summary: z.string(),
+  stack: z.array(z.string()),
+  imageUrl: z.string(),
+  demoUrl: z.string(),
+  author: AuthorSchema.optional(),
+  tags: z.array(TagSchema).optional(),
+});
+
+const ProfileSchema = z.object({
+  title: z.string(),
+  bio: z.string(),
+});
+
+const SettingsSchema = z.object({
+  siteTitle: z.string(),
+  footerText: z.string(),
+  spotlightText: z.string(),
+});
+
+// Type exports from schemas
+export type Tag = z.infer<typeof TagSchema>;
+export type Author = z.infer<typeof AuthorSchema>;
+export type Project = z.infer<typeof ProjectSchema>;
+export type Profile = z.infer<typeof ProfileSchema>;
+export type Settings = z.infer<typeof SettingsSchema>;
+
+export const fallbackProfile = ProfileSchema.parse({
   title: 'About Lukas Bohez',
   bio: 'Full-stack developer and indie creator from Belgium. I build SpireAI, Convert The Spire Reborn, SENTLE, and Industrial Empire. All projects are free and open source under GPLv3.',
-};
+});
 
-export const fallbackSettings = {
+export const fallbackSettings = SettingsSchema.parse({
   siteTitle: 'Lukas Bohez — Projects',
   footerText: 'Built with Next.js 15 App Router — Deployed on Apache.',
   spotlightText: 'A compact snapshot of the four projects featured below.',
-};
+});
 
-export const fallbackProjects = [
+export const fallbackProjects: Project[] = ProjectSchema.array().parse([
   {
     _id: 'fallback-spireai',
     title: 'SpireAI',
@@ -62,4 +104,4 @@ export const fallbackProjects = [
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },
     tags: [{ title: 'Browser Game' }, { title: 'Idle' }],
   },
-] as const;
+]);
