@@ -119,7 +119,7 @@ export function Hero() {
           </p>
           <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
             I care about backend architecture, clear UX, and deployments that hold up in the real
-            world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.2.3, and
+            world. This portfolio highlights Quiz The Spire, Convert The Spire Reborn v10.7.1, and
             the Lofi browser extension.
           </p>
 
@@ -197,13 +197,15 @@ export function ProofSpotlightSection() {
           </p>
         </div>
 
-        <ImageLightbox
-          src="/imagesPortfolio/additionalProof100+videos.png"
-          alt="Proof screenshot showing 100+ video downloads supported"
-          fill
-          className="w-full h-[200px] overflow-hidden rounded-t-xl bg-gray-100 shadow-md"
-          imgClassName="rounded-t-xl"
-        />
+        <div className="w-full overflow-hidden rounded-t-xl bg-gray-100 shadow-md">
+          <ImageLightbox
+            src="/imagesPortfolio/additionalProof100+videos.png"
+            alt="Proof screenshot showing 100+ video downloads supported"
+            fill
+            className="w-full h-full min-h-[220px]"
+            imgClassName="rounded-t-xl object-contain"
+          />
+        </div>
       </div>
     </Section>
   );
@@ -484,10 +486,10 @@ export function FeaturedProjects() {
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. v10.2.3 improves crash resilience for long-running sessions while keeping BitPlayer integrated. 8 release assets are available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
-      url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/tag/v10.2.3',
+        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. v10.7.1 improves crash resilience for long-running sessions while keeping BitPlayer integrated. Multiple release assets are available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
+      url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/tag/v10.7.1',
       downloadUrl:
-        'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/download/v10.2.3/ConvertTheSpireReborn-windows-x64.zip',
+        'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/download/v10.7.1/ConvertTheSpireReborn-windows-x64.zip',
       downloadLabel: 'Download Windows ZIP',
       tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', '8 release assets'],
       color: 'from-violet-500 to-purple-500',
@@ -496,11 +498,11 @@ export function FeaturedProjects() {
     {
       name: 'BitPlayer: Torrent & Media',
       description:
-        'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.2.3. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
+        'BitPlayer: Torrent & Media is now part of Convert The Spire Reborn v10.7.1. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
       url: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai',
       downloadUrl: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai',
       downloadLabel: 'Get on Google Play',
-      tech: ['Integrated into Convert v10.2.3', 'Flutter', 'Dart', 'Torrenting', 'Android'],
+      tech: ['Integrated into Convert v10.7.1', 'Flutter', 'Dart', 'Torrenting', 'Android'],
       color: 'from-emerald-500 to-teal-500',
       imageUrl: '/LukasBohez/images/projects/bitplayer.png',
     },
@@ -533,13 +535,13 @@ export function FeaturedProjects() {
           >
             <div className="mb-4">
               {project.imageUrl ? (
-                <div className="mb-3 h-[200px] w-full overflow-hidden rounded-t-xl bg-gray-100">
+                <div className="mb-3 w-full overflow-hidden rounded-t-xl bg-gray-100 shadow-sm">
                   <ImageLightbox
                     src={project.imageUrl}
                     alt={project.name}
                     fill
-                    className="h-full w-full"
-                    imgClassName="rounded-t-xl"
+                    className="h-full w-full min-h-[220px]"
+                    imgClassName="rounded-t-xl object-cover"
                   />
                 </div>
               ) : (
