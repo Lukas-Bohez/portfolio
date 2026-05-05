@@ -27,14 +27,19 @@ function Section({ id, title, subtitle, children }: SectionProps) {
   return (
     <section
       id={id}
-      className="mb-10 scroll-mt-24 sm:mb-12 sm:scroll-mt-28 rounded-3xl border border-surface bg-surface p-5 sm:p-8 lg:p-10 shadow-lg text-default transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-2xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50"
+      className="mb-10 scroll-mt-24 sm:mb-12 sm:scroll-mt-28 overflow-hidden rounded-3xl border border-surface bg-surface/95 p-5 text-default shadow-[0_24px_80px_-48px_rgba(15,23,42,0.45)] backdrop-blur transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:border-blue-400/50 md:hover:shadow-[0_28px_90px_-46px_rgba(15,23,42,0.55)] dark:md:hover:border-blue-300/50"
     >
-      <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight">
+      <div className="mb-8 border-b border-line pb-5 sm:pb-6">
+        <p className="mb-2 text-[0.7rem] font-bold uppercase tracking-[0.22em] text-primary/80">
+          Portfolio section
+        </p>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight text-pretty">
           {title}
         </h2>
         {subtitle && (
-          <p className="mt-2 sm:mt-3 text-base sm:text-lg text-muted leading-relaxed">{subtitle}</p>
+          <p className="mt-2 sm:mt-3 max-w-3xl text-base sm:text-lg text-muted leading-relaxed text-pretty">
+            {subtitle}
+          </p>
         )}
       </div>
       {children}
@@ -401,16 +406,16 @@ export function Stats() {
         {metrics.map((metric, index) => (
           <motion.article
             key={metric.label}
-            className="rounded-2xl border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 p-5 sm:p-7 shadow-md backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70 md:hover:-translate-y-0.5 will-change-[transform,opacity]"
+            className="group rounded-2xl border border-blue-400/30 dark:border-blue-300/30 bg-gradient-to-br from-blue-400/10 via-transparent to-surface/80 p-5 sm:p-7 shadow-[0_18px_50px_-36px_rgba(37,99,235,0.75)] backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-blue-400/60 md:hover:shadow-[0_22px_60px_-32px_rgba(37,99,235,0.95)] dark:md:hover:border-blue-300/60 will-change-[transform,opacity]"
             data-reveal=""
             data-reveal-order={index}
             whileHover={{ y: -2, scale: 1.003 }}
             transition={{ duration: 0.16, ease: 'easeOut' }}
           >
-            <p className="text-sm sm:text-base font-semibold text-primary uppercase tracking-[0.12em]">
+            <p className="text-[0.7rem] sm:text-xs font-bold text-primary uppercase tracking-[0.2em]">
               {metric.label}
             </p>
-            <p className="mt-2.5 sm:mt-3 text-base sm:text-lg text-default leading-relaxed">
+            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-default leading-relaxed text-pretty">
               {metric.value}
             </p>
           </motion.article>
@@ -450,10 +455,14 @@ export function AboutAndSkills() {
         {principles.map((principle) => (
           <article
             key={principle.title}
-            className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-6 shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
           >
-            <h3 className="text-lg sm:text-xl font-bold text-primary">{principle.title}</h3>
-            <p className="mt-3 text-base leading-relaxed text-default">{principle.copy}</p>
+            <h3 className="text-lg sm:text-xl font-bold text-primary text-pretty">
+              {principle.title}
+            </h3>
+            <p className="mt-3 text-base leading-relaxed text-default text-pretty">
+              {principle.copy}
+            </p>
           </article>
         ))}
       </div>
@@ -523,7 +532,7 @@ export function FeaturedProjects() {
         {projects.map((project, index) => (
           <motion.article
             key={project.name}
-            className="w-full rounded-2xl border border-surface bg-surface p-4 sm:p-5 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+            className="group w-full rounded-3xl border border-surface bg-surface/95 p-4 sm:p-5 shadow-[0_18px_55px_-34px_rgba(15,23,42,0.4)] transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_24px_70px_-34px_rgba(15,23,42,0.5)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ y: -2, scale: 1.004 }}
@@ -535,13 +544,13 @@ export function FeaturedProjects() {
           >
             <div className="mb-4">
               {project.imageUrl ? (
-                <div className="mb-3 w-full overflow-hidden rounded-t-xl bg-gray-100 shadow-sm">
+                <div className="mb-3 w-full overflow-hidden rounded-2xl bg-gray-100 shadow-sm ring-1 ring-line/70">
                   <ImageLightbox
                     src={project.imageUrl}
                     alt={project.name}
                     fill
                     className="h-full w-full min-h-[220px]"
-                    imgClassName="rounded-t-xl object-cover"
+                    imgClassName="object-cover"
                   />
                 </div>
               ) : (
@@ -558,21 +567,23 @@ export function FeaturedProjects() {
                 </span>
               </div>
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-primary">{project.name}</h3>
-            <p className="mt-3 text-base sm:text-lg text-default leading-relaxed">
+            <h3 className="text-lg sm:text-xl font-bold text-primary text-pretty">
+              {project.name}
+            </h3>
+            <p className="mt-3 text-base sm:text-lg text-default leading-relaxed text-pretty">
               {project.description}
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {project.tech.map((item) => (
                 <span
                   key={`${project.name}-${item}`}
-                  className="rounded-full border border-blue-400/40 dark:border-blue-300/40 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-150 md:hover:shadow-sm"
+                  className="rounded-full border border-blue-400/35 dark:border-blue-300/35 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-150 md:hover:shadow-sm"
                 >
                   {item}
                 </span>
               ))}
             </div>
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-3 border-t border-line pt-4">
               {project.url.startsWith('http') ? (
                 <a
                   href={project.url}
@@ -726,7 +737,7 @@ export function ContactSection() {
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={0}
           whileHover={{ y: -2, scale: 1.003 }}
@@ -741,7 +752,7 @@ export function ContactSection() {
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={1}
           whileHover={{ y: -2, scale: 1.003 }}
@@ -756,7 +767,7 @@ export function ContactSection() {
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl border border-surface bg-surface p-5 sm:p-7 text-base text-default shadow-md transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={2}
           whileHover={{ y: -2, scale: 1.003 }}

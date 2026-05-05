@@ -100,7 +100,7 @@ function ProjectsIntroSection() {
       </h1>
       <p className="mt-3 max-w-2xl text-base leading-relaxed text-default">
         A visual showcase of my work — real screenshots from SpireAI, Convert The Spire Reborn,
-        SENTLE, and Industrial Empire. Built with Next.js 15.
+        SENTLE, and Industrial Empire. Built with Next.js 16.2.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {badges.map((badge) => (

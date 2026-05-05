@@ -49,7 +49,7 @@ export const fallbackProfile = ProfileSchema.parse({
 
 export const fallbackSettings = SettingsSchema.parse({
   siteTitle: 'Lukas Bohez — Projects',
-  footerText: 'Built with Next.js 15 App Router — Deployed on Apache.',
+  footerText: 'Built with Next.js 16.2 App Router — Deployed on Apache via static export.',
   spotlightText: 'A compact snapshot of the four projects featured below.',
 });
 
