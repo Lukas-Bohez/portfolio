@@ -39,10 +39,18 @@ export function DeferredHomepageSections() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const timeoutId = window.setTimeout(() => setIsMounted(true), 1600);
+    const scheduleMount = () => setIsMounted(true);
+    const timeoutId = window.setTimeout(scheduleMount, 3000);
+    const idleCallbackId =
+      'requestIdleCallback' in window
+        ? window.requestIdleCallback(scheduleMount, { timeout: 2500 })
+        : null;
 
     return () => {
       window.clearTimeout(timeoutId);
+      if (idleCallbackId !== null && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleCallbackId);
+      }
     };
   }, []);
 

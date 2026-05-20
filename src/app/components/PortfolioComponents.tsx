@@ -1,9 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import Script from 'next/script';
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 
 import ImageLightbox from './ImageLightbox';
@@ -145,11 +143,7 @@ export function Hero() {
         </div>
         <div className="flex justify-center lg:justify-end">
           {profilePhoto ? (
-            <motion.div
-              className="relative h-48 w-48 sm:h-64 sm:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl"
-              animate={{ y: [0, -6, 0], rotate: [0, 0.6, 0] }}
-              transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
-            >
+            <div className="relative h-48 w-48 sm:h-64 sm:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-full border border-surface bg-secondary shadow-xl">
               <Image
                 src={profilePhoto}
                 alt="Portrait of Lukas Bohez"
@@ -160,7 +154,7 @@ export function Hero() {
                 sizes="(min-width: 1024px) 18rem, 14rem"
                 className="object-cover object-[50%_20%] scale-[1.15]"
               />
-            </motion.div>
+            </div>
           ) : (
             <div
               className="mt-8 h-3 w-28 rounded-full bg-gradient-to-r from-emerald-400 via-sky-400 to-violet-500 shadow-md shadow-emerald-400/20"
@@ -404,13 +398,11 @@ export function Stats() {
     >
       <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
         {metrics.map((metric, index) => (
-          <motion.article
+          <article
             key={metric.label}
             className="group rounded-2xl border border-blue-400/30 dark:border-blue-300/30 bg-gradient-to-br from-blue-400/10 via-transparent to-surface/80 p-5 sm:p-7 shadow-[0_18px_50px_-36px_rgba(37,99,235,0.75)] backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-blue-400/60 md:hover:shadow-[0_22px_60px_-32px_rgba(37,99,235,0.95)] dark:md:hover:border-blue-300/60 will-change-[transform,opacity]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -2, scale: 1.003 }}
-            transition={{ duration: 0.16, ease: 'easeOut' }}
           >
             <p className="text-[0.7rem] sm:text-xs font-bold text-primary uppercase tracking-[0.2em]">
               {metric.label}
@@ -418,7 +410,7 @@ export function Stats() {
             <p className="mt-3 sm:mt-4 text-base sm:text-lg text-default leading-relaxed text-pretty">
               {metric.value}
             </p>
-          </motion.article>
+          </article>
         ))}
       </div>
     </Section>
@@ -530,14 +522,9 @@ export function FeaturedProjects() {
     <Section id="projects" title="Featured Projects" subtitle="Code you can inspect and use today">
       <div className="flex flex-col gap-4">
         {projects.map((project, index) => (
-          <motion.article
+          <article
             key={project.name}
             className="group w-full rounded-3xl border border-surface bg-surface/95 p-4 sm:p-5 shadow-[0_18px_55px_-34px_rgba(15,23,42,0.4)] transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_24px_70px_-34px_rgba(15,23,42,0.5)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -2, scale: 1.004 }}
-            viewport={{ once: true, amount: 0.08 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
             data-reveal=""
             data-reveal-order={index}
             style={{ transformStyle: 'preserve-3d' }}
@@ -612,73 +599,8 @@ export function FeaturedProjects() {
                 </a>
               ) : null}
             </div>
-          </motion.article>
+          </article>
         ))}
-      </div>
-    </Section>
-  );
-}
-
-export function MonetizationShowcase() {
-  const [adState, setAdState] = useState<'loading' | 'ready' | 'blocked'>('loading');
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      try {
-        if (window.adsbygoogle) {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-          setAdState('ready');
-        } else {
-          setAdState('blocked');
-        }
-      } catch {
-        setAdState('blocked');
-      }
-    }, 500);
-
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  return (
-    <Section
-      id="monetization"
-      title="Monetization & Ads"
-      subtitle="A controlled, non-obtrusive ad integration showcase from Quiz The Spire"
-    >
-      <Script
-        id="portfolio-adsense"
-        strategy="afterInteractive"
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8418485814964449"
-        crossOrigin="anonymous"
-      />
-
-      <div className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <p className="text-sm font-bold uppercase tracking-[0.14em] text-primary">
-            Sponsored placement demo
-          </p>
-          <span className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-default">
-            Non-obtrusive
-          </span>
-        </div>
-
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block', minHeight: '90px' }}
-          data-ad-client="ca-pub-8418485814964449"
-          data-ad-slot="7822007431"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-
-        <p className="mt-4 text-sm text-muted leading-relaxed">
-          {adState === 'ready'
-            ? 'Ad integration is active and the layout stays clean.'
-            : adState === 'blocked'
-              ? 'Ad preview is blocked in this browser, but the integration is wired up.'
-              : 'Loading ad preview...'}
-        </p>
       </div>
     </Section>
   );
@@ -708,17 +630,15 @@ export function HumorSection() {
     >
       <div className="grid gap-5 md:grid-cols-3">
         {stories.map((story, index) => (
-          <motion.article
+          <article
             key={story.title}
             className="rounded-2xl border border-surface bg-surface p-5 sm:p-6 shadow-md transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
             data-reveal=""
             data-reveal-order={index}
-            whileHover={{ y: -2, scale: 1.003 }}
-            transition={{ duration: 0.16, ease: 'easeOut' }}
           >
             <h3 className="text-lg sm:text-xl font-bold text-primary">{story.title}</h3>
             <p className="mt-3 text-base leading-relaxed text-default">{story.copy}</p>
-          </motion.article>
+          </article>
         ))}
       </div>
     </Section>
@@ -733,45 +653,39 @@ export function ContactSection() {
       subtitle="I’m actively interviewing and available for full-stack web developer roles"
     >
       <div className="grid gap-5 sm:grid-cols-3">
-        <motion.a
+        <a
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
           className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={0}
-          whileHover={{ y: -2, scale: 1.003 }}
-          transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">Email</span>
           <span className="mt-3 text-base text-default block leading-relaxed">
             Reach out for contract and full-time opportunities.
           </span>
-        </motion.a>
-        <motion.a
+        </a>
+        <a
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
           className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={1}
-          whileHover={{ y: -2, scale: 1.003 }}
-          transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">GitHub</span>
           <span className="mt-3 text-base text-default block leading-relaxed">
             Open source work and active contributions.
           </span>
-        </motion.a>
-        <motion.a
+        </a>
+        <a
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
           className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={2}
-          whileHover={{ y: -2, scale: 1.003 }}
-          transition={{ duration: 0.16, ease: 'easeOut' }}
         >
           <span className="font-bold text-lg text-primary">LinkedIn</span>
           <span className="mt-3 text-base text-default block leading-relaxed">
@@ -779,7 +693,7 @@ export function ContactSection() {
             <br />
             open to opportunities.
           </span>
-        </motion.a>
+        </a>
       </div>
     </Section>
   );

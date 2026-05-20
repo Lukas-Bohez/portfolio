@@ -62,7 +62,7 @@ export function ScreenshotLightbox({ images }: Props) {
                 fill
                 className="object-cover"
                 unoptimized
-                loading={idx < 3 ? 'eager' : 'lazy'}
+                loading={idx === 0 ? 'eager' : 'lazy'}
               />
               <span className="screenshot-expand-icon" aria-hidden>
                 ⤢
@@ -99,7 +99,8 @@ export function ScreenshotLightbox({ images }: Props) {
                 fill
                 className="object-contain"
                 unoptimized
-                priority
+                loading="eager"
+                decoding="async"
               />
             </div>
             <button className="lightbox-nav lightbox-nav--next" onClick={next} aria-label="Next">
