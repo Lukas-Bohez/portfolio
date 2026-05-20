@@ -31,7 +31,6 @@ function BrandLink() {
           alt="Portrait of Lukas Bohez"
           fill
           sizes="36px"
-          priority
           className="object-cover object-[50%_18%] scale-[1.35]"
         />
       </span>

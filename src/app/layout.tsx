@@ -61,11 +61,6 @@ export default function RootLayout({
     >
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
-        <link
-          rel="preload"
-          as="image"
-          href="https://res.cloudinary.com/dmefzpaea/image/upload/f_blur:2000,e_grayscale,q_1,w_20/v1776524472/portfolio/profile/lukas-portrait"
-        />
       </head>
       <body className="min-h-full flex flex-col">
         <a
