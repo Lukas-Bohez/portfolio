@@ -111,8 +111,7 @@ export const fallbackProjects: Project[] = ProjectSchema.array().parse([
     summary:
       'The most comprehensive Figma extraction plugin. Export SVGs, PNGs, text, variables, styles, components, and metadata — selectively or in bulk, per page or across all pages. AI-friendly output for feeding designs into LLMs, After Effects, or design token pipelines.',
     stack: ['TypeScript', 'Figma Plugin API', 'SVG', 'JSON'],
-    imageUrl:
-      'https://raw.githubusercontent.com/Lukas-Bohez/figma-extract-all/main/figma-extract-all/code.ts',
+    imageUrl: withBasePath('/images/projects/figma-extract-all.png'),
     demoUrl: 'https://github.com/Lukas-Bohez/figma-extract-all',
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },
     tags: [
@@ -129,7 +128,7 @@ export const fallbackProjects: Project[] = ProjectSchema.array().parse([
     summary:
       'Interactive study guide for the Belgian practical driving exam Category B in Examencentrum Roeselare. Contains all 20 official exam routes with 60+ checkpoints, pitfalls per location, practical tips, and exam info. Responsive, print-friendly, with route filtering by category.',
     stack: ['HTML', 'CSS', 'JavaScript', 'Leaflet Maps'],
-    imageUrl: 'https://raw.githubusercontent.com/Lukas-Bohez/rijexamen/main/preview.png',
+    imageUrl: withBasePath('/images/projects/rijexamen-roeselare.png'),
     demoUrl: 'https://quizthespire.com/rijexamen/',
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },
     tags: [
