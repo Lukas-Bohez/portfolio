@@ -525,10 +525,10 @@ export function FeaturedProjects() {
       downloadLabel: 'GitHub Repo',
       tech: ['TypeScript', 'Figma Plugin API', 'SVG Export', 'JSON', 'MIT License'],
       color: 'from-green-500 to-emerald-500',
-      imageUrl: '/LukasBohez/images/projects/quizthespire.png',
+      imageUrl: '/LukasBohez/images/projects/figma-extract-all.png',
     },
     {
-      name: 'Rijexamen Roeselare — Studiegids',
+      name: 'Rijexamen Roeselare - Studiegids',
       description:
         'Interactive study guide for the Belgian practical driving exam (Category B) at Examencentrum Roeselare. Features all 20 official exam routes with 60+ checkpoints, interactive Leaflet maps, route filtering by category, practical tips, common mistakes, and exam procedures. Responsive and print-friendly. MIT licensed.',
       url: 'https://quizthespire.com/rijexamen/',
@@ -536,7 +536,7 @@ export function FeaturedProjects() {
       downloadLabel: 'GitHub Repo',
       tech: ['HTML', 'CSS', 'JavaScript', 'Leaflet Maps', 'Responsive', 'MIT License'],
       color: 'from-red-500 to-pink-500',
-      imageUrl: '/LukasBohez/images/projects/quizthespire.png',
+      imageUrl: '/LukasBohez/images/projects/rijexamen-roeselare.png',
     },
   ];
 
