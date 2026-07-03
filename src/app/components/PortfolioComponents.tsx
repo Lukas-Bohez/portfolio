@@ -510,11 +510,33 @@ export function FeaturedProjects() {
     {
       name: 'Projects Showcase',
       description:
-        'Browse the rebranded projects showcase with full project pages for SpireAI, Convert The Spire Reborn, SENTLE, and Industrial Empire.',
+        'Browse the rebranded projects showcase with full project pages for SpireAI, Convert The Spire Reborn, SENTLE, Industrial Empire, and more.',
       url: '/projects/',
       tech: ['Projects', 'Portfolio', 'Lukas Bohez'],
       color: 'from-amber-500 to-orange-500',
       imageUrl: '/LukasBohez/images/projects/projectShowcase.png',
+    },
+    {
+      name: 'Figma Extract All Plugin',
+      description:
+        'A comprehensive Figma plugin that extracts everything from any Figma file — SVGs, PNGs, text, variables, styles, components, and metadata. Export selectively or in bulk. AI-friendly JSON output for feeding designs into LLMs, After Effects, and design token pipelines. MIT licensed.',
+      url: 'https://github.com/Lukas-Bohez/figma-extract-all',
+      downloadUrl: 'https://github.com/Lukas-Bohez/figma-extract-all',
+      downloadLabel: 'GitHub Repo',
+      tech: ['TypeScript', 'Figma Plugin API', 'SVG Export', 'JSON', 'MIT License'],
+      color: 'from-green-500 to-emerald-500',
+      imageUrl: '/LukasBohez/images/projects/quizthespire.png',
+    },
+    {
+      name: 'Rijexamen Roeselare — Studiegids',
+      description:
+        'Interactive study guide for the Belgian practical driving exam (Category B) at Examencentrum Roeselare. Features all 20 official exam routes with 60+ checkpoints, interactive Leaflet maps, route filtering by category, practical tips, common mistakes, and exam procedures. Responsive and print-friendly. MIT licensed.',
+      url: 'https://quizthespire.com/rijexamen/',
+      downloadUrl: 'https://github.com/Lukas-Bohez/rijexamen',
+      downloadLabel: 'GitHub Repo',
+      tech: ['HTML', 'CSS', 'JavaScript', 'Leaflet Maps', 'Responsive', 'MIT License'],
+      color: 'from-red-500 to-pink-500',
+      imageUrl: '/LukasBohez/images/projects/quizthespire.png',
     },
   ];
 

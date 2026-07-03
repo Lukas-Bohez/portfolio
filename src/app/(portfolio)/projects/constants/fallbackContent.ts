@@ -44,13 +44,13 @@ export type Settings = z.infer<typeof SettingsSchema>;
 
 export const fallbackProfile = ProfileSchema.parse({
   title: 'About Lukas Bohez',
-  bio: 'Full-stack developer and indie creator from Belgium. I build SpireAI, Convert The Spire Reborn, SENTLE, and Industrial Empire. All projects are free and open source under GPLv3.',
+  bio: 'Full-stack developer and indie creator from Belgium. I build SpireAI, Convert The Spire Reborn, SENTLE, Industrial Empire, Extract All (Figma plugin), and the Rijexamen study guide. All projects are free and open source under GPLv3 or MIT.',
 });
 
 export const fallbackSettings = SettingsSchema.parse({
   siteTitle: 'Lukas Bohez — Projects',
   footerText: 'Built with Next.js 16.2 App Router — Deployed on Apache via static export.',
-  spotlightText: 'A compact snapshot of the four projects featured below.',
+  spotlightText: 'A compact snapshot of the projects featured below.',
 });
 
 export const fallbackProjects: Project[] = ProjectSchema.array().parse([
@@ -103,5 +103,40 @@ export const fallbackProjects: Project[] = ProjectSchema.array().parse([
     demoUrl: 'https://quizthespire.com/',
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },
     tags: [{ title: 'Browser Game' }, { title: 'Idle' }],
+  },
+  {
+    _id: 'fallback-figma-extract',
+    title: 'Extract All — Figma to Anything',
+    slug: 'figma-extract-all',
+    summary:
+      'The most comprehensive Figma extraction plugin. Export SVGs, PNGs, text, variables, styles, components, and metadata — selectively or in bulk, per page or across all pages. AI-friendly output for feeding designs into LLMs, After Effects, or design token pipelines.',
+    stack: ['TypeScript', 'Figma Plugin API', 'SVG', 'JSON'],
+    imageUrl:
+      'https://raw.githubusercontent.com/Lukas-Bohez/figma-extract-all/main/figma-extract-all/code.ts',
+    demoUrl: 'https://github.com/Lukas-Bohez/figma-extract-all',
+    author: { name: 'Lukas Bohez', bio: 'Solo developer' },
+    tags: [
+      { title: 'Figma Plugin' },
+      { title: 'Design Tools' },
+      { title: 'AI-Ready' },
+      { title: 'MIT' },
+    ],
+  },
+  {
+    _id: 'fallback-rijexamen',
+    title: 'Rijexamen Roeselare — Routekaart & Studiegids',
+    slug: 'rijexamen-roeselare',
+    summary:
+      'Interactive study guide for the Belgian practical driving exam Category B in Examencentrum Roeselare. Contains all 20 official exam routes with 60+ checkpoints, pitfalls per location, practical tips, and exam info. Responsive, print-friendly, with route filtering by category.',
+    stack: ['HTML', 'CSS', 'JavaScript', 'Leaflet Maps'],
+    imageUrl: 'https://raw.githubusercontent.com/Lukas-Bohez/rijexamen/main/preview.png',
+    demoUrl: 'https://quizthespire.com/rijexamen/',
+    author: { name: 'Lukas Bohez', bio: 'Solo developer' },
+    tags: [
+      { title: 'Study Guide' },
+      { title: 'Interactive Map' },
+      { title: 'Driving Exam' },
+      { title: 'MIT' },
+    ],
   },
 ]);
