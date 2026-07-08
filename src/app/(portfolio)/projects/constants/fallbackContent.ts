@@ -44,7 +44,7 @@ export type Settings = z.infer<typeof SettingsSchema>;
 
 export const fallbackProfile = ProfileSchema.parse({
   title: 'About Lukas Bohez',
-  bio: 'Full-stack developer and indie creator from Belgium. I build SpireAI, Convert The Spire Reborn, SENTLE, Industrial Empire, Extract All (Figma plugin), and the Rijexamen study guide. All projects are free and open source under GPLv3 or MIT.',
+  bio: 'Full-stack developer and indie creator from Belgium. I build SpireAI, Convert The Spire Reborn, SENTLE, Industrial Empire, Import Lottie JSON — Extract All for AI (the only Figma plugin that imports Lottie animations as editable vectors and extracts everything for AI coding tools), and the Rijexamen study guide. All projects are free and open source under GPLv3 or MIT.',
 });
 
 export const fallbackSettings = SettingsSchema.parse({
@@ -106,18 +106,19 @@ export const fallbackProjects: Project[] = ProjectSchema.array().parse([
   },
   {
     _id: 'fallback-figma-extract',
-    title: 'Extract All — Figma to Anything',
+    title: 'Import Lottie JSON — Extract All for AI',
     slug: 'figma-extract-all',
     summary:
-      'The most comprehensive Figma extraction plugin. Export SVGs, PNGs, text, variables, styles, components, and metadata — selectively or in bulk, per page or across all pages. AI-friendly output for feeding designs into LLMs, After Effects, or design token pipelines.',
-    stack: ['TypeScript', 'Figma Plugin API', 'SVG', 'JSON'],
+      'The only Figma plugin that imports Lottie JSON animations as editable native Figma vectors — no re-tracing, no rebuilding from scratch. Every frame lands as real Figma layers your whole team can restyle and reshape. Then Extract All for AI pulls every SVG, Variable, and CSS value into a clean structured export for Cursor, Claude, ChatGPT, v0, and Adobe After Effects. Import a Lottie animation, reshape it in Figma, extract it for code or motion. One plugin, both directions. Under review for official Figma publication.',
+    stack: ['TypeScript', 'Figma Plugin API', 'Lottie JSON Import', 'AI Export', 'SVG', 'JSON'],
     imageUrl: withBasePath('/images/projects/figma-extract-all.png'),
     demoUrl: 'https://github.com/Lukas-Bohez/figma-extract-all',
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },
     tags: [
       { title: 'Figma Plugin' },
-      { title: 'Design Tools' },
-      { title: 'AI-Ready' },
+      { title: 'Lottie Import' },
+      { title: 'AI Export' },
+      { title: 'Import & Export' },
       { title: 'MIT' },
     ],
   },

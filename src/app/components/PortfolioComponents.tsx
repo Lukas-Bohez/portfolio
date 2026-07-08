@@ -517,13 +517,13 @@ export function FeaturedProjects() {
       imageUrl: '/LukasBohez/images/projects/projectShowcase.png',
     },
     {
-      name: 'Figma Extract All Plugin',
+      name: 'Import Lottie JSON — Extract All for AI',
       description:
-        'A comprehensive Figma plugin that extracts everything from any Figma file — SVGs, PNGs, text, variables, styles, components, and metadata. Export selectively or in bulk. AI-friendly JSON output for feeding designs into LLMs, After Effects, and design token pipelines. MIT licensed.',
+        'The only Figma plugin that imports Lottie JSON animations as editable native Figma vectors — no re-tracing, no manual redraws. Every frame lands as real Figma layers. Then Extract All for AI pulls SVGs, Variables, and CSS into a clean export for Cursor, Claude, ChatGPT, v0, and After Effects. One plugin, both directions. Under review for official Figma publication. MIT licensed.',
       url: 'https://github.com/Lukas-Bohez/figma-extract-all',
       downloadUrl: 'https://github.com/Lukas-Bohez/figma-extract-all',
       downloadLabel: 'GitHub Repo',
-      tech: ['TypeScript', 'Figma Plugin API', 'SVG Export', 'JSON', 'MIT License'],
+      tech: ['TypeScript', 'Figma Plugin API', 'Lottie Import', 'AI Export', 'MIT License'],
       color: 'from-green-500 to-emerald-500',
       imageUrl: '/LukasBohez/images/projects/figma-extract-all.png',
     },
