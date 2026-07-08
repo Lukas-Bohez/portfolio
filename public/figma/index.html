@@ -67,16 +67,39 @@
     .btn-theme { color: var(--text-muted); cursor: pointer; background: none; }
     .btn-theme:hover { color: var(--amber); border-color: var(--amber); }
     .hero { padding: 72px 0 80px; position: relative; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--border); transition: background 0.3s; }
-    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; text-align: center; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(24,160,251,0.1); border: 1px solid rgba(24,160,251,0.2); border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 20px; }
     .hero-badge-review { display: inline-flex; align-items: center; gap: 6px; background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25); border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 700; color: var(--purple); margin-bottom: 20px; margin-left: 8px; }
     .hero h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; color: var(--text); margin-bottom: 14px; }
     .hero h1 em { font-style: normal; color: var(--accent); }
     .hero h1 .lottie-highlight { color: var(--green); }
-    .hero p { font-size: 16px; color: var(--text-muted); max-width: 640px; margin-bottom: 24px; line-height: 1.6; }
-    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero-preview { margin-bottom: 20px; }
-    .hero-preview img { max-width: 340px; width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .hero p { font-size: 16px; color: var(--text-muted); max-width: 640px; margin: 0 auto 24px; line-height: 1.6; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .hero-preview {
+      margin: 0 auto 20px;
+      position: relative;
+      cursor: zoom-in;
+      display: inline-block;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .hero-preview img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      display: block;
+      transition: transform 0.2s;
+    }
+    .hero-preview:hover img { transform: scale(1.02); }
+    .hero-preview .zoom-btn {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(0,0,0,0.65); color: #fff; border: none;
+      border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; gap: 6px;
+      transition: all 0.2s; opacity: 0; pointer-events: none;
+    }
+    .hero-preview:hover .zoom-btn { opacity: 1; pointer-events: auto; }
     .btn-primary { display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px; background: #18a0fb; color: #fff !important; border-radius: 100px; font-weight: 700; font-size: 14px; transition: all 0.2s; }
     .btn-primary:hover { background: #0d8ddb; text-decoration: none; }
     .btn-lottie { display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px; background: var(--green); color: #0f1112 !important; border-radius: 100px; font-weight: 700; font-size: 14px; transition: all 0.2s; }
@@ -85,7 +108,7 @@
     .btn-outline:hover { border-color: var(--accent); color: var(--accent) !important; text-decoration: none; }
     .section { padding: 64px 0; transition: background 0.3s; }
     .section-alt { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .section-header { margin-bottom: 36px; }
+    .section-header { margin-bottom: 36px; text-align: center; }
     .section-header h2 { font-size: clamp(20px, 3vw, 26px); font-weight: 800; color: var(--text); margin-bottom: 8px; }
     .section-header p { font-size: 15px; color: var(--text-muted); }
     .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
@@ -98,11 +121,63 @@
     .feature-icon { font-size: 28px; margin-bottom: 12px; }
     .feature-card h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
     .feature-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
-    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .gallery-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.2s; }
+
+    /* Zoomable images */
+    .zoomable-wrap {
+      position: relative; overflow: hidden; border-radius: var(--radius);
+      cursor: zoom-in; transition: all 0.2s;
+    }
+    .zoomable-wrap:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
+    .zoomable-wrap img { width: 100%; height: auto; display: block; transition: transform 0.3s ease; }
+    .zoomable-wrap:hover img { transform: scale(1.03); }
+    .zoomable-wrap .zoom-badge {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(0,0,0,0.7); color: #fff; border: none;
+      border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; gap: 6px;
+      transition: all 0.2s; opacity: 0; pointer-events: none; z-index: 2;
+    }
+    .zoomable-wrap:hover .zoom-badge { opacity: 1; }
+    .zoomable-wrap.full-width { grid-column: 1 / -1; }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .gallery-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; transition: all 0.2s;
+    }
     .gallery-item:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
-    .gallery-item img { width: 100%; height: auto; display: block; }
     .gallery-item .caption { padding: 12px 16px; font-size: 13px; color: var(--text-muted); }
+
+    /* Two-column showcase for wider images */
+    .showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }
+    .showcase-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .showcase-item .caption { padding: 14px 18px; font-size: 14px; color: var(--text-muted); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 9999; background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center; flex-direction: column;
+      padding: 20px; cursor: zoom-out;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 95vw; max-height: 85vh; object-fit: contain;
+      border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      font-size: 36px; color: #fff; background: none; border: none;
+      cursor: pointer; font-weight: 300; line-height: 1; z-index: 3;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 0.7; }
+    .lightbox-caption {
+      color: #94a3b8; margin-top: 16px; font-size: 14px; text-align: center;
+      max-width: 600px;
+    }
+
     .format-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
     .format-table th, .format-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
     .format-table th { color: var(--text-muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -139,8 +214,10 @@
       .hero { padding: 48px 0 56px; } .section { padding: 40px 0; }
       .feature-grid { grid-template-columns: 1fr; } .container { padding: 0 16px; }
       .gallery { grid-template-columns: 1fr; }
+      .showcase-grid { grid-template-columns: 1fr; }
       .flow-diagram { flex-direction: column; }
       .flow-arrow { transform: rotate(90deg); }
+      .hero-preview img { max-width: 100%; }
     }
   </style>
 </head>
@@ -168,7 +245,8 @@
     <div class="hero-content">
       <div class="hero-badge"><i class="fa-solid fa-plug"></i> Figma Plugin · Import & Export · MIT</div>
       <div class="hero-badge-review"><i class="fa-solid fa-clock"></i> Under Review — Official Figma Publication</div>
-      <div class="hero-preview">
+      <div class="hero-preview" onclick="openLightbox('Screenshot 2026-07-08 105100.png','Import Lottie JSON — Extract All for AI main plugin UI')">
+        <span class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to zoom</span>
         <img src="Screenshot 2026-07-08 105100.png" alt="Import Lottie JSON — Extract All for AI plugin UI showing Lottie import and full extraction panel" />
       </div>
       <h1><span class="lottie-highlight">Import Lottie JSON</span> — <em>Extract All for AI</em></h1>
@@ -248,47 +326,70 @@
   </div>
 </section>
 
-<section class="section section-alt" id="screenshots">
+<!-- FEATURED WIDE SCREENSHOT — the smaller 110046 image gets its own hero section -->
+<section class="section-alt" id="featured-screenshot">
   <div class="container">
-    <div class="section-header"><h2>Screenshots & Gallery</h2><p>See every panel and export mode in action.</p></div>
+    <div class="section-header"><h2>Full Plugin Overview</h2><p>Click the image to zoom in and see every detail.</p></div>
+    <div class="zoomable-wrap" onclick="openLightbox('Screenshot 2026-07-07 110046.png','Complete plugin interface — all extraction panels and export options')">
+      <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to zoom</span>
+      <img src="Screenshot 2026-07-07 110046.png" alt="Additional data extraction and export panel" loading="lazy" style="border-radius:var(--radius);">
+    </div>
+    <p style="text-align:center;margin-top:12px;font-size:14px;color:var(--text-muted);">Complete plugin interface — all extraction panels and export options</p>
+  </div>
+</section>
+
+<!-- SCREENSHOT GALLERY — remaining 7 images in a 2-col wide layout -->
+<section class="section" id="screenshots">
+  <div class="container">
+    <div class="section-header"><h2>Screenshots & Gallery</h2><p>See every panel and export mode in action. <strong>Click any image to zoom.</strong></p></div>
     <div class="gallery">
       <div class="gallery-item">
-        <img src="Screenshot 2026-07-08 105100.png" alt="Import Lottie JSON — Extract All for AI main plugin UI" loading="lazy">
-        <div class="caption">Main panel — Import Lottie JSON + Extract All for AI</div>
-      </div>
-      <div class="gallery-item">
-        <img src="Screenshot 2026-07-06 084818.png" alt="Node selection and batch export view" loading="lazy">
+        <div class="zoomable-wrap" onclick="openLightbox('Screenshot 2026-07-06 084818.png','Node selection and batch export view')">
+          <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</span>
+          <img src="Screenshot 2026-07-06 084818.png" alt="Node selection and batch export view" loading="lazy">
+        </div>
         <div class="caption">Node selection and batch export controls</div>
       </div>
       <div class="gallery-item">
-        <img src="Screenshot 2026-07-06 084843.png" alt="SVG export with individual node settings" loading="lazy">
+        <div class="zoomable-wrap" onclick="openLightbox('Screenshot 2026-07-06 084843.png','SVG export with individual node settings')">
+          <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</span>
+          <img src="Screenshot 2026-07-06 084843.png" alt="SVG export with individual node settings" loading="lazy">
+        </div>
         <div class="caption">SVG export — individual node and scale settings</div>
       </div>
       <div class="gallery-item">
-        <img src="Screenshot 2026-07-06 084852.png" alt="Full extract JSON output preview" loading="lazy">
+        <div class="zoomable-wrap" onclick="openLightbox('Screenshot 2026-07-06 084852.png','Full extract JSON output preview')">
+          <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</span>
+          <img src="Screenshot 2026-07-06 084852.png" alt="Full extract JSON output preview" loading="lazy">
+        </div>
         <div class="caption">Full extract JSON — structured data for AI and pipelines</div>
       </div>
       <div class="gallery-item">
-        <img src="Screenshot 2026-07-06 084859.png" alt="Variables and design tokens export panel" loading="lazy">
+        <div class="zoomable-wrap" onclick="openLightbox('Screenshot 2026-07-06 084859.png','Variables and design tokens export panel')">
+          <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</span>
+          <img src="Screenshot 2026-07-06 084859.png" alt="Variables and design tokens export panel" loading="lazy">
+        </div>
         <div class="caption">Variables and design tokens export</div>
       </div>
       <div class="gallery-item">
-        <img src="Screenshot 2026-07-06 084912.png" alt="Styles and components extraction view" loading="lazy">
+        <div class="zoomable-wrap" onclick="openLightbox('Screenshot 2026-07-06 084912.png','Styles and components extraction view')">
+          <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</span>
+          <img src="Screenshot 2026-07-06 084912.png" alt="Styles and components extraction view" loading="lazy">
+        </div>
         <div class="caption">Styles and components extraction</div>
       </div>
       <div class="gallery-item">
-        <img src="Screenshot 2026-07-06 084927.png" alt="Batch export progress with real-time status" loading="lazy">
+        <div class="zoomable-wrap" onclick="openLightbox('Screenshot 2026-07-06 084927.png','Batch export progress with real-time status')">
+          <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</span>
+          <img src="Screenshot 2026-07-06 084927.png" alt="Batch export progress with real-time status" loading="lazy">
+        </div>
         <div class="caption">Batch export in progress with real-time feedback</div>
-      </div>
-      <div class="gallery-item">
-        <img src="Screenshot 2026-07-07 110046.png" alt="Additional data extraction and export panel" loading="lazy">
-        <div class="caption">Additional extraction and export options</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="export-formats">
+<section class="section section-alt" id="export-formats">
   <div class="container">
     <div class="section-header"><h2>Export Formats</h2><p>Choose exactly what you need — from raw SVGs to structured JSON for AI coding tools.</p></div>
     <table class="format-table">
@@ -320,7 +421,7 @@
   </div>
 </section>
 
-<section class="section section-alt" id="usecases">
+<section class="section" id="usecases">
   <div class="container">
     <div class="section-header"><h2>Use Cases</h2></div>
     <div class="usecase-grid">
@@ -336,7 +437,7 @@
   </div>
 </section>
 
-<section class="section" id="install">
+<section class="section section-alt" id="install">
   <div class="container">
     <div class="section-header"><h2>How to Install</h2><p>Get the plugin running in Figma in under a minute. <strong style="color:var(--purple);">Under review for official Figma Community publication — soon available directly in the plugin directory.</strong></p></div>
     <h3>Option A — Figma Desktop (recommended)</h3>
@@ -371,21 +472,51 @@
   </div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close zoom">&times;</button>
+  <img src="" alt="" id="lightbox-img">
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
 <script>
 (function() {
   var KEY = 'spire-theme';
   function get() { return localStorage.getItem(KEY) || 'dark'; }
   function apply(t) { document.documentElement.setAttribute('data-theme', t); }
-  document.getElementById('themeToggle').addEventListener('click', function() {
-    var n = get() === 'dark' ? 'light' : 'dark';
-    localStorage.setItem(KEY, n); apply(n);
-    try { localStorage.setItem('spire-theme-sync', Date.now().toString()); } catch(e) {}
-  });
+  var btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.addEventListener('click', function() {
+      var n = get() === 'dark' ? 'light' : 'dark';
+      localStorage.setItem(KEY, n); apply(n);
+      try { localStorage.setItem('spire-theme-sync', Date.now().toString()); } catch(e) {}
+    });
+  }
   window.addEventListener('storage', function(e) {
     if (e.key === KEY || e.key === 'spire-theme-sync') apply(get());
   });
   apply(get());
 })();
+
+function openLightbox(src, caption) {
+  var lb = document.getElementById('lightbox');
+  var img = document.getElementById('lightbox-img');
+  var cap = document.getElementById('lightbox-caption');
+  img.src = src;
+  cap.textContent = caption || '';
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  var lb = document.getElementById('lightbox');
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
 </script>
 </body>
 </html>
