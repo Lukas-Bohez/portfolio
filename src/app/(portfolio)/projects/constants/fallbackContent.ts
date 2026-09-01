@@ -109,10 +109,11 @@ export const fallbackProjects: Project[] = ProjectSchema.array().parse([
     title: 'Import Lottie JSON — Extract All for AI',
     slug: 'figma-extract-all',
     summary:
-      'The only Figma plugin that imports Lottie JSON animations as editable native Figma vectors — no re-tracing, no rebuilding from scratch. Every frame lands as real Figma layers your whole team can restyle and reshape. Then Extract All for AI pulls every SVG, Variable, and CSS value into a clean structured export for Cursor, Claude, ChatGPT, v0, and Adobe After Effects. Import a Lottie animation, reshape it in Figma, extract it for code or motion. One plugin, both directions. Under review for official Figma publication.',
+      'The only Figma plugin that imports Lottie JSON animations as editable native Figma vectors — no re-tracing, no rebuilding from scratch. Every frame lands as real Figma layers your whole team can restyle and reshape. Then Extract All for AI pulls every SVG, Variable, and CSS value into a clean structured export for Cursor, Claude, ChatGPT, v0, and Adobe After Effects. Import a Lottie animation, reshape it in Figma, extract it for code or motion. One plugin, both directions. Now available in the Figma Community.',
     stack: ['TypeScript', 'Figma Plugin API', 'Lottie JSON Import', 'AI Export', 'SVG', 'JSON'],
     imageUrl: withBasePath('/images/projects/figma-extract-all.png'),
-    demoUrl: 'https://github.com/Lukas-Bohez/figma-extract-all',
+    demoUrl:
+      'https://www.figma.com/community/plugin/1655550973103544441/import-lottie-json-extract-all-for-ai',
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },
     tags: [
       { title: 'Figma Plugin' },
