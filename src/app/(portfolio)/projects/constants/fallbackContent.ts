@@ -71,8 +71,8 @@ export const fallbackProjects: Project[] = ProjectSchema.array().parse([
     title: 'Convert The Spire Reborn',
     slug: 'convert-the-spire',
     summary:
-      'Cross-platform desktop app for downloading media in 4K/8K from 1,800+ sites. Built with Flutter/Dart, integrates yt-dlp, includes a full integrated media player and torrent client. 950+ downloads worldwide.',
-    stack: ['Flutter', 'Dart', 'yt-dlp', 'Windows', 'Android', 'Linux'],
+      'Cross-platform desktop and Android app for downloading media in 4K/8K from 1,800+ sites. Built with Flutter/Dart, integrates yt-dlp with self-healing downloads (auto yt-dlp updates plus a bundled Deno JS runtime and multi-client fallback), BitPlayer torrent support, a unified Downloads Inbox, and an encrypted vault. 1k+ downloads worldwide.',
+    stack: ['Flutter', 'Dart', 'yt-dlp', 'Deno', 'Windows', 'Android', 'Linux', 'macOS'],
     imageUrl: withBasePath('/images/projects/convertthespirereborn.png'),
     demoUrl: 'https://quizthespire.com/',
     author: { name: 'Lukas Bohez', bio: 'Solo developer' },

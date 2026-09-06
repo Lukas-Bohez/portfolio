@@ -487,23 +487,23 @@ export function FeaturedProjects() {
     {
       name: 'Convert the Spire Reborn',
       description:
-        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites. Features 4K/8K downloads, 27+ format conversions, built-in media player, torrent management, DLNA casting, and a built-in browser. The latest release improves crash resilience for long-running sessions while keeping BitPlayer integrated. Multiple release assets are available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
+        'Open-source Flutter desktop and mobile app for downloading and converting media from 1,800+ sites, now at v13. Downloads self-heal: when YouTube changes its player, the app auto-updates yt-dlp, retries through a bundled Deno JS runtime, and rotates across fallback API clients. v13 added a unified Downloads Inbox, a redesigned browser and onboarding, Android playlist downloads, and a full security & compliance pass. Available for Windows, Linux, macOS, and Android. GPLv3 licensed.',
       url: 'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/latest',
       downloadUrl:
         'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/latest/download/ConvertTheSpireReborn-windows-x64.zip',
       downloadLabel: 'Download Windows ZIP',
-      tech: ['Flutter', 'Dart', 'SQLite', 'FFmpeg', 'yt-dlp', '8 release assets'],
+      tech: ['Flutter', 'Dart', 'yt-dlp', 'Deno', 'Torrenting', 'v13.0.7'],
       color: 'from-violet-500 to-purple-500',
       imageUrl: '/LukasBohez/images/projects/convertthespirereborn.png',
     },
     {
       name: 'BitPlayer: Torrent & Media',
       description:
-        'BitPlayer: Torrent & Media is now part of the latest Convert The Spire Reborn release. It combines torrent management, in-app browsing, fast local library loading, Bluetooth media controls, and reliable background playback in one unified experience.',
+        'BitPlayer is now fully integrated into Convert The Spire Reborn (v13.0.7). Recent updates bring Android playlist downloads via a headless WebView JS challenge solver, a foreground torrent service Android will not kill, a vault for downloaded media with theme-aware native ads, CJK-aware title matching, and reliable background playback with Bluetooth media controls.',
       url: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai',
       downloadUrl: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai',
       downloadLabel: 'Get on Google Play',
-      tech: ['Integrated into latest Convert release', 'Flutter', 'Dart', 'Torrenting', 'Android'],
+      tech: ['Integrated into Convert v13.0.7', 'Flutter', 'Dart', 'Torrenting', 'Android'],
       color: 'from-emerald-500 to-teal-500',
       imageUrl: '/LukasBohez/images/projects/bitplayer.png',
     },
