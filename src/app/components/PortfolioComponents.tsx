@@ -53,7 +53,7 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-40 mb-6 sm:mb-8 flex w-full items-center justify-between gap-2 sm:gap-4 rounded-2xl sm:rounded-3xl border border-surface bg-surface/98 dark:bg-surface/95 p-3.5 sm:p-5 text-[11px] sm:text-sm font-medium shadow-lg backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50">
+    <nav className="sticky top-0 z-40 mb-6 sm:mb-8 flex w-full items-center justify-between gap-2 sm:gap-4 rounded-2xl sm:rounded-3xl border border-surface bg-surface/98 dark:bg-surface/95 p-3.5 sm:p-5 text-[11px] sm:text-sm font-medium shadow-lg backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-xl md:hover:border-accent-soft">
       <button
         type="button"
         className="flex min-w-0 items-center gap-2 text-base sm:text-xl font-black tracking-tight transition duration-200 hover:opacity-85"
@@ -81,7 +81,7 @@ export function Navbar() {
           <a
             key={item.label}
             href={item.href}
-            className="rounded-full px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+            className="rounded-full px-2 sm:px-3 py-1.5 text-default transition duration-200 md:hover:bg-surface/50 md:hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             aria-label={`Scroll to ${item.label}`}
           >
             {item.label}
@@ -107,7 +107,7 @@ export function Hero() {
       </div>
       <div className="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
         <div className="max-w-2xl">
-          <p className="uppercase tracking-[0.12em] sm:tracking-widest text-blue-400 dark:text-blue-200 font-semibold text-xs sm:text-base">
+          <p className="uppercase tracking-[0.12em] sm:tracking-widest text-accent font-semibold text-xs sm:text-base">
             Built to ship and stay usable
           </p>
           <h1 className="mt-2 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">
@@ -117,7 +117,7 @@ export function Hero() {
             I build full-stack Python and TypeScript apps that are straightforward to ship, stable
             to run, and easy to hand off.
           </p>
-          <p className="mt-4 inline-flex rounded-full border border-blue-400 dark:border-blue-200 bg-blue-400/15 dark:bg-blue-400/20 px-3.5 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold text-contrast">
+          <p className="mt-4 inline-flex rounded-full border border-accent-soft bg-accent-soft px-3.5 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-semibold text-contrast">
             Actively interviewing for full-stack web developer roles
           </p>
           <p className="mt-5 sm:mt-6 max-w-2xl text-base sm:text-lg text-default leading-relaxed">
@@ -129,13 +129,13 @@ export function Hero() {
           <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
             <a
               href="#projects"
-              className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+              className="rounded-full btn-primary px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:shadow-accent/40 md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               View featured work
             </a>
             <a
               href="#contact"
-              className="rounded-full border-2 border-blue-400 dark:border-blue-200 bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-blue-400/10 md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
+              className="rounded-full border-2 border-accent-soft bg-transparent px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:bg-accent-soft md:hover:shadow-md md:hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-2)]"
             >
               Get in touch
             </a>
@@ -157,7 +157,7 @@ export function Hero() {
             </div>
           ) : (
             <div
-              className="mt-8 h-3 w-28 rounded-full bg-gradient-to-r from-emerald-400 via-sky-400 to-violet-500 shadow-md shadow-emerald-400/20"
+              className="mt-8 h-3 w-28 rounded-full bg-gradient-to-r bg-accent-gradient shadow-md shadow-accent"
               aria-hidden="true"
             />
           )}
@@ -185,7 +185,7 @@ export function ProofSpotlightSection() {
             {['100+ videos', 'Full playlists', 'Zoomable proof', 'Fullscreen view'].map((item) => (
               <span
                 key={item}
-                className="rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1.5 text-sm font-medium text-default"
+                className="rounded-full border border-accent-soft bg-accent-soft px-3 py-1.5 text-sm font-medium text-default"
               >
                 {item}
               </span>
@@ -400,7 +400,7 @@ export function Stats() {
         {metrics.map((metric, index) => (
           <article
             key={metric.label}
-            className="group rounded-2xl border border-blue-400/30 dark:border-blue-300/30 bg-gradient-to-br from-blue-400/10 via-transparent to-surface/80 p-5 sm:p-7 shadow-[0_18px_50px_-36px_rgba(37,99,235,0.75)] backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-blue-400/60 md:hover:shadow-[0_22px_60px_-32px_rgba(37,99,235,0.95)] dark:md:hover:border-blue-300/60 will-change-[transform,opacity]"
+            className="group rounded-2xl border border-accent-soft bg-gradient-to-br bg-accent-soft p-5 sm:p-7 shadow-accent backdrop-blur transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:border-blue-400/60 md:hover:shadow-accent dark:md:hover:border-blue-300/60 will-change-[transform,opacity]"
             data-reveal=""
             data-reveal-order={index}
           >
@@ -481,7 +481,7 @@ export function FeaturedProjects() {
       downloadUrl: 'https://quizthespire.com/pages/lofi-download/',
       downloadLabel: 'Download extension',
       tech: ['JavaScript', 'Browser Extension', 'Audio Player', 'UX'],
-      color: 'from-pink-500 to-orange-500',
+      color: 'bg-accent-gradient',
       imageUrl: '/LukasBohez/images/projects/LofiExtension.png',
     },
     {
@@ -493,7 +493,7 @@ export function FeaturedProjects() {
         'https://github.com/Lukas-Bohez/ConvertTheSpireFlutter/releases/latest/download/ConvertTheSpireReborn-windows-x64.zip',
       downloadLabel: 'Download Windows ZIP',
       tech: ['Flutter', 'Dart', 'yt-dlp', 'Deno', 'Torrenting', 'v13.0.7'],
-      color: 'from-violet-500 to-purple-500',
+      color: 'bg-accent-gradient',
       imageUrl: '/LukasBohez/images/projects/convertthespirereborn.png',
     },
     {
@@ -504,7 +504,7 @@ export function FeaturedProjects() {
       downloadUrl: 'https://play.google.com/store/apps/details?id=com.torrentspire.ai',
       downloadLabel: 'Get on Google Play',
       tech: ['Integrated into Convert v13.0.7', 'Flutter', 'Dart', 'Torrenting', 'Android'],
-      color: 'from-emerald-500 to-teal-500',
+      color: 'bg-accent-gradient',
       imageUrl: '/LukasBohez/images/projects/bitplayer.png',
     },
     {
@@ -513,7 +513,7 @@ export function FeaturedProjects() {
         'Browse the rebranded projects showcase with full project pages for SpireAI, Convert The Spire Reborn, SENTLE, Industrial Empire, and more.',
       url: '/projects/',
       tech: ['Projects', 'Portfolio', 'Lukas Bohez'],
-      color: 'from-amber-500 to-orange-500',
+      color: 'bg-accent-gradient',
       imageUrl: '/LukasBohez/images/projects/projectShowcase.png',
     },
     {
@@ -524,7 +524,7 @@ export function FeaturedProjects() {
       downloadUrl: 'https://github.com/Lukas-Bohez/figma-extract-all',
       downloadLabel: 'GitHub Repo',
       tech: ['TypeScript', 'Figma Plugin API', 'Lottie Import', 'AI Export', 'MIT License'],
-      color: 'from-green-500 to-emerald-500',
+      color: 'bg-accent-gradient',
       imageUrl: '/LukasBohez/images/projects/figma-extract-all.png',
     },
     {
@@ -546,7 +546,7 @@ export function FeaturedProjects() {
         {projects.map((project, index) => (
           <article
             key={project.name}
-            className="group w-full rounded-3xl border border-surface bg-surface/95 p-4 sm:p-5 shadow-[0_18px_55px_-34px_rgba(15,23,42,0.4)] transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_24px_70px_-34px_rgba(15,23,42,0.5)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+            className="group w-full rounded-3xl border border-surface bg-surface/95 p-4 sm:p-5 shadow-[0_18px_55px_-34px_rgba(15,23,42,0.4)] transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_24px_70px_-34px_rgba(15,23,42,0.5)] md:hover:border-accent-soft mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
             data-reveal=""
             data-reveal-order={index}
             style={{ transformStyle: 'preserve-3d' }}
@@ -586,7 +586,7 @@ export function FeaturedProjects() {
               {project.tech.map((item) => (
                 <span
                   key={`${project.name}-${item}`}
-                  className="rounded-full border border-blue-400/35 dark:border-blue-300/35 bg-blue-400/10 dark:bg-blue-300/10 px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-150 md:hover:shadow-sm"
+                  className="rounded-full border border-accent-soft bg-accent-soft px-3 py-1.5 text-sm sm:text-base font-medium text-default transition duration-150 md:hover:shadow-sm"
                 >
                   {item}
                 </span>
@@ -598,14 +598,14 @@ export function FeaturedProjects() {
                   href={project.url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
+                  className="inline-flex items-center text-base sm:text-lg font-semibold text-accent transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
                 >
                   Explore ↗
                 </a>
               ) : (
                 <Link
                   href={project.url}
-                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-400 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
+                  className="inline-flex items-center text-base sm:text-lg font-semibold text-accent transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-500 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
                 >
                   Explore ↗
                 </Link>
@@ -615,7 +615,7 @@ export function FeaturedProjects() {
                   href={project.downloadUrl}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center text-base sm:text-lg font-semibold text-blue-500 dark:text-blue-200 transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-600 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
+                  className="inline-flex items-center text-base sm:text-lg font-semibold text-accent-strong transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:text-blue-600 dark:md:hover:text-blue-100 md:hover:translate-x-0.5"
                 >
                   {project.downloadLabel || 'Download'} ↗
                 </a>
@@ -679,7 +679,7 @@ export function ContactSection() {
           href="mailto:lukasbohez@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-accent-soft mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={0}
         >
@@ -692,7 +692,7 @@ export function ContactSection() {
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noreferrer noopener"
-          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-accent-soft mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={1}
         >
@@ -705,7 +705,7 @@ export function ContactSection() {
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-blue-400/50 dark:md:hover:border-blue-300/50 mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
+          className="rounded-2xl border border-surface bg-surface/95 p-5 sm:p-7 text-base text-default shadow-[0_16px_44px_-30px_rgba(15,23,42,0.35)] transition duration-120 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:-translate-y-0.5 md:hover:shadow-[0_22px_56px_-30px_rgba(37,99,235,0.35)] md:hover:border-accent-soft mb-[clamp(20px,3vh,44px)] will-change-[transform,opacity]"
           data-reveal=""
           data-reveal-order={2}
         >
@@ -723,7 +723,7 @@ export function ContactSection() {
 
 export function Footer() {
   return (
-    <footer className="my-8 sm:my-10 w-full rounded-3xl border-2 border-blue-400/40 dark:border-blue-300/40 bg-surface/70 p-5 sm:p-8 text-center text-base sm:text-lg text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-blue-400/70 dark:md:hover:border-blue-300/70">
+    <footer className="my-8 sm:my-10 w-full rounded-3xl border-2 border-accent-soft bg-surface/70 p-5 sm:p-8 text-center text-base sm:text-lg text-default transition duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:shadow-lg md:hover:border-accent-soft">
       <span
         className="relative inline-flex h-9 w-9 overflow-hidden rounded-full border border-surface bg-secondary align-middle shadow-sm"
         title="Portrait of Lukas Bohez"
@@ -740,7 +740,7 @@ export function Footer() {
       <div className="mt-4 flex flex-wrap justify-center gap-4">
         <a
           href="mailto:lukasbohez@gmail.com"
-          className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline"
+          className="text-accent hover:text-accent-strong transition font-semibold hover:underline"
         >
           Email
         </a>
@@ -749,7 +749,7 @@ export function Footer() {
           href="https://github.com/Lukas-Bohez"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline"
+          className="text-accent hover:text-accent-strong transition font-semibold hover:underline"
         >
           GitHub
         </a>
@@ -758,7 +758,7 @@ export function Footer() {
           href="https://www.linkedin.com/in/lukas-bohez-3ba566271/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-400 dark:text-blue-200 hover:text-blue-500 dark:hover:text-blue-100 transition font-semibold hover:underline"
+          className="text-accent hover:text-accent-strong transition font-semibold hover:underline"
         >
           LinkedIn
         </a>
